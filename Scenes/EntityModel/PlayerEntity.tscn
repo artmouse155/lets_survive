@@ -254,10 +254,11 @@ _data = {
 &"swingr": SubResource("Animation_ngjm7")
 }
 
-[node name="PlayerEntity" type="Node2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite")]
+[node name="PlayerEntity" type="Node2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite", "hitBox")]
 script = ExtResource("1_wqpke")
 melee_radius = NodePath("MeleeRadius")
 _tool_sprite = NodePath("Body/ArmR/HandR/Tool")
+hitBox = NodePath("MeleeRadius")
 metadata/_custom_type_script = "uid://bq7btvrn0u1rs"
 
 [node name="Body" type="Sprite2D" parent="."]
