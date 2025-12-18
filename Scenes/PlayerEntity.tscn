@@ -1,10 +1,10 @@
 [gd_scene load_steps=24 format=3 uid="uid://bdriym0k3hk1g"]
 
-[ext_resource type="Texture2D" uid="uid://4oiecskv1ol2" path="res://Resources/Textures/Terrain/dude.png" id="1_mug8v"]
-[ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/player_entity.gd" id="2_mug8v"]
-[ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/Terrain/hand.png" id="3_sar6w"]
-[ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_2lkt2"]
-[ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/melee_radius.tscn" id="5_oyunc"]
+[ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/EntityModel/player_entity.gd" id="1_wqpke"]
+[ext_resource type="Texture2D" uid="uid://4oiecskv1ol2" path="res://Resources/Textures/Terrain/dude.png" id="2_qpj1x"]
+[ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/Terrain/hand.png" id="3_i7lqm"]
+[ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_i26bu"]
+[ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/melee_radius.tscn" id="5_xlttt"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sar6w"]
 animation = &"RESET"
@@ -254,15 +254,15 @@ _data = {
 &"swingr": SubResource("Animation_ngjm7")
 }
 
-[node name="HumanSprite" type="Node2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite")]
-script = ExtResource("2_mug8v")
+[node name="PlayerEntity" type="Node2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite")]
+script = ExtResource("1_wqpke")
 melee_radius = NodePath("MeleeRadius")
 _tool_sprite = NodePath("Body/ArmR/HandR/Tool")
 metadata/_custom_type_script = "uid://bq7btvrn0u1rs"
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_mug8v")
+texture = ExtResource("2_qpj1x")
 offset = Vector2(16, 0)
 
 [node name="ArmR" type="Node2D" parent="Body"]
@@ -273,13 +273,13 @@ scale = Vector2(1.0000001, 1.0000001)
 [node name="HandR" type="Sprite2D" parent="Body/ArmR"]
 show_behind_parent = true
 position = Vector2(72, 0)
-texture = ExtResource("3_sar6w")
+texture = ExtResource("3_i7lqm")
 
 [node name="Tool" type="Sprite2D" parent="Body/ArmR/HandR"]
 visible = false
 show_behind_parent = true
 rotation = 1.5707964
-texture = ExtResource("4_2lkt2")
+texture = ExtResource("4_i26bu")
 offset = Vector2(0, -36)
 
 [node name="ArmL" type="Node2D" parent="Body"]
@@ -290,7 +290,7 @@ rotation = -0.7853982
 show_behind_parent = true
 position = Vector2(72, 0)
 scale = Vector2(0.9999998, 0.9999998)
-texture = ExtResource("3_sar6w")
+texture = ExtResource("3_i7lqm")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_go5uh")
@@ -302,5 +302,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_oyunc")
 }
 
-[node name="MeleeRadius" parent="." instance=ExtResource("5_oyunc")]
+[node name="MeleeRadius" parent="." instance=ExtResource("5_xlttt")]
 radius = 20.0

@@ -1,4 +1,4 @@
-class_name BrainEntity extends Entity
+class_name PlayerEntity extends PersonEntity
 
 enum ANIMATIONS {IDLE, PUNCH, SWING}
 

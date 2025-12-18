@@ -23,6 +23,7 @@ z_index = 1
 motion_mode = 1
 script = ExtResource("1_80hld")
 sprite = NodePath("PlayerEntity")
+speed = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)

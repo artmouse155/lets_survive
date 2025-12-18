@@ -1,6 +1,6 @@
 class_name PlayerSelf extends CharacterBody2D
 
-@export var sprite : BrainEntity
+@export var sprite : PlayerEntity
 # Called when the node enters the scene tree for the first time.
 @export var speed = 125
 
