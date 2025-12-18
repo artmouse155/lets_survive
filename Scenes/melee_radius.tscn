@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://djrh6t2ximylw"]
+
+[ext_resource type="Script" uid="uid://bi637kpik2gj6" path="res://Scripts/melee_radius.gd" id="1_mt76c"]
+
+[node name="MeleeRadius" type="Area2D" node_paths=PackedStringArray("cPolygon")]
+script = ExtResource("1_mt76c")
+cPolygon = NodePath("CollisionPolygon2D")
+radius = 200.0
+precision = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 199.99998, -200.00002, 231.6912, -162.2319, 256.34256, -119.53449, 273.20508, -73.2051, 281.76642, -24.651367, 281.76642, 24.651382, 273.20508, 73.20508, 256.34256, 119.53449, 231.6912, 162.2319, 200, 200)

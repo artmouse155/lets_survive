@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerSave" load_steps=2 format=3 uid="uid://1u8lqvfn1xfb"]
+
+[ext_resource type="Script" uid="uid://b2814qm5brf7h" path="res://Scripts/CustomResource/player_save.gd" id="1_prisv"]
+
+[resource]
+script = ExtResource("1_prisv")
+player_name = "TestPlayer"
+level = 5
+metadata/_custom_type_script = "uid://b2814qm5brf7h"

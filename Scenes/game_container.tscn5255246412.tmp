@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcnynj6tfm2v3"]
+
+[ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/game_node.gd" id="1_jr5s5"]
+[ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/world.tscn" id="2_juifl"]
+[ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scenes/game_ui.gd" id="3_us7ks"]
+[ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/hotbar.tscn" id="4_juifl"]
+[ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory.tscn" id="5_us7ks"]
+
+[node name="GameContainer" type="Control" node_paths=PackedStringArray("world")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_jr5s5")
+world = NodePath("SubViewportContainer/SubViewport/World")
+metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
+
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui", "player_self")]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_us7ks")
+health_label = NodePath("VBoxContainer/Health")
+inventory_label = NodePath("VBoxContainer/Inventory")
+pause_screen = NodePath("../PauseScreen")
+hotbar = NodePath("SafeZone/Hotbar")
+inventory_ui = NodePath("SafeZone/Inventory")
+player_self = NodePath("../SubViewportContainer/SubViewport/World/Player")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Label" parent="GameUI/VBoxContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Inventory" type="Label" parent="GameUI/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Inventory:"
+
+[node name="Selected" type="Label" parent="GameUI/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Selected:"
+
+[node name="SafeZone" type="MarginContainer" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Hotbar" parent="GameUI/SafeZone" instance=ExtResource("4_juifl")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Inventory" parent="GameUI/SafeZone" instance=ExtResource("5_us7ks")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PauseScreen" type="PanelContainer" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -74.0
+offset_right = 75.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseScreen"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="resume" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="settings" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="return" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Menu"
+
+[connection signal="set_pause" from="." to="GameUI" method="set_pause"]
+[connection signal="health_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_health_updated"]
+[connection signal="inventory_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_inventory_updated"]
+[connection signal="item_collected" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_item_collected"]
+[connection signal="selected_index_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_selected_index_updated"]
+[connection signal="world_item_dropped" from="SubViewportContainer/SubViewport/World/Player/HumanSprite" to="SubViewportContainer/SubViewport/World/EntitySpawner" method="on_world_item_dropped"]
+[connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
+[connection signal="inventory_slot_set" from="GameUI/SafeZone/Inventory" to="GameUI" method="on_inventory_item_set"]
+[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
+
+[editable path="SubViewportContainer/SubViewport/World"]
+[editable path="SubViewportContainer/SubViewport/World/Player"]

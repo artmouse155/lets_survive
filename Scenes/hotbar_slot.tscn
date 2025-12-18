@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4nhneowv5r"]
+
+[ext_resource type="Script" uid="uid://b65ymnneektyg" path="res://Scripts/hotbar_slot.gd" id="1_vsge4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jnhk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="HotbarSlot" type="PanelContainer" node_paths=PackedStringArray("selected", "texture_node", "count_label")]
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_vsge4")
+selected = NodePath("selected")
+texture_node = NodePath("TextureRect")
+count_label = NodePath("Label")
+metadata/_custom_type_script = "uid://b65ymnneektyg"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 1
+
+[node name="selected" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = -10
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_right = -10
+theme_override_constants/margin_bottom = -10
+
+[node name="Panel" type="Panel" parent="selected"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1jnhk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "64"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://q7wfdi5cus2m"]
+
+[ext_resource type="Script" uid="uid://cqbywq1gnb2n7" path="res://world_item.gd" id="1_aeu3x"]
+[ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://item.gd" id="2_70t5p"]
+[ext_resource type="Texture2D" uid="uid://bsifbn1s8va8o" path="res://Resources/Textures/Terrain/wood.png" id="2_etyx1"]
+
+[sub_resource type="Resource" id="Resource_wrcol"]
+script = ExtResource("2_70t5p")
+metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etyx1"]
+radius = 8.0
+
+[node name="WorldItem" type="Area2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_aeu3x")
+_item = SubResource("Resource_wrcol")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://cqbywq1gnb2n7"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_etyx1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_etyx1")

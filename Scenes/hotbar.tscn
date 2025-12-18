@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbe71tvxwfhof"]
+
+[ext_resource type="PackedScene" uid="uid://cm4nhneowv5r" path="res://Scenes/hotbar_slot.tscn" id="1_oais3"]
+[ext_resource type="Script" uid="uid://c6qe3y71k0l87" path="res://Scripts/hotbar.gd" id="1_w22v5"]
+
+[node name="Hotbar" type="PanelContainer" node_paths=PackedStringArray("slot_container")]
+script = ExtResource("1_w22v5")
+slot_container = NodePath("MarginContainer/HBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="slot_0" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_oais3")]
+layout_mode = 2
+
+[node name="slot_1" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_oais3")]
+layout_mode = 2
+
+[node name="slot_2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_oais3")]
+layout_mode = 2
+
+[node name="slot_3" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_oais3")]
+layout_mode = 2
+
+[node name="slot_4" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_oais3")]
+layout_mode = 2

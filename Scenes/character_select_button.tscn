@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckcx2xvk8cpir"]
+
+[ext_resource type="Script" uid="uid://btlilw2x0f3i8" path="res://Scripts/character_select_button.gd" id="1_4pux1"]
+
+[node name="CharacterSelectButton" type="PanelContainer" node_paths=PackedStringArray("NameLabel", "LevelLabel")]
+offset_right = 137.0
+offset_bottom = 60.0
+script = ExtResource("1_4pux1")
+NameLabel = NodePath("MarginContainer/VBoxContainer/NameLabel")
+LevelLabel = NodePath("MarginContainer/VBoxContainer/LevelLabel")
+metadata/_custom_type_script = "uid://btlilw2x0f3i8"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Character Name"
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lv. 0"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="emit_pressed"]

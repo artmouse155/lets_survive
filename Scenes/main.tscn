@@ -1,0 +1,659 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfsck5iumxmgy"]
+
+[ext_resource type="Script" uid="uid://dt3cw2yylpcf4" path="res://Scripts/main_menus.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://bdjj0fr0ve0cb" path="res://Scripts/character_select_menu.gd" id="2_21xkr"]
+[ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/world_select_node.gd" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/game_container.tscn" id="4_jjvhh"]
+
+[sub_resource type="GDScript" id="GDScript_h2yge"]
+resource_name = "Title"
+script/source = "extends Menu
+
+func play():
+	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
+
+func settings():
+	menu_selected.emit(MainMenus.MENUS.SETTINGS)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_7dm0k"]
+font_size = 64
+
+[sub_resource type="GDScript" id="GDScript_7dm0k"]
+resource_name = "Quit Button Script"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+resource_name = "Settings"
+script/source = "extends Menu
+
+func return_to_main_menu():
+	menu_selected.emit(MainMenus.MENUS.TITLE)
+"
+
+[sub_resource type="GDScript" id="GDScript_kry3j"]
+resource_name = "Character Create"
+script/source = "extends Menu
+
+const COLOR_OPTIONS : Dictionary[String,Color] ={
+	\"red\" : Color.RED,
+	\"green\" : Color.GREEN,
+	\"blue\" : Color.BLUE,
+	\"yellow\" : Color.YELLOW
+}
+
+@export var create_button : Button
+@export var name_input : LineEdit
+@export var shirts_dropdown : OptionButton
+
+var _character_shirt_color : String = COLOR_OPTIONS.keys()[0]
+var _character_name : String = \"\"
+
+func start() -> void:
+	_character_name = \"\"
+	_character_shirt_color = COLOR_OPTIONS.keys()[0]
+	name_input.text = \"\"
+	shirts_dropdown.selected = 0
+
+func return_to_character_select():
+	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
+	
+func create_character():
+	SaveLoad.create_character(_character_name, COLOR_OPTIONS[_character_shirt_color])
+	return_to_character_select()
+
+func set_character_name(character_name : String):
+	_character_name = character_name.strip_edges()
+	_update_create_button()
+
+func set_character_shirt_color(index : int):
+	_character_shirt_color = COLOR_OPTIONS.keys()[index]
+	_update_create_button()
+
+func _update_create_button():
+	create_button.disabled = (_character_name.length() == 0)
+"
+
+[sub_resource type="GDScript" id="GDScript_jjvhh"]
+resource_name = "World Create"
+script/source = "extends Menu
+
+var _world_name : String = \"\"
+var _world_seed : String = \"\"
+
+@export var create_button : Button
+@export var name_input : LineEdit
+@export var seed_input : LineEdit
+
+func start() -> void:
+	_world_name = \"\"
+	_world_seed = \"\"
+	name_input.text = \"\"
+	seed_input.text = \"\"
+
+func return_to_world_select():
+	menu_selected.emit(MainMenus.MENUS.WORLD_SELECT)
+	
+func create_world():
+	SaveLoad.create_world(_world_name, _world_seed)
+	return_to_world_select()
+
+func set_world_name(world_name : String):
+	_world_name = world_name.strip_edges()
+	_update_create_button()
+
+func set_seed(world_seed : String):
+	_world_seed = world_seed.strip_edges()
+	_update_create_button()
+
+func _update_create_button():
+	create_button.disabled = (_world_name.length() == 0)
+"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenus" type="Control" parent="." node_paths=PackedStringArray("menus", "characterSelectNode", "worldSelectNode", "gameContainer")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_jjvhh")
+menus = {
+0: NodePath("Title"),
+1: NodePath("Settings"),
+2: NodePath("CharacterSelect"),
+3: NodePath("CharacterCreate"),
+4: NodePath("WorldSelect"),
+5: NodePath("WorldCreate"),
+6: NodePath("GameContainer")
+}
+characterSelectNode = NodePath("CharacterSelect")
+worldSelectNode = NodePath("WorldSelect")
+gameContainer = NodePath("GameContainer")
+metadata/_custom_type_script = "uid://dt3cw2yylpcf4"
+
+[node name="Title" type="Control" parent="MainMenus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_h2yge")
+metadata/_custom_type_script = "uid://ydodnup51mgc"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/Title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -112.5
+offset_right = 193.0
+offset_bottom = 112.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainMenus/Title/VBoxContainer"]
+layout_mode = 2
+text = "Let's Survive"
+label_settings = SubResource("LabelSettings_7dm0k")
+
+[node name="Buttons" type="VBoxContainer" parent="MainMenus/Title/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PlayButton" type="Button" parent="MainMenus/Title/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="MainMenus/Title/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="MainMenus/Title/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Quit"
+script = SubResource("GDScript_7dm0k")
+
+[node name="Settings" type="Control" parent="MainMenus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_1bvp3")
+metadata/_custom_type_script = "uid://ydodnup51mgc"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -53.0
+offset_right = 96.5
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/Settings/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/Settings/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="SettingsContainer" type="VBoxContainer" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer/SettingsContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gamer Mode"
+
+[node name="CheckButton" type="CheckButton" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer/SettingsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ReturnButton" type="Button" parent="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="CharacterSelect" type="Control" parent="MainMenus" node_paths=PackedStringArray("CharacterButtonContainer", "PlayButton", "PreviewBox")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_21xkr")
+CharacterButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/CharacterSelectButtons")
+PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton")
+PreviewBox = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer")
+metadata/_custom_type_script = "uid://bdjj0fr0ve0cb"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.5
+offset_top = -193.0
+offset_right = 204.5
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/CharacterSelect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select your Character"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Characters"
+horizontal_alignment = 1
+
+[node name="MIN_SIZE" type="PanelContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CharacterSelectButtons" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 0
+
+[node name="PlayButton" type="Button" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+text = "Play"
+
+[node name="NewCharacter" type="Button" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Create New Character"
+
+[node name="Return" type="Button" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[node name="CharacterCreate" type="Control" parent="MainMenus" node_paths=PackedStringArray("create_button", "name_input", "shirts_dropdown")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_kry3j")
+create_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create")
+name_input = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer/LineEdit")
+shirts_dropdown = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2/OptionButton")
+metadata/_custom_type_script = "uid://ydodnup51mgc"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/CharacterCreate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = -97.0
+offset_right = 165.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/CharacterCreate/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Create a character"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MIN_SIZE" type="VBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2"]
+layout_mode = 2
+text = "Shirt Color: "
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Red"
+popup/item_0/id = 0
+popup/item_1/text = "Green"
+popup/item_1/id = 1
+popup/item_2/text = "Blue"
+popup/item_2/id = 2
+popup/item_3/text = "Yellow"
+popup/item_3/id = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Back"
+
+[node name="Create" type="Button" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "Create"
+
+[node name="WorldSelect" type="Control" parent="MainMenus" node_paths=PackedStringArray("WorldButtonContainer", "PlayButton")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("3_jjvhh")
+WorldButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/WorldSelectButtons")
+PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton")
+metadata/_custom_type_script = "uid://dv68qe5d3euf6"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/WorldSelect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -176.5
+offset_right = 189.5
+offset_bottom = 176.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select a World"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MIN_SIZE" type="PanelContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WorldSelectButtons" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+text = "Play"
+
+[node name="NewWorld" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Create New World"
+
+[node name="Return" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[node name="WorldCreate" type="Control" parent="MainMenus" node_paths=PackedStringArray("create_button", "name_input", "seed_input")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_jjvhh")
+create_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create")
+name_input = NodePath("PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer/WorldName")
+seed_input = NodePath("PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2/Seed")
+metadata/_custom_type_script = "uid://ydodnup51mgc"
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/WorldCreate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -83.0
+offset_right = 160.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldCreate/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Create a world"
+horizontal_alignment = 1
+
+[node name="MIN_SIZE" type="VBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+horizontal_alignment = 1
+
+[node name="WorldName" type="LineEdit" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2"]
+layout_mode = 2
+text = "Seed: "
+horizontal_alignment = 1
+
+[node name="Seed" type="LineEdit" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Leave blank for random"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Back"
+
+[node name="Create" type="Button" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "Create"
+
+[node name="GameContainer" parent="MainMenus" instance=ExtResource("4_jjvhh")]
+layout_mode = 1
+
+[connection signal="pressed" from="MainMenus/Title/VBoxContainer/Buttons/PlayButton" to="MainMenus/Title" method="play"]
+[connection signal="pressed" from="MainMenus/Title/VBoxContainer/Buttons/SettingsButton" to="MainMenus/Title" method="settings"]
+[connection signal="pressed" from="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer/ReturnButton" to="MainMenus/Settings" method="return_to_main_menu"]
+[connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/CharacterSelect" method="play"]
+[connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewCharacter" to="MainMenus/CharacterSelect" method="create_character"]
+[connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Return" to="MainMenus/CharacterSelect" method="return_to_main_menu"]
+[connection signal="text_changed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer/LineEdit" to="MainMenus/CharacterCreate" method="set_character_name"]
+[connection signal="item_selected" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2/OptionButton" to="MainMenus/CharacterCreate" method="set_character_shirt_color"]
+[connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/CharacterCreate" method="return_to_character_select"]
+[connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create" to="MainMenus/CharacterCreate" method="create_character"]
+[connection signal="world_selected" from="MainMenus/WorldSelect" to="MainMenus" method="load_game"]
+[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/WorldSelect" method="play"]
+[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewWorld" to="MainMenus/WorldSelect" method="create_world"]
+[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Return" to="MainMenus/WorldSelect" method="return_to_player_select"]
+[connection signal="text_changed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer/WorldName" to="MainMenus/WorldCreate" method="set_world_name"]
+[connection signal="text_changed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2/Seed" to="MainMenus/WorldCreate" method="set_seed"]
+[connection signal="pressed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/WorldCreate" method="return_to_world_select"]
+[connection signal="pressed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create" to="MainMenus/WorldCreate" method="create_world"]

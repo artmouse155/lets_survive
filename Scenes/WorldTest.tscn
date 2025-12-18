@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxjdkdkaf7fdy"]
+
+[ext_resource type="Script" uid="uid://css2hyvtv3ie4" path="res://Scripts/world_test.gd" id="1_r8vti"]
+[ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/game_container.tscn" id="2_r8vti"]
+
+[node name="WorldTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8vti")
+
+[node name="GameContainer" parent="." instance=ExtResource("2_r8vti")]
+layout_mode = 1
