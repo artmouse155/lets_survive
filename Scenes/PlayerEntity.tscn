@@ -1,20 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bdriym0k3hk1g"]
+[gd_scene load_steps=24 format=3 uid="uid://bdriym0k3hk1g"]
 
 [ext_resource type="Texture2D" uid="uid://4oiecskv1ol2" path="res://Resources/Textures/Terrain/dude.png" id="1_mug8v"]
-[ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/human_sprite.gd" id="2_mug8v"]
-[ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://item.gd" id="2_ngjm7"]
+[ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/player_entity.gd" id="2_mug8v"]
 [ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/Terrain/hand.png" id="3_sar6w"]
 [ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_2lkt2"]
 [ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/melee_radius.tscn" id="5_oyunc"]
-
-[sub_resource type="Resource" id="Resource_ngjm7"]
-script = ExtResource("2_ngjm7")
-metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
-
-[sub_resource type="Resource" id="Resource_35ope"]
-script = ExtResource("2_ngjm7")
-item_name = 2
-metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sar6w"]
 animation = &"RESET"
@@ -268,7 +258,6 @@ _data = {
 script = ExtResource("2_mug8v")
 melee_radius = NodePath("MeleeRadius")
 _tool_sprite = NodePath("Body/ArmR/HandR/Tool")
-inventory = Array[ExtResource("2_ngjm7")]([SubResource("Resource_ngjm7"), SubResource("Resource_35ope")])
 metadata/_custom_type_script = "uid://bq7btvrn0u1rs"
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -315,4 +304,3 @@ libraries = {
 
 [node name="MeleeRadius" parent="." instance=ExtResource("5_oyunc")]
 radius = 20.0
-arc_angle = 1.5707963267949

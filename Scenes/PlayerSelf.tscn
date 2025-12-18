@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6v2fkwk03kpo"]
 
 [ext_resource type="Script" uid="uid://cj8x2dvmayegx" path="res://Scripts/player_self.gd" id="1_80hld"]
-[ext_resource type="PackedScene" uid="uid://bdriym0k3hk1g" path="res://Scenes/HumanSprite.tscn" id="2_80hld"]
+[ext_resource type="PackedScene" uid="uid://bdriym0k3hk1g" path="res://Scenes/PlayerEntity.tscn" id="2_80hld"]
 [ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://item.gd" id="3_gubx5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_80hld"]
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_80hld")
-sprite = NodePath("HumanSprite")
+sprite = NodePath("PlayerEntity")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -31,7 +31,7 @@ limit_enabled = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_80hld")
 
-[node name="HumanSprite" parent="." instance=ExtResource("2_80hld")]
+[node name="PlayerEntity" parent="." instance=ExtResource("2_80hld")]
 _inventory = Array[ExtResource("3_gubx5")]([SubResource("Resource_38kob"), SubResource("Resource_dm1wv")])
 max_health = 100.0
 health = 100.0
