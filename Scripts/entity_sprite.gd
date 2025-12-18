@@ -1,5 +1,5 @@
 @abstract
-class_name EntitySprite extends Node2D
+class_name Entity extends Node2D
 
 signal world_item_dropped(sender : Node2D, item : Item, cooldown: float)
 

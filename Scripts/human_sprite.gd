@@ -1,4 +1,4 @@
-class_name HumanSprite extends EntitySprite
+class_name BrainEntity extends Entity
 
 enum ANIMATIONS {IDLE, PUNCH, SWING}
 
