@@ -1,4 +1,4 @@
-class_name WorldItem extends Area2D
+class_name WorldItem extends Entity
 
 #const EXPLODE_COOLDOWN
 const PACKED : PackedScene = preload("uid://q7wfdi5cus2m")
