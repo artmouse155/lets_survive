@@ -34,7 +34,7 @@ render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui", "player_self")]
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -48,7 +48,6 @@ inventory_label = NodePath("SafeZone/VBoxContainer/Inventory")
 pause_screen = NodePath("../PauseScreen")
 hotbar = NodePath("SafeZone/Hotbar")
 inventory_ui = NodePath("SafeZone/Inventory")
-player_self = NodePath("../SubViewportContainer/SubViewport/World/Player")
 
 [node name="SafeZone" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
@@ -136,15 +135,9 @@ layout_mode = 2
 text = "Return to Menu"
 
 [connection signal="set_pause" from="." to="GameUI" method="set_pause"]
-[connection signal="health_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_health_updated"]
-[connection signal="inventory_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_inventory_updated"]
-[connection signal="item_collected" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_item_collected"]
-[connection signal="selected_index_updated" from="SubViewportContainer/SubViewport/World/Player" to="GameUI" method="on_selected_index_updated"]
-[connection signal="world_item_dropped" from="SubViewportContainer/SubViewport/World/Player/HumanSprite" to="SubViewportContainer/SubViewport/World/EntitySpawner" method="on_world_item_dropped"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="inventory_slot_set" from="GameUI/SafeZone/Inventory" to="GameUI" method="on_inventory_item_set"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="set_pause" binds= [false]]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
 
 [editable path="SubViewportContainer/SubViewport/World"]
-[editable path="SubViewportContainer/SubViewport/World/Player"]

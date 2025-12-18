@@ -34,3 +34,5 @@ metadata/_custom_type_script = "uid://53rs4mt5chvi"
 [node name="AboveGround" type="TileMapLayer" parent="."]
 
 [node name="PlayerEntity" parent="." instance=ExtResource("5_fo5ed")]
+
+[node name="Camera2D" type="Camera2D" parent="PlayerEntity"]

@@ -6,7 +6,7 @@ extends Control
 @export var pause_screen : Control
 @export var hotbar : Hotbar
 @export var inventory_ui : Inventory
-@export var player_self : PlayerSelf
+@export var player_self : PlayerEntity
 
 var is_in_ingame_ui : bool = false
 
