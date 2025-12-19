@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/EntityModel/player_entity.gd" id="1_wqpke"]
 [ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scenes/EntityModel/BrainModel/SelfBrain.gd" id="3_vitn1"]
 
-[node name="PlayerEntity" instance=ExtResource("1_pdhha")]
+[node name="PlayerEntity" node_paths=PackedStringArray("brain") instance=ExtResource("1_pdhha")]
 script = ExtResource("1_wqpke")
-speed = 125
+brain = NodePath("SelfBrain")
 
 [node name="SelfBrain" type="Node" parent="." index="6"]
 script = ExtResource("3_vitn1")

@@ -1,3 +1,5 @@
 class_name PlayerEntity extends PersonEntity
 
-@export var speed = 125
+func set_movement_enabled(enabled : bool) -> void:
+	if brain is SelfBrain:
+		brain.set_movement_enabled(enabled)
