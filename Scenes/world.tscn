@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr6w6t2qv7atg"]
+[gd_scene load_steps=9 format=3 uid="uid://dr6w6t2qv7atg"]
 
 [ext_resource type="Script" uid="uid://d4nnyh3h5l7bl" path="res://Scripts/world.gd" id="1_a02cp"]
 [ext_resource type="FastNoiseLite" uid="uid://dyd1hw7adwaqb" path="res://Resources/Generators/terrain.tres" id="2_go701"]
 [ext_resource type="Texture2D" uid="uid://cdp8mhyo7jxwm" path="res://Resources/Textures/Terrain/terrain.png" id="3_5a7ea"]
+[ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scenes/EntityModel/BrainModel/SelfBrain.gd" id="3_5ukr8"]
 [ext_resource type="Script" uid="uid://53rs4mt5chvi" path="res://Scripts/entity_spawner.gd" id="3_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://bfwu7kuh082tc" path="res://Scenes/EntityModel/PlayerEntity.tscn" id="5_fo5ed"]
 
@@ -23,6 +24,10 @@ terrain_gen = ExtResource("2_go701")
 ground = NodePath("Ground")
 above_ground = NodePath("AboveGround")
 entity_spawner = NodePath("EntitySpawner")
+
+[node name="SelfBrain" type="Node" parent="."]
+script = ExtResource("3_5ukr8")
+metadata/_custom_type_script = "uid://yyjkgbfe6jg5"
 
 [node name="Ground" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_fo5ed")

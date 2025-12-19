@@ -1,10 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcnynj6tfm2v3"]
+[gd_scene load_steps=10 format=3 uid="uid://bcnynj6tfm2v3"]
 
 [ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/game_node.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/world.tscn" id="2_juifl"]
+[ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://item.gd" id="3_udj4x"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scenes/game_ui.gd" id="3_us7ks"]
 [ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/hotbar.tscn" id="4_juifl"]
-[ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory.tscn" id="5_us7ks"]
+[ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory_ui.tscn" id="5_us7ks"]
+
+[sub_resource type="Resource" id="Resource_jvhxo"]
+script = ExtResource("3_udj4x")
+item_quantity = 7
+metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
+
+[sub_resource type="Resource" id="Resource_h6fkb"]
+script = ExtResource("3_udj4x")
+item_name = 2
+metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
+
+[sub_resource type="Resource" id="Resource_gi2c6"]
+script = ExtResource("3_udj4x")
+item_name = 1
+item_quantity = 3
+metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [node name="GameContainer" type="Control" node_paths=PackedStringArray("world")]
 layout_mode = 3
@@ -34,7 +51,11 @@ render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui", "player_self")]
+[node name="PlayerEntity" parent="SubViewportContainer/SubViewport/World" index="4" node_paths=PackedStringArray("brain")]
+_inventory = Array[ExtResource("3_udj4x")]([SubResource("Resource_jvhxo"), SubResource("Resource_h6fkb"), SubResource("Resource_gi2c6")])
+brain = NodePath("../SelfBrain")
+
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui", "self_brain")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -47,8 +68,8 @@ health_label = NodePath("SafeZone/VBoxContainer/Health")
 inventory_label = NodePath("SafeZone/VBoxContainer/Inventory")
 pause_screen = NodePath("../PauseScreen")
 hotbar = NodePath("SafeZone/Hotbar")
-inventory_ui = NodePath("SafeZone/Inventory")
-player_self = NodePath("../SubViewportContainer/SubViewport/World/PlayerEntity")
+inventory_ui = NodePath("SafeZone/InventoryUI")
+self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
 
 [node name="SafeZone" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
@@ -84,7 +105,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Inventory" parent="GameUI/SafeZone" instance=ExtResource("5_us7ks")]
+[node name="InventoryUI" parent="GameUI/SafeZone" instance=ExtResource("5_us7ks")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -136,9 +157,15 @@ layout_mode = 2
 text = "Return to Menu"
 
 [connection signal="set_pause" from="." to="GameUI" method="set_pause"]
+[connection signal="health_updated" from="SubViewportContainer/SubViewport/World/PlayerEntity" to="GameUI" method="on_health_updated"]
+[connection signal="item_collected" from="SubViewportContainer/SubViewport/World/PlayerEntity" to="GameUI" method="on_item_collected"]
+[connection signal="player_inventory_updated" from="SubViewportContainer/SubViewport/World/PlayerEntity" to="GameUI" method="on_player_inventory_updated"]
+[connection signal="selected_index_updated" from="SubViewportContainer/SubViewport/World/PlayerEntity" to="GameUI" method="on_selected_index_updated"]
+[connection signal="world_item_dropped" from="SubViewportContainer/SubViewport/World/PlayerEntity" to="SubViewportContainer/SubViewport/World/EntitySpawner" method="on_world_item_dropped"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
-[connection signal="inventory_slot_set" from="GameUI/SafeZone/Inventory" to="GameUI" method="on_inventory_item_set"]
-[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="set_pause" binds= [false]]
+[connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="SubViewportContainer/SubViewport/World/SelfBrain" method="on_inv_slot_left_clicked"]
+[connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="SubViewportContainer/SubViewport/World/SelfBrain" method="on_inv_slot_right_clicked"]
+[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
 
 [editable path="SubViewportContainer/SubViewport/World"]

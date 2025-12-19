@@ -14,24 +14,25 @@ var _selected_index : int = 0
 
 enum ANIMATIONS {IDLE, PUNCH, SWING}
 
+var velocity = Vector2.ZERO
+
 @export var anim_state : ANIMATIONS = ANIMATIONS.IDLE
 @export var _tool_state : Item.TOOL_TYPE = Item.TOOL_TYPE.FISTS
 @export var melee_radius: MeleeRadius
-
 @export var _tool_sprite : Sprite2D
 
 func _ready() -> void:
 	_connect_to_brain()
 	_inventory.resize(INVENTORY_SIZE)
 	_update_tool_state()
-	inventory_updated.emit(get_inventory())
+	_emit_inventory_updated()
 	selected_index_updated.emit(0)
 
 func _connect_to_brain() -> void:
 	if brain is PersonBrain:
 		
 		brain.movement_vector.connect(_on_movement_vector)
-		brain.look_direction.connect(_on_look_direction)
+		brain.look_target.connect(_on_look_target)
 		
 		brain.attack.connect(attack)
 		brain.go_idle.connect(go_idle)
@@ -44,11 +45,19 @@ func _connect_to_brain() -> void:
 		brain.drop_selected_item.connect(drop_selected_item)
 
 
-func _on_movement_vector(movement_vector : Vector2) -> void:
-	pass
+func _emit_inventory_updated() -> void:
+	inventory_updated.emit(_inventory)
 
-func _on_look_direction(angle_rad : float) -> void:
-	rotation = angle_rad
+func _physics_process(delta: float) -> void:
+	# TODO: Make this more robust
+	position += velocity * delta
+
+
+func _on_movement_vector(movement_vector : Vector2) -> void:
+	velocity = movement_vector * speed
+
+func _on_look_target(look_target : float) -> void:
+	rotation = look_target
 
 
 func attack() -> void:
@@ -97,7 +106,7 @@ func pickup_item(item : Item) -> Item:
 				item = null
 				break
 	_update_tool_state()
-	inventory_updated.emit(_inventory)
+	_emit_inventory_updated()
 	return item
 
 
@@ -145,7 +154,7 @@ func drop_index(index : int) -> void:
 		world_item_dropped.emit(self,Item.new(item.item_name,1), 1.0)
 		_inventory[index] = null if item.item_quantity <= 1 else Item.new(item.item_name,item.item_quantity - 1)
 	_update_tool_state()
-	inventory_updated.emit(_inventory)
+	_emit_inventory_updated()
 
 
 func drop_all_selected_item() -> void:
@@ -158,13 +167,13 @@ func drop_all_index(index : int) -> void:
 		world_item_dropped.emit(self,item, 1.0)
 		_inventory[index] = null
 	_update_tool_state()
-	inventory_updated.emit(_inventory)
+	_emit_inventory_updated()
 
 
 func set_inventory_at_index(index: int, item: Item) -> void:
 	_inventory[index] = item
 	_update_tool_state()
-	inventory_updated.emit(_inventory)
+	_emit_inventory_updated()
 
 
 func _on_pickup_area_area_entered(area: Area2D) -> void:
@@ -176,7 +185,7 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		var count_after = leftovers.item_quantity if leftovers else 0
 		var count = count_before - count_after
 		if (item and count > 0):
-			inventory_updated.emit(get_inventory())
+			_emit_inventory_updated()
 			item_collected.emit(Item.new(item.item_name,count))
 		if !leftovers:
 			area.queue_free()

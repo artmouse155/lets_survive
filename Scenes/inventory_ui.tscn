@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://blkwdjk1xb8wr"]
+
+[ext_resource type="Script" uid="uid://4gxh5soeij7l" path="res://Scripts/inventory_ui.gd" id="1_vr5og"]
+[ext_resource type="PackedScene" uid="uid://crl2y8wmcwmkk" path="res://Scenes/ui_slot.tscn" id="2_brbew"]
+[ext_resource type="PackedScene" uid="uid://d0omj2r68up4x" path="res://slot.tscn" id="3_7oojl"]
+
+[node name="InventoryUI" type="PanelContainer" node_paths=PackedStringArray("floating_slot", "ui_slot_container")]
+script = ExtResource("1_vr5og")
+floating_slot = NodePath("Control/FloatingSlot")
+ui_slot_container = NodePath("MarginContainer/VBoxContainer/GridContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Inventory"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="UISlot" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot2" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot3" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot4" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot5" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot6" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot7" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot8" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot9" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="UISlot10" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_brbew")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="FloatingSlot" parent="Control" instance=ExtResource("3_7oojl")]
+layout_mode = 1

@@ -5,8 +5,8 @@ extends Control
 
 @export var pause_screen : Control
 @export var hotbar : Hotbar
-@export var inventory_ui : Inventory
-@export var player_self : PlayerEntity
+@export var inventory_ui : InventoryUI
+@export var self_brain : SelfBrain
 
 var is_in_ingame_ui : bool = false
 
@@ -19,19 +19,24 @@ func _process(_delta: float) -> void:
 	if is_in_ingame_ui:
 		if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("open_inventory"):
 			is_in_ingame_ui = false
-			player_self.set_movement_enabled(true)
+			self_brain.set_movement_enabled(true)
 			_drop_floating_ui_item()
 			inventory_ui.hide()
 			hotbar.show()
-		elif Input.is_action_just_pressed("drop_all_selected_item"):
-			_drop_item(inventory_ui.pop_all_touching_mouse())
+		elif Input.is_action_just_pressed("drop_all"):
+			var touching_mouse_index := inventory_ui.get_touching_mouse_index()
+			if touching_mouse_index != -1:
+				self_brain.emit_drop_all_index(touching_mouse_index)
 	else:
 		if Input.is_action_just_pressed("pause"):
 			set_pause(!get_tree().paused)
 		elif Input.is_action_just_pressed("open_inventory"):
 			is_in_ingame_ui = true
-			player_self.set_movement_enabled(false)
-			inventory_ui.update(player_self.get_inventory())
+			self_brain.set_movement_enabled(false)
+			
+			## We shouldn't need this if we are updating as often as we should.
+			#inventory_ui.update(player_self.get_inventory())
+			
 			inventory_ui.show()
 			hotbar.hide()
 			return
@@ -40,11 +45,14 @@ func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
 	pause_screen.visible = get_tree().paused
 
+func resume() -> void:
+	set_pause(false)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func on_inventory_updated(inventory : Array[Item]) -> void:
+func on_player_inventory_updated(inventory : Array[Item], floating_item : Item) -> void:
 	inventory_label.text = "Inventory: %s" % str(inventory)
 	hotbar.update_hotbar(inventory.slice(0,5))
-	inventory_ui.update(inventory)
+	inventory_ui.update(inventory, floating_item)
 
 func on_health_updated(health : float) -> void:
 	health_label.text = "Health: %s" % str(health)
@@ -55,15 +63,8 @@ func on_selected_index_updated(index : int) -> void:
 func on_item_collected(item : Item) -> void:
 	print("Collected %s" % str(item))
 
-func on_inventory_item_set(index : int, item : Item) -> void:
-	player_self.set_inventory_at_index(index,item)
-
 func _drop_floating_ui_item() -> void:
-	_drop_item(inventory_ui.pop_floating_item())
-
-func _drop_item(item : Item) -> void:
-	if item:
-		player_self.drop(item)
+	self_brain.emit_drop_floating()
 
 func _on_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
