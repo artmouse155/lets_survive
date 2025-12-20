@@ -11,7 +11,7 @@ func _connect_to_brain() -> void:
 		brain.drop_floating.connect(_drop_floating)
 		brain.in_ui.connect(_set_in_ui)
 		brain.inventory_left_clicked.connect(_on_inventory_left_click)
-		brain.inventory_left_clicked.connect(_on_inventory_right_click)
+		brain.inventory_right_clicked.connect(_on_inventory_right_click)
 
 func set_movement_enabled(enabled : bool) -> void:
 	if brain is SelfBrain:
@@ -31,6 +31,7 @@ func _drop_floating() -> void:
 	
 	drop(_floating_item)
 	_floating_item = null
+	_emit_inventory_updated()
 
 func _on_inventory_left_click(index : int) -> void:
 	
