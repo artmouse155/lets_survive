@@ -1,23 +1,12 @@
 class_name SelfBrain extends PersonBrain
 
-
-
-## Fraction: transfer (count) / (fraction) to floating.
-#signal swap_inv_and_floating(index: int)
-#signal transfer_inv_to_floating(index: int, fraction: int)
-#signal transfer_floating_to_inv(index: int, fraction: int)
-#signal transfer_one_inv_to_floating(index: int)
-#signal transfer_one_floating_to_inv(index: int)
+var is_movement_disabled : bool = false
 
 signal drop_floating()
 signal in_ui(in_ui: bool)
 signal inventory_left_clicked(index: int)
 signal inventory_right_clicked(index: int)
 
-var is_movement_disabled : bool = false
-
-
-# TODO: Make this not _process, maybe _input??
 func _physics_process(_delta: float) -> void:
 	
 	_get_look_direction()
@@ -64,21 +53,10 @@ func set_movement_enabled(enabled : bool) -> void:
 func on_inv_slot_left_clicked(index : int) -> void:
 	inventory_left_clicked.emit(index)
 
+
 func on_inv_slot_right_clicked(index : int) -> void:
 	inventory_right_clicked.emit(index)
-
-#func emit_swap_inv_and_floating() -> void:
-	#swap_inv_and_floating.emit()
 
 
 func emit_drop_floating() -> void:
 	drop_floating.emit()
-		
-#func emit_transfer_inv_to_floating(index: int, fraction: int):
-	#transfer_inv_to_floating.emit(index,fraction)
-	#
-#func emit_transfer_floating_to_inv(index: int, fraction: int):
-	#transfer_floating_to_inv.emit(index,fraction)
-#
-#func emit_transfer_one_floating_to_inv(index: int):
-	#transfer_one_floating_to_inv.emit(index)
