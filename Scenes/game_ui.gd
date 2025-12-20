@@ -27,6 +27,10 @@ func _process(_delta: float) -> void:
 			var touching_mouse_index := inventory_ui.get_touching_mouse_index()
 			if touching_mouse_index != -1:
 				self_brain.emit_drop_all_index(touching_mouse_index)
+		elif Input.is_action_just_pressed("drop"):
+				var touching_mouse_index := inventory_ui.get_touching_mouse_index()
+				if touching_mouse_index != -1:
+					self_brain.emit_drop_index(touching_mouse_index)
 	else:
 		if Input.is_action_just_pressed("pause"):
 			set_pause(!get_tree().paused)

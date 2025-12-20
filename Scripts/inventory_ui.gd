@@ -10,6 +10,7 @@ var clicked_slot : UISlot = null
 
 signal left_clicked(index: int)
 signal right_clicked(index: int)
+
 # Called when the node enters the scene tree for the first time.
 func update(inventory : Array[Item], floating_item : Item) -> void:
 	#TODO: Make it so I don't have to make and delete nodes every time
@@ -32,6 +33,7 @@ func _setup_slot_container(inventory : Array[Item]) -> Array[UISlot]:
 
 func _process(_delta: float) -> void:
 	floating_slot.global_position = get_global_mouse_position()
+
 
 func _on_left_clicked(index : int):
 	left_clicked.emit(index)

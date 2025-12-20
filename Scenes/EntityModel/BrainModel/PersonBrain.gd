@@ -10,8 +10,8 @@ signal select(index: int)
 signal select_next()
 signal select_prev()
 
-signal drop_all_selected_item()
 signal drop_selected_item()
+signal drop_all_selected_item()
 signal drop_index(index: int)
 signal drop_all_index(index: int)
 

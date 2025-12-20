@@ -41,8 +41,11 @@ func _connect_to_brain() -> void:
 		brain.select_next.connect(select_next)
 		brain.select_prev.connect(select_prev)
 		
-		brain.drop_all_selected_item.connect(drop_all_selected_item)
 		brain.drop_selected_item.connect(drop_selected_item)
+		brain.drop_all_selected_item.connect(drop_all_selected_item)
+		
+		brain.drop_index.connect(drop_index)
+		brain.drop_all_index.connect(drop_all_index)
 
 
 func _emit_inventory_updated() -> void:
