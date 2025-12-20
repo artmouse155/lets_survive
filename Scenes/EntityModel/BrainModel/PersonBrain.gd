@@ -20,4 +20,4 @@ func emit_drop_index(index: int):
 
 
 func emit_drop_all_index(index: int):
-	drop_all_index.emit()
+	drop_all_index.emit(index)
