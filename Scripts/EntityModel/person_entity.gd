@@ -14,8 +14,6 @@ var _selected_index : int = 0
 
 enum ANIMATIONS {IDLE, PUNCH, SWING}
 
-var velocity = Vector2.ZERO
-
 @export var anim_state : ANIMATIONS = ANIMATIONS.IDLE
 @export var _tool_state : Item.TOOL_TYPE = Item.TOOL_TYPE.FISTS
 @export var melee_radius: MeleeRadius
@@ -50,10 +48,6 @@ func _connect_to_brain() -> void:
 
 func _emit_inventory_updated() -> void:
 	inventory_updated.emit(_inventory)
-
-func _physics_process(delta: float) -> void:
-	# TODO: Make this more robust
-	position += velocity * delta
 
 
 func _on_movement_vector(movement_vector : Vector2) -> void:

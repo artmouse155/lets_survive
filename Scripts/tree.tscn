@@ -11,8 +11,8 @@ script = ExtResource("1_7kcem")
 sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://dhej6pd0sfvi2"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6tccs")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pyekw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6tccs")

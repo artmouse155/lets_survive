@@ -258,12 +258,12 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ckagm"]
 
-[node name="PersonEntity" type="Area2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite", "hitBox", "hurtBox")]
+[node name="PersonEntity" type="CharacterBody2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite", "hitBox")]
+input_pickable = true
 script = ExtResource("1_vm3h2")
 melee_radius = NodePath("MeleeRadius")
 _tool_sprite = NodePath("Body/ArmR/HandR/Tool")
 hitBox = NodePath("MeleeRadius")
-hurtBox = NodePath(".")
 metadata/_custom_type_script = "uid://bqvhs7u5b5bxs"
 
 [node name="Body" type="Sprite2D" parent="."]
