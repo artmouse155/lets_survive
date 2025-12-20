@@ -14,5 +14,5 @@ func loadGame(world_index : int, player_index : int) -> void:
 	var world_data := SaveLoad.get_world_save(world_index)
 	world.generate_world(world_data.get_world_seed())
 
-func testLoad(world_seed : String) -> void:
-	world.generate_world(world_seed)
+func testLoad(world_seed : String, player_save : PlayerSave) -> void:
+	world.start(world_seed, player_save)

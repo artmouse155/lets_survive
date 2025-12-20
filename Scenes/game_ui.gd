@@ -65,7 +65,9 @@ func on_selected_index_updated(index : int) -> void:
 	hotbar.set_selected(index)
 
 func on_item_collected(item : Item) -> void:
-	print("Collected %s" % str(item))
+	#print("Collected %s" % str(item))
+	# TODO: Add toast saying "You got <item>
+	pass
 
 func _drop_floating_ui_item() -> void:
 	self_brain.emit_drop_floating()
@@ -77,3 +79,10 @@ func _on_gui_input(event : InputEvent) -> void:
 				_drop_floating_ui_item()
 			MOUSE_BUTTON_RIGHT:
 				_drop_floating_ui_item()
+
+func _on_inventory_left_clicked(index: int) -> void:
+	pass
+
+func _on_inventory_lright_clicked(index: int) -> void:
+	pass
+	# EMIT MY OWN

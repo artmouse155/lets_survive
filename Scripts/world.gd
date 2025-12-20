@@ -14,6 +14,10 @@ const WATER_ATLAS = Vector2i(2,0)
 const GRASS_ATLAS = Vector2i(0,0)
 const SAND_ATLAS = Vector2i(1,0)
 
+func start(world_seed : String, player_save : PlayerSave) -> void:
+	generate_world(world_seed)
+	entity_spawner.spawn_player(player_save,true)
+
 func generate_world(world_seed : String):
 	var world_size_x : int = 200
 	var world_size_y : int = 200
@@ -34,7 +38,7 @@ func _spawn_tree(coords : Vector2) -> void:
 	tree.position = coords
 	tree.world_item_dropped.connect(entity_spawner.on_world_item_dropped)
 	add_child(tree)
-	
+
 
 static func _noise_to_atlas(noise_val : float) -> Vector2i:
 	if (noise_val < .2):

@@ -176,7 +176,7 @@ func set_inventory_at_index(index: int, item: Item) -> void:
 func _on_pickup_area_area_entered(area: Area2D) -> void:
 	if is_instance_of(area, WorldItem) and !area.has_cooldown():
 		var item : Item = area.get_item()
-		print("Trying to collect %s" % str(item))
+		# print("Trying to collect %s" % str(item))
 		var count_before = item.item_quantity if item else 0
 		var leftovers : Item = pickup_item(area.get_item())
 		var count_after = leftovers.item_quantity if leftovers else 0

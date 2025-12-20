@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxjdkdkaf7fdy"]
+[gd_scene load_steps=5 format=3 uid="uid://dxjdkdkaf7fdy"]
 
 [ext_resource type="Script" uid="uid://css2hyvtv3ie4" path="res://Scripts/world_test.gd" id="1_r8vti"]
+[ext_resource type="Script" uid="uid://b2814qm5brf7h" path="res://Scripts/CustomResource/player_save.gd" id="2_hkm8i"]
 [ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/game_container.tscn" id="2_r8vti"]
+
+[sub_resource type="Resource" id="Resource_yyb55"]
+script = ExtResource("2_hkm8i")
+_player_name = "Jimmy Two-Shoes"
+_color = Color(0.644799, 0.4271072, 0.84195435, 1)
+metadata/_custom_type_script = "uid://b2814qm5brf7h"
 
 [node name="WorldTest" type="Control"]
 layout_mode = 3
@@ -11,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r8vti")
+player_save = SubResource("Resource_yyb55")
 
 [node name="GameContainer" parent="." instance=ExtResource("2_r8vti")]
 layout_mode = 1
