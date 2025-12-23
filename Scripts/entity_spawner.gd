@@ -1,5 +1,9 @@
 class_name EntitySpawner extends Node2D
 
+signal self_inventory_updated(inventory : Array[Item], floating_item : Item)
+signal self_item_collected(item : Item)
+signal self_health_updated(health : float)
+
 const PLAYER_PACKED : PackedScene = preload("uid://bfwu7kuh082tc")
 @export var self_brain : SelfBrain
 
@@ -14,4 +18,10 @@ func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 	if is_self:
 		player.add_child(Camera2D.new())
 		player.brain = self_brain
+		_pipe_signal(player.player_inventory_updated,self_inventory_updated)
+		_pipe_signal(player.health_updated,self_health_updated)
+		_pipe_signal(player.item_collected,self_item_collected)
 	add_child(player)
+
+func _pipe_signal(source : Signal, output : Signal) -> void:
+	source.connect(func(...args): output.emit.callv(args))

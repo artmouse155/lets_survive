@@ -35,7 +35,7 @@ render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui", "self_brain")]
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -48,7 +48,6 @@ health_label = NodePath("SafeZone/VBoxContainer/Health")
 pause_screen = NodePath("../PauseScreen")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
-self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
 
 [node name="SafeZone" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
@@ -186,8 +185,8 @@ text = "Return to Menu"
 
 [connection signal="set_pause" from="." to="GameUI" method="set_pause"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
-[connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="SubViewportContainer/SubViewport/World/SelfBrain" method="on_inv_slot_left_clicked"]
-[connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="SubViewportContainer/SubViewport/World/SelfBrain" method="on_inv_slot_right_clicked"]
+[connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
+[connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
 

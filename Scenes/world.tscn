@@ -23,6 +23,7 @@ terrain_gen = ExtResource("2_go701")
 ground = NodePath("Ground")
 above_ground = NodePath("AboveGround")
 entity_spawner = NodePath("EntitySpawner")
+metadata/_custom_type_script = "uid://d4nnyh3h5l7bl"
 
 [node name="SelfBrain" type="Node" parent="."]
 script = ExtResource("3_5ukr8")

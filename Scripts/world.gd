@@ -7,6 +7,7 @@ class_name World extends Node2D
 @export var above_ground : TileMapLayer
 
 @export var entity_spawner : EntitySpawner
+@export var game_ui : GameUI
 
 const PACKED_TREE : PackedScene = preload("uid://dg8ianfbwidj5")
 
@@ -33,6 +34,7 @@ func generate_world(world_seed : String):
 			if (noise_val < .1) && (random.randf() < .1):
 				_spawn_tree(ground.map_to_local(Vector2i(x,y)))
 
+
 func _spawn_tree(coords : Vector2) -> void:
 	var tree : Breakable = PACKED_TREE.instantiate()
 	tree.position = coords
@@ -46,7 +48,3 @@ static func _noise_to_atlas(noise_val : float) -> Vector2i:
 	elif (noise_val < .25):
 		return SAND_ATLAS
 	return WATER_ATLAS
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.

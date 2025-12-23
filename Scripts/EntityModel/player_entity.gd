@@ -7,14 +7,14 @@ var in_ui : bool = false
 
 func _connect_to_brain() -> void:
 	super._connect_to_brain()
-	if brain is SelfBrain:
+	if brain is PlayerBrain:
 		brain.drop_floating.connect(_drop_floating)
 		brain.in_ui.connect(_set_in_ui)
 		brain.inventory_left_clicked.connect(_on_inventory_left_click)
 		brain.inventory_right_clicked.connect(_on_inventory_right_click)
 
 func set_movement_enabled(enabled : bool) -> void:
-	if brain is SelfBrain:
+	if brain is PlayerBrain:
 		brain.set_movement_enabled(enabled)
 
 func _emit_inventory_updated() -> void:
