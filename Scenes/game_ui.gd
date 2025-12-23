@@ -83,6 +83,6 @@ func _on_gui_input(event : InputEvent) -> void:
 func _on_inventory_left_clicked(index: int) -> void:
 	pass
 
-func _on_inventory_lright_clicked(index: int) -> void:
+func _on_inventory_right_clicked(index: int) -> void:
 	pass
 	# EMIT MY OWN
