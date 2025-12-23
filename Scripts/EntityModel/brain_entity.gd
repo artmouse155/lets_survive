@@ -1,6 +1,7 @@
 @abstract
 class_name BrainEntity extends CharacterBody2D
 
+@warning_ignore("unused_signal")
 signal world_item_dropped(sender : Node2D, item : Item, cooldown: float)
 signal health_updated(health : float)
 

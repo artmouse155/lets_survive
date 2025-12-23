@@ -15,48 +15,48 @@ func _physics_process(_delta: float) -> void:
 	_get_movement_vector()
 	
 	if Input.is_action_pressed("attack"):
-		attack.emit()
+		_emit(attack)
 	else:
-		go_idle.emit()
+		_emit(go_idle)
 	if Input.is_action_just_pressed("select_0"):
-		select.emit(0)
+		_emit(select,0)
 	elif Input.is_action_just_pressed("select_1"):
-		select.emit(1)
+		_emit(select,1)
 	if Input.is_action_just_pressed("select_next"):
-		select_next.emit()
+		_emit(select_next)
 	elif Input.is_action_just_pressed("select_prev"):
-		select_prev.emit()
+		_emit(select_prev)
 	if Input.is_action_just_pressed("drop_all"):
-		drop_all_selected_item.emit()
+		_emit(drop_all_selected_item)
 	elif Input.is_action_just_pressed("drop"):
-		drop_selected_item.emit()
+		_emit(drop_selected_item)
 
 
 func _get_look_direction() -> void:	
 	var mouse_angle = (get_viewport().get_mouse_position() - (get_tree().get_root().size / 2.0)).angle()
-	look_target.emit(mouse_angle)
+	_emit(look_target,mouse_angle)
 
 
 func _get_movement_vector() -> void:
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	movement_vector.emit(input_direction)
+	_emit(movement_vector,input_direction)
 
 
 func set_movement_enabled(enabled : bool) -> void:
 	is_movement_disabled = !enabled
-	in_ui.emit(!enabled)
+	_emit(in_ui,!enabled)
 	if is_movement_disabled:
-		movement_vector.emit(Vector2.ZERO)
-		go_idle.emit()
+		_emit(movement_vector,Vector2.ZERO)
+		_emit(go_idle)
 
 
 func on_inv_slot_left_clicked(index : int) -> void:
-	inventory_left_clicked.emit(index)
+	_emit(inventory_left_clicked, index)
 
 
 func on_inv_slot_right_clicked(index : int) -> void:
-	inventory_right_clicked.emit(index)
+	_emit(inventory_right_clicked, index)
 
 
 func emit_drop_floating() -> void:
-	drop_floating.emit()
+	_emit(drop_floating)

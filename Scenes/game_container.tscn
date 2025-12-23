@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcnynj6tfm2v3"]
+[gd_scene load_steps=7 format=3 uid="uid://bcnynj6tfm2v3"]
 
 [ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/game_node.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/world.tscn" id="2_juifl"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scenes/game_ui.gd" id="3_us7ks"]
 [ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/hotbar.tscn" id="4_juifl"]
 [ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory_ui.tscn" id="5_us7ks"]
+[ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/chat.gd" id="6_udj4x"]
 
 [node name="GameContainer" type="Control" node_paths=PackedStringArray("world")]
 layout_mode = 3
@@ -44,9 +45,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_us7ks")
 health_label = NodePath("SafeZone/VBoxContainer/Health")
-inventory_label = NodePath("SafeZone/VBoxContainer/Inventory")
+inventory_label = NodePath("")
 pause_screen = NodePath("../PauseScreen")
-hotbar = NodePath("SafeZone/Hotbar")
+hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
 self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
 
@@ -64,22 +65,14 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="Health" type="Label" parent="GameUI/SafeZone/VBoxContainer"]
 layout_mode = 2
 text = "Health:"
 
-[node name="Inventory" type="Label" parent="GameUI/SafeZone/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Inventory:"
-
-[node name="Selected" type="Label" parent="GameUI/SafeZone/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Selected:"
-
-[node name="Hotbar" parent="GameUI/SafeZone" instance=ExtResource("4_juifl")]
+[node name="Hotbar" parent="GameUI/SafeZone/VBoxContainer" instance=ExtResource("4_juifl")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -89,6 +82,63 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Chat" type="Control" parent="GameUI/SafeZone"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_udj4x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -135.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/SafeZone/Chat/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+scroll_vertical = 31
+
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "[LUKE] This is a Chat message."
+fit_content = true
+
+[node name="Label2" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "[LUKE] This is a Chat message."
+fit_content = true
+
+[node name="Label3" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "[LUKE] This is a Chat message."
+fit_content = true
+
+[node name="Label4" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "[LUKE] This is a Chat message."
+fit_content = true
+
+[node name="Label5" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "[LUKE] This is a Chat message."
+fit_content = true
+
+[node name="LineEdit" type="LineEdit" parent="GameUI/SafeZone/Chat/VBoxContainer"]
+layout_mode = 2
 
 [node name="PauseScreen" type="PanelContainer" parent="."]
 process_mode = 2
