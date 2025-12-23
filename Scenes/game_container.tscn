@@ -35,7 +35,7 @@ render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "inventory_label", "pause_screen", "hotbar", "inventory_ui", "self_brain")]
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui", "self_brain")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -45,7 +45,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_us7ks")
 health_label = NodePath("SafeZone/VBoxContainer/Health")
-inventory_label = NodePath("")
 pause_screen = NodePath("../PauseScreen")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")

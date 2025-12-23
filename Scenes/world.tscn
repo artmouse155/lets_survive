@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d4nnyh3h5l7bl" path="res://Scripts/world.gd" id="1_a02cp"]
 [ext_resource type="FastNoiseLite" uid="uid://dyd1hw7adwaqb" path="res://Resources/Generators/terrain.tres" id="2_go701"]
 [ext_resource type="Texture2D" uid="uid://cdp8mhyo7jxwm" path="res://Resources/Textures/Terrain/terrain.png" id="3_5a7ea"]
-[ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scenes/EntityModel/BrainModel/SelfBrain.gd" id="3_5ukr8"]
+[ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scripts/BrainModel/SelfBrain.gd" id="3_5ukr8"]
 [ext_resource type="Script" uid="uid://53rs4mt5chvi" path="res://Scripts/entity_spawner.gd" id="3_fo5ed"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8j60k"]

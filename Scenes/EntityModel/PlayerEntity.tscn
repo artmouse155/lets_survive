@@ -1,13 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfwu7kuh082tc"]
+[gd_scene load_steps=3 format=3 uid="uid://bfwu7kuh082tc"]
 
 [ext_resource type="PackedScene" uid="uid://b2501naobgh8n" path="res://Scenes/EntityModel/PersonEntity.tscn" id="1_pdhha"]
 [ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/EntityModel/player_entity.gd" id="1_wqpke"]
-[ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scenes/EntityModel/BrainModel/SelfBrain.gd" id="3_vitn1"]
 
-[node name="PlayerEntity" node_paths=PackedStringArray("brain") instance=ExtResource("1_pdhha")]
+[node name="PlayerEntity" instance=ExtResource("1_pdhha")]
 script = ExtResource("1_wqpke")
-brain = NodePath("SelfBrain")
-
-[node name="SelfBrain" type="Node" parent="." index="6"]
-script = ExtResource("3_vitn1")
-metadata/_custom_type_script = "uid://yyjkgbfe6jg5"

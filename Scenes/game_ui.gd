@@ -1,8 +1,6 @@
 extends Control
 
 @export var health_label : Label
-@export var inventory_label : Label
-
 @export var pause_screen : Control
 @export var hotbar : Hotbar
 @export var inventory_ui : InventoryUI
@@ -54,7 +52,6 @@ func resume() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func on_player_inventory_updated(inventory : Array[Item], floating_item : Item) -> void:
-	inventory_label.text = "Inventory: %s" % str(inventory)
 	hotbar.update_hotbar(inventory.slice(0,5))
 	inventory_ui.update(inventory, floating_item)
 
