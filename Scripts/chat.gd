@@ -16,12 +16,25 @@ func _on_visibility_changed() -> void:
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	if new_text != "":
-		send_player_message(new_text)
 		input.clear()
+		send_player_msg(new_text)
 
-func send_player_message(msg : String) -> void:
-	var formatted_msg = "<%s> %s" % ["Chase",msg]
-	_print_msg(formatted_msg)
+
+func send_system_msg(msg : String) -> void:
+	_print_msg(msg)
+
+
+func send_player_msg(msg : String) -> void:
+	_print_msg("<%s> %s" % ["Chase",msg])
+
+
+func send_join_game_msg(player_name : String) -> void:
+	_print_msg("[color=yellow]%s joined the game[/color]" % player_name)
+
+
+func send_leave_game_msg(player_name : String) -> void:
+	_print_msg("[color=yellow]%s left the game[/color]" % player_name)
+
 
 func _print_msg(message : String) -> void:
 	var current_scroll : float = scroll.get_v_scroll_bar().value

@@ -171,6 +171,10 @@ text = "Resume"
 layout_mode = 2
 text = "Settings"
 
+[node name="lan" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Open to LAN"
+
 [node name="return" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
