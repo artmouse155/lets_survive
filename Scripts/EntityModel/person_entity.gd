@@ -1,6 +1,6 @@
 class_name PersonEntity extends BrainEntity
 
-const INVENTORY_SIZE : int = 5
+const INVENTORY_SIZE : int = 10
 const HOTBAR_SIZE : int = 5
 
 signal inventory_updated(inventory : Array[Item])

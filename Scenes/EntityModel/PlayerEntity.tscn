@@ -20,6 +20,7 @@ script = ExtResource("3_vitn1")
 item_quantity = 5
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
-[node name="PlayerEntity" instance=ExtResource("1_pdhha")]
+[node name="PlayerEntity" node_paths=PackedStringArray("body") instance=ExtResource("1_pdhha")]
 script = ExtResource("1_wqpke")
+body = NodePath("Body")
 _inventory = Array[ExtResource("3_vitn1")]([SubResource("Resource_fi5qx"), SubResource("Resource_1jwu2"), SubResource("Resource_xeb8m")])

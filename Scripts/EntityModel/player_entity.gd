@@ -1,5 +1,7 @@
 class_name PlayerEntity extends PersonEntity
 
+@export var body : Sprite2D
+
 signal player_inventory_updated(inventory : Array[Item], floating_item : Item)
 
 var _floating_item : Item = null
@@ -105,4 +107,4 @@ func _on_inventory_right_click(index : int) -> void:
 			pass
 
 func set_color(color : Color):
-	pass
+	body.self_modulate = color

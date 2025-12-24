@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4oiecskv1ol2"
-path="res://.godot/imported/dude.png-2cf5138cffd1daf1222bec270eb436ce.ctex"
+uid="uid://b5ri0e6agp7r4"
+path="res://.godot/imported/skin.png-25a1a9025a016b5f4db18f1dd1267ade.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Terrain/dude.png"
-dest_files=["res://.godot/imported/dude.png-2cf5138cffd1daf1222bec270eb436ce.ctex"]
+source_file="res://Resources/Textures/People/skin.png"
+dest_files=["res://.godot/imported/skin.png-25a1a9025a016b5f4db18f1dd1267ade.ctex"]
 
 [params]
 
