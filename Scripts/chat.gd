@@ -25,15 +25,15 @@ func send_system_msg(msg : String) -> void:
 
 
 func send_player_msg(msg : String) -> void:
-	_print_msg("<%s> %s" % ["Chase",msg])
+	_print_msg("<%s> %s" % ["Chase", escape_bbcode(msg)])
 
 
 func send_join_game_msg(player_name : String) -> void:
-	_print_msg("[color=yellow]%s joined the game[/color]" % player_name)
+	_print_msg("[color=yellow]%s joined the game[/color]" % escape_bbcode(player_name))
 
 
 func send_leave_game_msg(player_name : String) -> void:
-	_print_msg("[color=yellow]%s left the game[/color]" % player_name)
+	_print_msg("[color=yellow]%s left the game[/color]" % escape_bbcode(player_name))
 
 
 func _print_msg(message : String) -> void:
@@ -54,6 +54,6 @@ func _print_msg(message : String) -> void:
 func scroll_to_bottom():
 	scroll.set_deferred("scroll_vertical",SCROLL_MAX)
 
-#func _on_message_container_resized() -> void:
-	#if on_bottom:
-		#scroll.set_deferred("scroll_vertical",10000)
+static func escape_bbcode(bbcode_text):
+	# We only need to replace opening brackets to prevent tags from being parsed.
+	return bbcode_text.replace("[", "[lb]")
