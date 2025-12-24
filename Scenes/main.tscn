@@ -128,6 +128,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5248, 0.492, 0.82, 1)
+
 [node name="MainMenus" type="Control" parent="." node_paths=PackedStringArray("menus", "characterSelectNode", "worldSelectNode", "gameContainer")]
 layout_mode = 1
 anchors_preset = 15
@@ -152,7 +161,6 @@ gameContainer = NodePath("GameContainer")
 metadata/_custom_type_script = "uid://dt3cw2yylpcf4"
 
 [node name="Title" type="Control" parent="MainMenus"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -643,6 +651,7 @@ disabled = true
 text = "Create"
 
 [node name="GameContainer" parent="MainMenus" instance=ExtResource("4_jjvhh")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="MainMenus/Title/VBoxContainer/Buttons/PlayButton" to="MainMenus/Title" method="play"]

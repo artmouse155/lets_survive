@@ -1,7 +1,7 @@
 class_name GameUI extends Control
 
 @export var health_label : Label
-@export var pause_screen : Control
+@export var pause_menus : Control
 @export var hotbar : Hotbar
 @export var inventory_ui : InventoryUI
 @export var chat : Chat
@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 #region pause
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
-	pause_screen.visible = get_tree().paused
+	pause_menus.visible = get_tree().paused
 
 
 func resume() -> void:

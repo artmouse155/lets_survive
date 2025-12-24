@@ -48,7 +48,7 @@ render_target_update_mode = 4
 [node name="World" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("game_ui") instance=ExtResource("2_juifl")]
 game_ui = NodePath("../../../GameUI")
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui", "chat", "self_brain")]
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_menus", "hotbar", "inventory_ui", "chat", "self_brain")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -58,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_us7ks")
 health_label = NodePath("SafeZone/VBoxContainer/Health")
-pause_screen = NodePath("../PauseMenus/PauseScreen/PanelContainer")
+pause_menus = NodePath("../PauseMenus")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
 chat = NodePath("SafeZone/Chat")
@@ -133,6 +133,7 @@ layout_mode = 2
 keep_editing_on_text_submit = true
 
 [node name="PauseMenus" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
