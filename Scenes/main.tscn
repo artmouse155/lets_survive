@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dfsck5iumxmgy"]
 
-[ext_resource type="Script" uid="uid://dt3cw2yylpcf4" path="res://Scripts/main_menus.gd" id="1_jjvhh"]
-[ext_resource type="Script" uid="uid://bdjj0fr0ve0cb" path="res://Scripts/character_select_menu.gd" id="2_21xkr"]
-[ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/world_select_node.gd" id="3_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/game_container.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://dt3cw2yylpcf4" path="res://Scripts/Menu/MainMenu/main_menus.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://bdjj0fr0ve0cb" path="res://Scripts/Menu/MainMenu/character_select_menu.gd" id="2_21xkr"]
+[ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/MainMenu/world_select_node.gd" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/MainMenu/game_container.tscn" id="4_jjvhh"]
 
 [sub_resource type="GDScript" id="GDScript_h2yge"]
 resource_name = "Title"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://crl2y8wmcwmkk"]
 
-[ext_resource type="Script" uid="uid://8thbftl3b6u5" path="res://Scripts/ui_slot.gd" id="1_fpofp"]
-[ext_resource type="Script" uid="uid://e6xi3iktx4bh" path="res://Scripts/ui_slot_button.gd" id="2_bhwag"]
+[ext_resource type="Script" uid="uid://8thbftl3b6u5" path="res://Scripts/GameUI/ui_slot.gd" id="1_fpofp"]
+[ext_resource type="Script" uid="uid://e6xi3iktx4bh" path="res://Scripts/GameUI/ui_slot_button.gd" id="2_bhwag"]
 
 [node name="UISlot" type="PanelContainer" node_paths=PackedStringArray("texture_node", "count_label")]
 offset_right = 48.0

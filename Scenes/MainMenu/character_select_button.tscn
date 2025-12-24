@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ckcx2xvk8cpir"]
 
-[ext_resource type="Script" uid="uid://btlilw2x0f3i8" path="res://Scripts/character_select_button.gd" id="1_4pux1"]
+[ext_resource type="Script" uid="uid://btlilw2x0f3i8" path="res://Scripts/Menu/MainMenu/character_select_button.gd" id="1_4pux1"]
 
 [node name="CharacterSelectButton" type="PanelContainer" node_paths=PackedStringArray("NameLabel", "LevelLabel")]
 offset_right = 137.0

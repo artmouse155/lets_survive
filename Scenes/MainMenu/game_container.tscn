@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcnynj6tfm2v3"]
+[gd_scene load_steps=8 format=3 uid="uid://bcnynj6tfm2v3"]
 
-[ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/game_node.gd" id="1_jr5s5"]
-[ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/world.tscn" id="2_juifl"]
-[ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scenes/game_ui.gd" id="3_us7ks"]
-[ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/hotbar.tscn" id="4_juifl"]
-[ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory_ui.tscn" id="5_us7ks"]
-[ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/chat.gd" id="6_udj4x"]
+[ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/GameContainer.gd" id="1_jr5s5"]
+[ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
+[ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scripts/GameUI/game_ui.gd" id="3_us7ks"]
+[ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/GameUI/hotbar.tscn" id="4_juifl"]
+[ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/GameUI/inventory_ui.tscn" id="5_us7ks"]
+[ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/GameUI/chat.gd" id="6_udj4x"]
+[ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
 
 [node name="GameContainer" type="Control" node_paths=PackedStringArray("world", "game_ui")]
 layout_mode = 3
@@ -57,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_us7ks")
 health_label = NodePath("SafeZone/VBoxContainer/Health")
-pause_screen = NodePath("../PauseScreen")
+pause_screen = NodePath("../PauseMenus/PauseScreen/PanelContainer")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
 chat = NodePath("SafeZone/Chat")
@@ -131,9 +132,25 @@ alignment = 2
 layout_mode = 2
 keep_editing_on_text_submit = true
 
-[node name="PauseScreen" type="PanelContainer" parent="."]
+[node name="PauseMenus" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_jvhxo")
+
+[node name="PauseScreen" type="Control" parent="PauseMenus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/PauseScreen"]
 process_mode = 2
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -141,42 +158,42 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -75.0
-offset_top = -74.0
+offset_top = -91.5
 offset_right = 75.0
-offset_bottom = 74.0
+offset_bottom = 91.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/PauseScreen/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseScreen/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="resume" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+[node name="resume" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="settings" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+[node name="settings" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="lan" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+[node name="lan" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Open to LAN"
 
-[node name="return" type="Button" parent="PauseScreen/MarginContainer/VBoxContainer"]
+[node name="return" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
 
@@ -189,7 +206,7 @@ text = "Return to Menu"
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
 [connection signal="visibility_changed" from="GameUI/SafeZone/Chat" to="GameUI/SafeZone/Chat" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
-[connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
 
 [editable path="SubViewportContainer/SubViewport/World"]

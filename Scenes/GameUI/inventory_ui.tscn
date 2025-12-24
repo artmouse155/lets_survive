@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://blkwdjk1xb8wr"]
 
-[ext_resource type="Script" uid="uid://4gxh5soeij7l" path="res://Scripts/inventory_ui.gd" id="1_vr5og"]
-[ext_resource type="PackedScene" uid="uid://crl2y8wmcwmkk" path="res://Scenes/ui_slot.tscn" id="2_brbew"]
-[ext_resource type="PackedScene" uid="uid://d0omj2r68up4x" path="res://Scenes/slot.tscn" id="3_7oojl"]
+[ext_resource type="Script" uid="uid://4gxh5soeij7l" path="res://Scripts/GameUI/inventory_ui.gd" id="1_vr5og"]
+[ext_resource type="PackedScene" uid="uid://crl2y8wmcwmkk" path="res://Scenes/GameUI/ui_slot.tscn" id="2_brbew"]
+[ext_resource type="PackedScene" uid="uid://d0omj2r68up4x" path="res://Scenes/GameUI/slot.tscn" id="3_7oojl"]
 
 [node name="InventoryUI" type="PanelContainer" node_paths=PackedStringArray("floating_slot", "ui_slot_container")]
 script = ExtResource("1_vr5og")

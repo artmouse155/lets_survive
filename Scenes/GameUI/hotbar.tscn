@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbe71tvxwfhof"]
 
-[ext_resource type="PackedScene" uid="uid://cm4nhneowv5r" path="res://Scenes/hotbar_slot.tscn" id="1_oais3"]
-[ext_resource type="Script" uid="uid://c6qe3y71k0l87" path="res://Scripts/hotbar.gd" id="1_w22v5"]
+[ext_resource type="PackedScene" uid="uid://cm4nhneowv5r" path="res://Scenes/GameUI/hotbar_slot.tscn" id="1_oais3"]
+[ext_resource type="Script" uid="uid://c6qe3y71k0l87" path="res://Scripts/GameUI/hotbar.gd" id="1_w22v5"]
 
 [node name="Hotbar" type="PanelContainer" node_paths=PackedStringArray("slot_container")]
 script = ExtResource("1_w22v5")

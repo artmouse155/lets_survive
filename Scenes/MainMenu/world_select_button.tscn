@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cb032osgj4mk6"]
 
-[ext_resource type="Script" uid="uid://dt4c87rq0gnte" path="res://Scripts/world_select_button.gd" id="1_njgei"]
+[ext_resource type="Script" uid="uid://dt4c87rq0gnte" path="res://Scripts/Menu/MainMenu/world_select_button.gd" id="1_njgei"]
 
 [node name="WorldSelectButton" type="PanelContainer" node_paths=PackedStringArray("label")]
 offset_right = 107.0

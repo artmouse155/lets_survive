@@ -1,10 +1,10 @@
 [gd_scene load_steps=26 format=3 uid="uid://b2501naobgh8n"]
 
-[ext_resource type="Script" uid="uid://bqvhs7u5b5bxs" path="res://Scripts/EntityModel/person_entity.gd" id="1_vm3h2"]
+[ext_resource type="Script" uid="uid://bqvhs7u5b5bxs" path="res://Scripts/World/EntityModel/person_entity.gd" id="1_vm3h2"]
 [ext_resource type="Texture2D" uid="uid://bjsy02kxx1nu5" path="res://Resources/Textures/People/hat_white.png" id="2_ckagm"]
 [ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/People/skin.png" id="3_uq0ln"]
 [ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_br0ts"]
-[ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/melee_radius.tscn" id="5_nmbym"]
+[ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/World/melee_radius.tscn" id="5_nmbym"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sar6w"]
 animation = &"RESET"

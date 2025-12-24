@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djrh6t2ximylw"]
 
-[ext_resource type="Script" uid="uid://bi637kpik2gj6" path="res://Scripts/melee_radius.gd" id="1_mt76c"]
+[ext_resource type="Script" uid="uid://bi637kpik2gj6" path="res://Scripts/World/melee_radius.gd" id="1_mt76c"]
 
 [node name="MeleeRadius" type="Area2D" node_paths=PackedStringArray("cPolygon")]
 script = ExtResource("1_mt76c")
