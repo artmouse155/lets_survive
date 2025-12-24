@@ -116,7 +116,6 @@ grow_vertical = 0
 [node name="ScrollContainer" type="ScrollContainer" parent="GameUI/SafeZone/Chat/VBoxContainer"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-scroll_vertical = 31
 
 [node name="PanelContainer" type="PanelContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer"]
 layout_mode = 2

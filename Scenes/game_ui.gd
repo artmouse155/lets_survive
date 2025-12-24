@@ -17,13 +17,13 @@ func _process(_delta: float) -> void:
 	if chat.visible:
 		if Input.is_action_just_pressed("pause"):
 			chat.hide()
-			_set_self_movement_enabled(true)
+			_set_self_movement_enabled(!inventory_ui.visible)
 		return
 	else:
 		if !get_tree().paused and Input.is_action_just_pressed("chat"):
-			chat.visible = !chat.visible
+			chat.show()
 			_set_self_movement_enabled(false)
-		if inventory_ui.visible:
+		elif inventory_ui.visible:
 			if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("open_inventory"):
 				_set_self_movement_enabled(true)
 				_emit_drop_all_floating()
