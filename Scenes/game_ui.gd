@@ -7,39 +7,44 @@ class_name GameUI extends Control
 @export var chat : Chat
 @export var self_brain : SelfBrain
 
-var is_in_ingame_ui : bool = false
-
 func _ready() -> void:
 	if !self_brain:
 		push_warning("No SelfBrain specified in GameUI. UI will not be able to communicate with player node.")
 
 
 func _process(_delta: float) -> void:
-		
-	if is_in_ingame_ui:
-		if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("open_inventory"):
-			is_in_ingame_ui = false
+	
+	if chat.visible:
+		if Input.is_action_just_pressed("pause"):
+			chat.hide()
 			_set_self_movement_enabled(true)
-			_emit_drop_all_floating()
-			inventory_ui.hide()
-			hotbar.show()
-		elif Input.is_action_just_pressed("drop_all"):
-			var touching_mouse_index := inventory_ui.get_touching_mouse_index()
-			if touching_mouse_index != -1:
-				_emit_drop_all_index(touching_mouse_index)
-		elif Input.is_action_just_pressed("drop"):
+		return
+	else:
+		if !get_tree().paused and Input.is_action_just_pressed("chat"):
+			chat.visible = !chat.visible
+			_set_self_movement_enabled(false)
+		if inventory_ui.visible:
+			if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("open_inventory"):
+				_set_self_movement_enabled(true)
+				_emit_drop_all_floating()
+				inventory_ui.hide()
+				hotbar.show()
+			elif Input.is_action_just_pressed("drop_all"):
 				var touching_mouse_index := inventory_ui.get_touching_mouse_index()
 				if touching_mouse_index != -1:
-					_emit_drop_index(touching_mouse_index)
-	else:
-		if Input.is_action_just_pressed("pause"):
-			set_pause(!get_tree().paused)
-		elif Input.is_action_just_pressed("open_inventory"):
-			is_in_ingame_ui = true
-			_set_self_movement_enabled(false)
-			inventory_ui.show()
-			hotbar.hide()
-			return
+					_emit_drop_all_index(touching_mouse_index)
+			elif Input.is_action_just_pressed("drop"):
+					var touching_mouse_index := inventory_ui.get_touching_mouse_index()
+					if touching_mouse_index != -1:
+						_emit_drop_index(touching_mouse_index)
+		else:
+			if Input.is_action_just_pressed("pause"):
+				set_pause(!get_tree().paused)
+			elif Input.is_action_just_pressed("open_inventory"):
+				_set_self_movement_enabled(false)
+				inventory_ui.show()
+				hotbar.hide()
+				return
 
 #region pause
 func set_pause(pause: bool) -> void:

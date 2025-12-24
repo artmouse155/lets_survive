@@ -94,10 +94,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Chat" type="Control" parent="GameUI/SafeZone"]
+[node name="Chat" type="Control" parent="GameUI/SafeZone" node_paths=PackedStringArray("input", "msg_box", "scroll")]
+editor_description = "This is the Chat node."
 visible = false
 layout_mode = 2
 script = ExtResource("6_udj4x")
+input = NodePath("VBoxContainer/LineEdit")
+msg_box = NodePath("VBoxContainer/ScrollContainer/PanelContainer/MessageContainer")
+scroll = NodePath("VBoxContainer/ScrollContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat"]
 layout_mode = 1
@@ -110,7 +114,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="GameUI/SafeZone/Chat/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 scroll_vertical = 31
 
@@ -119,37 +123,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer"]
+[node name="MessageContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "[LUKE] This is a Chat message."
-fit_content = true
-
-[node name="Label2" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "[LUKE] This is a Chat message."
-fit_content = true
-
-[node name="Label3" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "[LUKE] This is a Chat message."
-fit_content = true
-
-[node name="Label4" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "[LUKE] This is a Chat message."
-fit_content = true
-
-[node name="Label5" type="RichTextLabel" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "[LUKE] This is a Chat message."
-fit_content = true
-
 [node name="LineEdit" type="LineEdit" parent="GameUI/SafeZone/Chat/VBoxContainer"]
 layout_mode = 2
+keep_editing_on_text_submit = true
 
 [node name="PauseScreen" type="PanelContainer" parent="."]
 process_mode = 2
@@ -204,6 +184,8 @@ text = "Return to Menu"
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
+[connection signal="visibility_changed" from="GameUI/SafeZone/Chat" to="GameUI/SafeZone/Chat" method="_on_visibility_changed"]
+[connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
 [connection signal="pressed" from="PauseScreen/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
 
