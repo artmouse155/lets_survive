@@ -4,8 +4,14 @@ class_name GameUI extends Control
 @export var pause_screen : Control
 @export var hotbar : Hotbar
 @export var inventory_ui : InventoryUI
+@export var chat : Chat
+@export var self_brain : SelfBrain
 
 var is_in_ingame_ui : bool = false
+
+func _ready() -> void:
+	if !self_brain:
+		push_warning("No SelfBrain specified in GameUI. UI will not be able to communicate with player node.")
 
 func _process(_delta: float) -> void:
 		
@@ -44,8 +50,7 @@ func resume() -> void:
 	set_pause(false)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func on_player_inventory_updated(inventory : Array[Item], floating_item : Item) -> void:
+func _on_player_inventory_updated(inventory : Array[Item], floating_item : Item) -> void:
 	hotbar.update_hotbar(inventory.slice(0,5))
 	inventory_ui.update(inventory, floating_item)
 
@@ -59,7 +64,7 @@ func _on_selected_index_updated(index : int) -> void:
 
 
 func _on_item_collected(item : Item) -> void:
-	#print("Collected %s" % str(item))
+	print("Collected %s" % str(item))
 	# TODO: Add toast saying "You got <item>
 	pass
 
@@ -73,28 +78,33 @@ func _on_gui_input(event : InputEvent) -> void:
 
 
 func _set_self_movement_enabled(enabled : bool) -> void:
-	pass
-
+	if self_brain:
+		self_brain.set_movement_enabled(enabled)
 
 func _emit_drop_floating() -> void:
-	pass
+	if self_brain:
+		self_brain.emit_drop_floating()
 
 
 func _emit_drop_all_floating() -> void:
-	pass
+	if self_brain:
+		self_brain.emit_drop_all_floating()
 
 
 func _emit_drop_index(index: int) -> void:
-	pass
+	if self_brain:
+		self_brain.emit_drop_index(index)
 
 
 func _emit_drop_all_index(index: int) -> void:
-	pass
+	if self_brain:
+		self_brain.emit_drop_all_index(index)
 
 
 func _on_inventory_left_clicked(index: int) -> void:
-	pass
-
+	if self_brain:
+		self_brain.on_inv_slot_left_clicked(index)
 
 func _on_inventory_right_clicked(index: int) -> void:
-	pass
+	if self_brain:
+		self_brain.on_inv_slot_right_clicked(index)

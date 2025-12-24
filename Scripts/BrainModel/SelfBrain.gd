@@ -15,7 +15,13 @@ func _physics_process(_delta: float) -> void:
 		_emit(select,0)
 	elif Input.is_action_just_pressed("select_1"):
 		_emit(select,1)
-	if Input.is_action_just_pressed("select_next"):
+	elif Input.is_action_just_pressed("select_2"):
+		_emit(select,2)
+	elif Input.is_action_just_pressed("select_3"):
+		_emit(select,3)
+	elif Input.is_action_just_pressed("select_4"):
+		_emit(select,4)
+	elif Input.is_action_just_pressed("select_next"):
 		_emit(select_next)
 	elif Input.is_action_just_pressed("select_prev"):
 		_emit(select_prev)

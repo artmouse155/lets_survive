@@ -9,6 +9,7 @@ func _connect_to_brain() -> void:
 	super._connect_to_brain()
 	if brain is PlayerBrain:
 		brain.drop_floating.connect(_drop_floating)
+		brain.drop_all_floating.connect(_drop_all_floating)
 		brain.in_ui.connect(_set_in_ui)
 		brain.inventory_left_clicked.connect(_on_inventory_left_click)
 		brain.inventory_right_clicked.connect(_on_inventory_right_click)
@@ -25,6 +26,15 @@ func _set_in_ui(value : bool) -> void:
 	in_ui = value
 
 func _drop_floating() -> void:
+	
+	if !(in_ui and _floating_item):
+		return
+	
+	drop(Item.new(_floating_item.item_name,1))
+	_floating_item = null if _floating_item.item_quantity <= 1 else Item.new(_floating_item.item_name,_floating_item.item_quantity - 1)
+	_emit_inventory_updated()
+
+func _drop_all_floating() -> void:
 	
 	if !(in_ui and _floating_item):
 		return
@@ -93,3 +103,6 @@ func _on_inventory_right_click(index : int) -> void:
 		else:
 			# Do nothing
 			pass
+
+func set_color(color : Color):
+	pass

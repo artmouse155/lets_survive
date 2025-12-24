@@ -10,6 +10,9 @@ func get_player_name() -> String:
 func get_level() -> int:
 	return _level
 
+func get_color() -> Color:
+	return _color
+
 func _init(player_name : String = "", color : Color = Color.WHITE) -> void:
 	_player_name = player_name
 	_color = color

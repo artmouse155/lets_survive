@@ -148,7 +148,7 @@ func drop_selected_item() -> void:
 func drop_index(index : int) -> void:
 	var item = _inventory[index]
 	if item:
-		world_item_dropped.emit(self,Item.new(item.item_name,1), 1.0)
+		drop(Item.new(item.item_name,1))
 		_inventory[index] = null if item.item_quantity <= 1 else Item.new(item.item_name,item.item_quantity - 1)
 	_update_tool_state()
 	_emit_inventory_updated()
@@ -161,7 +161,7 @@ func drop_all_selected_item() -> void:
 func drop_all_index(index : int) -> void:
 	var item = _inventory[index]
 	if item:
-		world_item_dropped.emit(self,item, 1.0)
+		drop(item)
 		_inventory[index] = null
 	_update_tool_state()
 	_emit_inventory_updated()

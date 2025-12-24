@@ -33,9 +33,10 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_juifl")]
+[node name="World" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("game_ui") instance=ExtResource("2_juifl")]
+game_ui = NodePath("../../../GameUI")
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui")]
+[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_screen", "hotbar", "inventory_ui", "chat", "self_brain")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -48,6 +49,8 @@ health_label = NodePath("SafeZone/VBoxContainer/Health")
 pause_screen = NodePath("../PauseScreen")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
+chat = NodePath("SafeZone/Chat")
+self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
 
 [node name="SafeZone" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
@@ -184,6 +187,10 @@ layout_mode = 2
 text = "Return to Menu"
 
 [connection signal="set_pause" from="." to="GameUI" method="set_pause"]
+[connection signal="self_health_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_health_updated"]
+[connection signal="self_inventory_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_player_inventory_updated"]
+[connection signal="self_item_collected" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_item_collected"]
+[connection signal="self_selected_index_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_selected_index_updated"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]

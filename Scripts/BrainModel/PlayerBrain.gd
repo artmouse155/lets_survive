@@ -4,6 +4,7 @@ class_name PlayerBrain extends PersonBrain
 var is_movement_disabled : bool = false
 
 signal drop_floating()
+signal drop_all_floating()
 signal in_ui(in_ui: bool)
 signal inventory_left_clicked(index: int)
 signal inventory_right_clicked(index: int)
@@ -26,3 +27,7 @@ func on_inv_slot_right_clicked(index : int) -> void:
 
 func emit_drop_floating() -> void:
 	_emit(drop_floating)
+
+
+func emit_drop_all_floating() -> void:
+	_emit(drop_all_floating)
