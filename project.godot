@@ -23,6 +23,15 @@ SaveLoad="*res://Scripts/save_load.gd"
 
 project/assembly_name="lets_survive"
 
+[file_customization]
+
+folder_colors={
+"res://Resources/": "gray",
+"res://Scenes/": "green",
+"res://Scripts/": "red",
+"res://Testing Save Data/": "orange"
+}
+
 [input]
 
 up={
