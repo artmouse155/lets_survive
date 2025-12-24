@@ -19,6 +19,15 @@ script = ExtResource("1_jr5s5")
 world = NodePath("SubViewportContainer/SubViewport/World")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
 
+[node name="Sky" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5494, 0.73431, 0.82, 1)
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -29,6 +38,7 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4

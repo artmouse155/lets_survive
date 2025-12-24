@@ -13,6 +13,7 @@ func _ready() -> void:
 	if !self_brain:
 		push_warning("No SelfBrain specified in GameUI. UI will not be able to communicate with player node.")
 
+
 func _process(_delta: float) -> void:
 		
 	if is_in_ingame_ui:
@@ -40,7 +41,7 @@ func _process(_delta: float) -> void:
 			hotbar.hide()
 			return
 
-
+#region pause
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
 	pause_screen.visible = get_tree().paused
@@ -48,8 +49,9 @@ func set_pause(pause: bool) -> void:
 
 func resume() -> void:
 	set_pause(false)
+#endregion
 
-
+#region display
 func _on_player_inventory_updated(inventory : Array[Item], floating_item : Item) -> void:
 	hotbar.update_hotbar(inventory.slice(0,5))
 	inventory_ui.update(inventory, floating_item)
@@ -68,6 +70,7 @@ func _on_item_collected(item : Item) -> void:
 	# TODO: Add toast saying "You got <item>
 	pass
 
+
 func _on_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
@@ -80,6 +83,7 @@ func _on_gui_input(event : InputEvent) -> void:
 func _set_self_movement_enabled(enabled : bool) -> void:
 	if self_brain:
 		self_brain.set_movement_enabled(enabled)
+
 
 func _emit_drop_floating() -> void:
 	if self_brain:
@@ -105,6 +109,12 @@ func _on_inventory_left_clicked(index: int) -> void:
 	if self_brain:
 		self_brain.on_inv_slot_left_clicked(index)
 
+
 func _on_inventory_right_clicked(index: int) -> void:
 	if self_brain:
 		self_brain.on_inv_slot_right_clicked(index)
+#endregion
+
+#region chat
+
+#endregion
