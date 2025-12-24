@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/inventory_ui.tscn" id="5_us7ks"]
 [ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/chat.gd" id="6_udj4x"]
 
-[node name="GameContainer" type="Control" node_paths=PackedStringArray("world")]
+[node name="GameContainer" type="Control" node_paths=PackedStringArray("world", "game_ui")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_jr5s5")
 world = NodePath("SubViewportContainer/SubViewport/World")
+game_ui = NodePath("GameUI")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
 
 [node name="Sky" type="ColorRect" parent="."]
@@ -179,7 +180,6 @@ text = "Open to LAN"
 layout_mode = 2
 text = "Return to Menu"
 
-[connection signal="set_pause" from="." to="GameUI" method="set_pause"]
 [connection signal="self_health_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_health_updated"]
 [connection signal="self_inventory_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_player_inventory_updated"]
 [connection signal="self_item_collected" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_item_collected"]

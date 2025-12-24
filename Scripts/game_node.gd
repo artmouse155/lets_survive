@@ -1,11 +1,13 @@
 class_name GameContainer extends Menu
 
 @export var world : World
+@export var game_ui : GameUI
 
-signal set_pause(pause : bool)
+func start() -> void:
+	pass
 
 func return_to_main_menu():
-	set_pause.emit(false)
+	game_ui.set_pause(false)
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 
 func loadGame(world_index : int, player_index : int) -> void:

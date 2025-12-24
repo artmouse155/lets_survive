@@ -19,6 +19,7 @@ func start(world_seed : String, player_save : PlayerSave) -> void:
 	generate_world(world_seed)
 	entity_spawner.spawn_player(player_save,true)
 
+
 func generate_world(world_seed : String):
 	var world_size_x : int = 200
 	var world_size_y : int = 200

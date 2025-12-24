@@ -14,11 +14,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	
+	if !is_visible_in_tree():
+		return
+	
 	if chat.visible:
 		if Input.is_action_just_pressed("pause"):
 			chat.hide()
 			_set_self_movement_enabled(!inventory_ui.visible)
-		return
 	else:
 		if !get_tree().paused and Input.is_action_just_pressed("chat"):
 			chat.show()

@@ -9,6 +9,9 @@
 resource_name = "Title"
 script/source = "extends Menu
 
+func start() -> void:
+	pass
+
 func play():
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
 
@@ -30,6 +33,9 @@ func _pressed() -> void:
 [sub_resource type="GDScript" id="GDScript_1bvp3"]
 resource_name = "Settings"
 script/source = "extends Menu
+
+func start() -> void:
+	pass
 
 func return_to_main_menu():
 	menu_selected.emit(MainMenus.MENUS.TITLE)
