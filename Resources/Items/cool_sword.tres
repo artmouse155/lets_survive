@@ -8,4 +8,5 @@ resource_name = "cool_sword"
 script = ExtResource("1_8tqlv")
 _icon = ExtResource("1_b4jhe")
 _max_amount = 1
+_tool_type = 2
 metadata/_custom_type_script = "uid://w82p7ap6838j"

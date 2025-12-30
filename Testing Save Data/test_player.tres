@@ -5,11 +5,13 @@
 
 [sub_resource type="Resource" id="Resource_rdge0"]
 script = ExtResource("1_x7qvn")
+item_quantity = 6
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="Resource" id="Resource_x7qvn"]
 script = ExtResource("1_x7qvn")
 item_name = "stone"
+item_quantity = 7
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="Resource" id="Resource_78g2t"]
