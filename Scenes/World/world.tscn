@@ -1,21 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr6w6t2qv7atg"]
+[gd_scene load_steps=6 format=3 uid="uid://dr6w6t2qv7atg"]
 
 [ext_resource type="Script" uid="uid://d4nnyh3h5l7bl" path="res://Scripts/World/world.gd" id="1_a02cp"]
 [ext_resource type="FastNoiseLite" uid="uid://dyd1hw7adwaqb" path="res://Resources/Generators/terrain.tres" id="2_go701"]
-[ext_resource type="Texture2D" uid="uid://cdp8mhyo7jxwm" path="res://Resources/Textures/Terrain/terrain.png" id="3_5a7ea"]
 [ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scripts/World/BrainModel/SelfBrain.gd" id="3_5ukr8"]
 [ext_resource type="Script" uid="uid://53rs4mt5chvi" path="res://Scripts/World/entity_spawner.gd" id="3_fo5ed"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8j60k"]
-texture = ExtResource("3_5a7ea")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_fo5ed"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_8j60k")
+[ext_resource type="TileSet" uid="uid://5pn671jsdxwh" path="res://Resources/ground.tres" id="4_l1hd3"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground", "above_ground", "entity_spawner")]
 script = ExtResource("1_a02cp")
@@ -30,7 +19,7 @@ script = ExtResource("3_5ukr8")
 metadata/_custom_type_script = "uid://yyjkgbfe6jg5"
 
 [node name="Ground" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_fo5ed")
+tile_set = ExtResource("4_l1hd3")
 
 [node name="EntitySpawner" type="Node2D" parent="." node_paths=PackedStringArray("self_brain")]
 script = ExtResource("3_fo5ed")

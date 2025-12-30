@@ -4,7 +4,7 @@ const SelectButtonPacked : PackedScene = preload("uid://ckcx2xvk8cpir")
 
 @export var CharacterButtonContainer : BoxContainer
 @export var PlayButton : Button
-@export var PreviewBox : SubViewportContainer
+@export var PreviewBox : PlayerPreview
 
 signal character_selected(index : int)
 
@@ -28,10 +28,11 @@ func start() -> void:
 		button.set_character_level(save.get_level())
 		button.pressed.connect(select_character.bind(i))
 		CharacterButtonContainer.add_child(button)
-	
+	PreviewBox.preview(null)
 	PlayButton.disabled = true
 	
 func select_character(index : int):
 	character_selected.emit(index)
 	PlayButton.disabled = false
+	PreviewBox.preview(SaveLoad.get_player_save(index))
 	# TODO: Make preview show up

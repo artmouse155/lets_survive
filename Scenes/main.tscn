@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfsck5iumxmgy"]
+[gd_scene load_steps=12 format=3 uid="uid://dfsck5iumxmgy"]
 
 [ext_resource type="Script" uid="uid://dt3cw2yylpcf4" path="res://Scripts/Menu/MainMenu/main_menus.gd" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://bdjj0fr0ve0cb" path="res://Scripts/Menu/MainMenu/character_select_menu.gd" id="2_21xkr"]
 [ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/MainMenu/world_select_node.gd" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://c5scwbwr17nu3" path="res://Scenes/MainMenu/PlayerPreview.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/MainMenu/game_container.tscn" id="4_jjvhh"]
 
 [sub_resource type="GDScript" id="GDScript_h2yge"]
@@ -55,15 +56,18 @@ const COLOR_OPTIONS : Dictionary[String,Color] ={
 @export var create_button : Button
 @export var name_input : LineEdit
 @export var shirts_dropdown : OptionButton
+@export var _player_preview : PlayerPreview
 
 var _character_shirt_color : String = COLOR_OPTIONS.keys()[0]
 var _character_name : String = \"\"
 
 func start() -> void:
 	_character_name = \"\"
-	_character_shirt_color = COLOR_OPTIONS.keys()[0]
+	#_character_shirt_color = COLOR_OPTIONS.keys()[0]
 	name_input.text = \"\"
 	shirts_dropdown.selected = 0
+	set_character_shirt_color(0)
+	#_player_preview.preview(PlayerSave.new(\"_PREVIEW_\",_character_shirt_color))
 
 func return_to_character_select():
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
@@ -78,6 +82,7 @@ func set_character_name(character_name : String):
 
 func set_character_shirt_color(index : int):
 	_character_shirt_color = COLOR_OPTIONS.keys()[index]
+	_player_preview.preview(PlayerSave.new(\"_PREVIEW_\",_character_shirt_color))
 	_update_create_button()
 
 func _update_create_button():
@@ -161,6 +166,7 @@ gameContainer = NodePath("GameContainer")
 metadata/_custom_type_script = "uid://dt3cw2yylpcf4"
 
 [node name="Title" type="Control" parent="MainMenus"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,7 +284,7 @@ mouse_filter = 1
 script = ExtResource("2_21xkr")
 CharacterButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/CharacterSelectButtons")
 PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton")
-PreviewBox = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer")
+PreviewBox = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayerPreview")
 metadata/_custom_type_script = "uid://bdjj0fr0ve0cb"
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenus/CharacterSelect"]
@@ -336,17 +342,9 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 100)
+[node name="PlayerPreview" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_kry3j")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(100, 100)
-render_target_update_mode = 0
-
-[node name="Playerpreview" type="Node2D" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport"]
 
 [node name="PlayButton" type="Button" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -363,8 +361,7 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "Back"
 
-[node name="CharacterCreate" type="Control" parent="MainMenus" node_paths=PackedStringArray("create_button", "name_input", "shirts_dropdown")]
-visible = false
+[node name="CharacterCreate" type="Control" parent="MainMenus" node_paths=PackedStringArray("create_button", "name_input", "shirts_dropdown", "_player_preview")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -376,6 +373,7 @@ script = SubResource("GDScript_kry3j")
 create_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create")
 name_input = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer/LineEdit")
 shirts_dropdown = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2/OptionButton")
+_player_preview = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayerPreview")
 metadata/_custom_type_script = "uid://ydodnup51mgc"
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenus/CharacterCreate"]
@@ -455,15 +453,9 @@ popup/item_3/id = 3
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PlayerPreview" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_kry3j")]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(100, 100)
-render_target_update_mode = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
