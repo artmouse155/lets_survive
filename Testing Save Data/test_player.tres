@@ -11,14 +11,12 @@ metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="Resource" id="Resource_k0qrl"]
 script = ExtResource("1_x7qvn")
-item_name = 1
 item_quantity = 4
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="Resource" id="Resource_k03ko"]
 script = ExtResource("2_78g2t")
 type = 1
-item_name = 2
 metadata/_custom_type_script = "uid://quqqiuqhb6j4"
 
 [resource]
