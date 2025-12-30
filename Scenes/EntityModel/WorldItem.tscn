@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://q7wfdi5cus2m"]
 
 [ext_resource type="Script" uid="uid://cqbywq1gnb2n7" path="res://Scripts/World/world_item.gd" id="1_aeu3x"]
-[ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://Scripts/World/item.gd" id="2_70t5p"]
+[ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://Scripts/CustomResource/item.gd" id="2_70t5p"]
 [ext_resource type="Texture2D" uid="uid://bsifbn1s8va8o" path="res://Resources/Textures/Terrain/wood.png" id="2_etyx1"]
 
 [sub_resource type="Resource" id="Resource_wrcol"]
