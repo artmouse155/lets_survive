@@ -1,4 +1,4 @@
-extends Node
+class_name SaveLoad extends Object
 
 const USER_DIR = "user://"
 const GLOBAL_SAVE_DATA_NAME = "global_data"
@@ -13,7 +13,7 @@ const WORLD_SAVE_PREFIX = "world_"
 const MAX_NUM_SAVES = 5
 #save filenames start with save_0, and go on numerically. if save_0 and save_2 exist, the next save created will be save_1.tres.
 
-func get_player_saves() -> Array[PlayerSave]:
+static func get_player_saves() -> Array[PlayerSave]:
 	var output : Array[PlayerSave] = []
 	for i : int in get_file_count(PLAYER_SUB_DIR):
 		var save := get_player_save(i)
@@ -33,7 +33,7 @@ func get_player_saves() -> Array[PlayerSave]:
 		#delete(PLAYER_SUB_DIR,filename)
 	#return output
 
-func get_player_save(index : int) -> PlayerSave:
+static func get_player_save(index : int) -> PlayerSave:
 	var filename := get_filename_list(PLAYER_SUB_DIR)[index]
 	var resource : Resource = load_res(PLAYER_SUB_DIR,filename,"PlayerSave")
 	if is_instance_of(resource,PlayerSave):
@@ -41,14 +41,14 @@ func get_player_save(index : int) -> PlayerSave:
 	print("Couldn't parse %s" % filename)
 	return null
 
-func get_world_saves() -> Array[WorldSave]:
+static func get_world_saves() -> Array[WorldSave]:
 	var output : Array[WorldSave] = []
 	for i : int in get_file_count(WORLD_SUB_DIR):
 		var save := get_world_save(i)
 		output.append(save)
 	return output
 
-func get_world_save(index : int) -> WorldSave:
+static func get_world_save(index : int) -> WorldSave:
 	var filename := get_filename_list(WORLD_SUB_DIR)[index]
 	var resource : Resource = load_res(WORLD_SUB_DIR,filename,"WorldSave")
 	if is_instance_of(resource,WorldSave):
@@ -56,11 +56,11 @@ func get_world_save(index : int) -> WorldSave:
 	print("Couldn't parse %s" % filename)
 	return null
 
-func create_character(player_name : String, player_shirt_color : Color) -> void:
+static func create_character(player_name : String, player_shirt_color : Color) -> void:
 	var newSave := PlayerSave.new(player_name,player_shirt_color)
 	save_res(PLAYER_SUB_DIR,PLAYER_SAVE_PREFIX,newSave)
 
-func create_world(world_name : String, world_seed : String) -> void:
+static func create_world(world_name : String, world_seed : String) -> void:
 	if world_seed == "":
 		world_seed = str(randi())
 	var newSave := WorldSave.new(world_name, world_seed)
@@ -69,11 +69,11 @@ func create_world(world_name : String, world_seed : String) -> void:
 ## __________________________________________________________
 
 
-func get_file_count(sub_dir : String) -> int:
+static func get_file_count(sub_dir : String) -> int:
 	return len(get_filename_list(sub_dir))
 
 # If filename is null or empty, we create a new file
-func save_res(sub_dir : String, prefix : String, data: Resource, filename: String = "") -> void:
+static func save_res(sub_dir : String, prefix : String, data: Resource, filename: String = "") -> void:
 	ensure_sub_dir(sub_dir)
 	var dir = DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
 	if dir.file_exists(filename):
@@ -85,7 +85,7 @@ func save_res(sub_dir : String, prefix : String, data: Resource, filename: Strin
 			print("Couldn't save to " + filename)
 
 
-func _new_file_save(sub_dir: String, prefix : String, data: Resource) -> String:
+static func _new_file_save(sub_dir: String, prefix : String, data: Resource) -> String:
 	var save_names := get_filename_list(sub_dir)
 	var valid_name: bool = false
 	var i = 0
@@ -103,7 +103,7 @@ func _new_file_save(sub_dir: String, prefix : String, data: Resource) -> String:
 	return save_name
 
 
-func load_res(sub_dir : String, filename : String = "", type_hint : String = "Resource"):
+static func load_res(sub_dir : String, filename : String = "", type_hint : String = "Resource"):
 	ensure_sub_dir(sub_dir)
 	var dir = DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
 	if dir.file_exists(filename):
@@ -113,7 +113,7 @@ func load_res(sub_dir : String, filename : String = "", type_hint : String = "Re
 		return null
 
 
-func delete(sub_dir: String, filename: String):
+static func delete(sub_dir: String, filename: String):
 	var dir = DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
 	if dir.file_exists(filename):
 		dir.remove("%s%s/%s" % [USER_DIR, sub_dir, filename])
@@ -122,7 +122,7 @@ func delete(sub_dir: String, filename: String):
 		return null
 
 
-func get_filename_list(sub_dir : String) -> Array[String]:
+static func get_filename_list(sub_dir : String) -> Array[String]:
 	ensure_sub_dir(sub_dir)
 	var dir = DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
 	var output : Array[String] = []
@@ -131,7 +131,7 @@ func get_filename_list(sub_dir : String) -> Array[String]:
 	return output
 
 #makes sure the filestructure we want exists
-func ensure_sub_dir(sub_dir : String) -> bool:
+static func ensure_sub_dir(sub_dir : String) -> bool:
 	var dir := DirAccess.open(USER_DIR)
 	if !dir.dir_exists(sub_dir):
 		dir.make_dir(sub_dir)
@@ -139,7 +139,7 @@ func ensure_sub_dir(sub_dir : String) -> bool:
 	return true
 
 
-func ensure_global() -> bool:
+static func ensure_global() -> bool:
 	var dir = DirAccess.open(USER_DIR)
 	if !dir.file_exists(GLOBAL_SAVE_DATA_NAME + SAVE_SUFFIX):
 		dir = null

@@ -15,10 +15,6 @@ run/main_scene="uid://dxjdkdkaf7fdy"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-SaveLoad="*res://Scripts/Autoload/save_load.gd"
-
 [dotnet]
 
 project/assembly_name="lets_survive"
