@@ -1,5 +1,11 @@
 class_name Item extends Resource
 
+#region item_names
+const WOOD := "wood"
+const STONE := "stone"
+const COOL_SWORD := "cool_sword"
+#endregion
+
 enum TOOL_TYPE {NONE, FISTS, SWORD}
 
 @export var item_name : String = "wood"
@@ -17,7 +23,7 @@ func is_tool() -> bool:
 	return (tool_type != TOOL_TYPE.NONE)
 
 static func _get_item_data(item : String) -> ItemData:
-	return null
+	return ItemData.of(item)
 
 static func static_max(item : String) -> int:
 	var item_data : ItemData = _get_item_data(item)
@@ -25,7 +31,7 @@ static func static_max(item : String) -> int:
 
 static func static_tool_type(item : String) -> TOOL_TYPE:
 	var item_data : ItemData = _get_item_data(item)
-	return item_data.get_max_amount()
+	return item_data.get_tool_type()
 
 static func static_texture(item: String) -> Texture2D:
 	var item_data : ItemData = _get_item_data(item)

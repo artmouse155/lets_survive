@@ -29,5 +29,5 @@ func take_damage(damage : float, attack_origin : Vector2) -> void:
 
 
 func destroy() -> void:
-	world_item_dropped.emit(self,Item.new("wood",5))
+	world_item_dropped.emit(self,Item.new(Item.WOOD,5))
 	queue_free()

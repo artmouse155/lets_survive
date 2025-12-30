@@ -1,28 +1,26 @@
-[gd_resource type="Resource" script_class="PlayerSave" load_steps=7 format=3 uid="uid://1u8lqvfn1xfb"]
+[gd_resource type="Resource" script_class="PlayerSave" load_steps=6 format=3 uid="uid://1u8lqvfn1xfb"]
 
 [ext_resource type="Script" uid="uid://b2814qm5brf7h" path="res://Scripts/CustomResource/player_save.gd" id="1_prisv"]
 [ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://Scripts/CustomResource/item.gd" id="1_x7qvn"]
-[ext_resource type="Script" uid="uid://quqqiuqhb6j4" path="res://weapon.gd" id="2_78g2t"]
 
-[sub_resource type="Resource" id="Resource_fy4hm"]
+[sub_resource type="Resource" id="Resource_rdge0"]
 script = ExtResource("1_x7qvn")
-item_quantity = 9
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
-[sub_resource type="Resource" id="Resource_k0qrl"]
+[sub_resource type="Resource" id="Resource_x7qvn"]
 script = ExtResource("1_x7qvn")
-item_quantity = 4
+item_name = "stone"
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
-[sub_resource type="Resource" id="Resource_k03ko"]
-script = ExtResource("2_78g2t")
-type = 1
-metadata/_custom_type_script = "uid://quqqiuqhb6j4"
+[sub_resource type="Resource" id="Resource_78g2t"]
+script = ExtResource("1_x7qvn")
+item_name = "cool_sword"
+metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [resource]
 resource_name = "Test Player"
 script = ExtResource("1_prisv")
 _player_name = "Test Player"
 _color = Color(0.56930333, 0.89, 0.48059997, 1)
-_inventory = Array[ExtResource("1_x7qvn")]([SubResource("Resource_fy4hm"), SubResource("Resource_k0qrl"), SubResource("Resource_k03ko")])
+_inventory = Array[ExtResource("1_x7qvn")]([SubResource("Resource_rdge0"), SubResource("Resource_x7qvn"), SubResource("Resource_78g2t")])
 metadata/_custom_type_script = "uid://b2814qm5brf7h"
