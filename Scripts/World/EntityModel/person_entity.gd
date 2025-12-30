@@ -77,8 +77,12 @@ func _update_tool_state() -> void:
 		_tool_sprite.hide()
 
 
-func get_inventory():
+func get_inventory() -> Array[Item]:
 	return _inventory
+
+
+func set_inventory(inv : Array[Item]) -> void:
+	_inventory = inv
 
 
 func pickup_item(item : Item) -> Item:

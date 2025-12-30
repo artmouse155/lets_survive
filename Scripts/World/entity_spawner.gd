@@ -16,6 +16,7 @@ func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -
 
 func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 	var player : PlayerEntity = PLAYER_PACKED.instantiate()
+	player.set_inventory(player_save.get_inventory())
 	player.set_color(player_save.get_color())
 	player.world_item_dropped.connect(on_world_item_dropped)
 	if is_self:

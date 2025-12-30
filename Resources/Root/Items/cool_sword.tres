@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://hbvcijgt3nv6"]
+
+[ext_resource type="Script" uid="uid://w82p7ap6838j" path="res://Scripts/CustomResource/item_data.gd" id="1_8tqlv"]
+[ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="1_b4jhe"]
+
+[resource]
+resource_name = "cool_sword"
+script = ExtResource("1_8tqlv")
+_icon = ExtResource("1_b4jhe")
+_max_amount = 1
+metadata/_custom_type_script = "uid://w82p7ap6838j"
