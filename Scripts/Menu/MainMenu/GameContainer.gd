@@ -8,6 +8,7 @@ func start() -> void:
 
 func return_to_main_menu():
 	game_ui.set_pause(false)
+	world.clear()
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 
 func loadGame(world_index : int, player_index : int) -> void:

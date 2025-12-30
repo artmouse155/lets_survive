@@ -26,3 +26,7 @@ func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 		SignalPipe.pipe(player.health_updated,self_health_updated)
 		SignalPipe.pipe(player.item_collected,self_item_collected)
 	add_child(player)
+
+func clear() -> void:
+	for child in get_children():
+		child.queue_free()

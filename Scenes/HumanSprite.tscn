@@ -1,0 +1,306 @@
+[gd_scene load_steps=24 format=3 uid="uid://bdriym0k3hk1g"]
+
+[ext_resource type="Texture2D" uid="uid://4oiecskv1ol2" path="res://Resources/Textures/Terrain/dude.png" id="1_mug8v"]
+[ext_resource type="Script" uid="uid://bq7btvrn0u1rs" path="res://Scripts/human_sprite.gd" id="2_mug8v"]
+[ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/Terrain/hand.png" id="3_sar6w"]
+[ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_2lkt2"]
+[ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/melee_radius.tscn" id="5_oyunc"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sar6w"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2lkt2"]
+animation = &"punchl"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oyunc"]
+animation = &"punchr"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ngjm7"]
+animation = &"swingr"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_35ope"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sar6w"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "anim_state == ANIMATIONS.PUNCH"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2lkt2"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "anim_state == ANIMATIONS.PUNCH"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oyunc"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngjm7"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_go5uh"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "anim_state == ANIMATIONS.PUNCH"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qb6w3"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "anim_state == ANIMATIONS.SWING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ryls"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_go5uh"]
+states/RESET/node = SubResource("AnimationNodeAnimation_sar6w")
+states/RESET/position = Vector2(467, 42)
+states/Start/position = Vector2(141, 109)
+states/punchl/node = SubResource("AnimationNodeAnimation_2lkt2")
+states/punchl/position = Vector2(686, 95)
+states/punchr/node = SubResource("AnimationNodeAnimation_oyunc")
+states/punchr/position = Vector2(458, 156)
+states/swingr/node = SubResource("AnimationNodeAnimation_ngjm7")
+states/swingr/position = Vector2(518, -61)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_35ope"), "RESET", "punchr", SubResource("AnimationNodeStateMachineTransition_sar6w"), "punchr", "punchl", SubResource("AnimationNodeStateMachineTransition_2lkt2"), "punchr", "RESET", SubResource("AnimationNodeStateMachineTransition_oyunc"), "punchl", "RESET", SubResource("AnimationNodeStateMachineTransition_ngjm7"), "punchl", "punchr", SubResource("AnimationNodeStateMachineTransition_go5uh"), "RESET", "swingr", SubResource("AnimationNodeStateMachineTransition_qb6w3"), "swingr", "RESET", SubResource("AnimationNodeStateMachineTransition_1ryls")]
+graph_offset = Vector2(56, -136)
+
+[sub_resource type="Animation" id="Animation_2lkt2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ArmR/HandR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(72, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/ArmL/HandL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(72, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/ArmR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7853982]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/ArmL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.7853981633974483]
+}
+
+[sub_resource type="Animation" id="Animation_oyunc"]
+resource_name = "punch2"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ArmL/HandL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(72, 0), Vector2(96, 0), Vector2(72, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_eval_attack"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/ArmL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.7853981633974483, -0.2617993877991494, -0.7853981633974483]
+}
+
+[sub_resource type="Animation" id="Animation_sar6w"]
+resource_name = "punch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ArmR/HandR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(72, 0), Vector2(96, 0), Vector2(72, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/ArmR:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.7853982, 0.2617993877991494, 0.7853982]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_eval_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ngjm7"]
+resource_name = "swingr"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/ArmR/HandR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(72, 0), Vector2(112, 0), Vector2(96, 0), Vector2(72, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/ArmR:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 0.48296818, 1),
+"update": 0,
+"values": [0.7853982, -0.7853981633974483, 0.7853982]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_eval_attack"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oyunc"]
+_data = {
+&"RESET": SubResource("Animation_2lkt2"),
+&"punchl": SubResource("Animation_oyunc"),
+&"punchr": SubResource("Animation_sar6w"),
+&"swingr": SubResource("Animation_ngjm7")
+}
+
+[node name="HumanSprite" type="Node2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite")]
+script = ExtResource("2_mug8v")
+melee_radius = NodePath("MeleeRadius")
+_tool_sprite = NodePath("Body/ArmR/HandR/Tool")
+metadata/_custom_type_script = "uid://bq7btvrn0u1rs"
+
+[node name="Body" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_mug8v")
+offset = Vector2(16, 0)
+
+[node name="ArmR" type="Node2D" parent="Body"]
+show_behind_parent = true
+rotation = 0.7853982
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="HandR" type="Sprite2D" parent="Body/ArmR"]
+show_behind_parent = true
+position = Vector2(72, 0)
+texture = ExtResource("3_sar6w")
+
+[node name="Tool" type="Sprite2D" parent="Body/ArmR/HandR"]
+visible = false
+show_behind_parent = true
+rotation = 1.5707964
+texture = ExtResource("4_2lkt2")
+offset = Vector2(0, -36)
+
+[node name="ArmL" type="Node2D" parent="Body"]
+show_behind_parent = true
+rotation = -0.7853982
+
+[node name="HandL" type="Sprite2D" parent="Body/ArmL"]
+show_behind_parent = true
+position = Vector2(72, 0)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("3_sar6w")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_go5uh")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oyunc")
+}
+
+[node name="MeleeRadius" parent="." instance=ExtResource("5_oyunc")]
+radius = 20.0

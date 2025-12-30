@@ -49,3 +49,11 @@ static func _noise_to_atlas(noise_val : float) -> Vector2i:
 	elif (noise_val < .25):
 		return SAND_ATLAS
 	return WATER_ATLAS
+
+
+func clear() -> void:
+	entity_spawner.clear()
+	
+	# clear tiles
+	ground.clear()
+	above_ground.clear()

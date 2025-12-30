@@ -135,7 +135,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.5248, 0.492, 0.82, 1)
+color = Color(0.82, 0.7981334, 0.492, 1)
 
 [node name="MainMenus" type="Control" parent="." node_paths=PackedStringArray("menus", "characterSelectNode", "worldSelectNode", "gameContainer")]
 layout_mode = 1
@@ -345,6 +345,8 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(100, 100)
 render_target_update_mode = 0
+
+[node name="Playerpreview" type="Node2D" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport"]
 
 [node name="PlayButton" type="Button" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
