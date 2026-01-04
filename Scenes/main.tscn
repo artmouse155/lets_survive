@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt3cw2yylpcf4" path="res://Scripts/Menu/MainMenu/main_menus.gd" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://bdjj0fr0ve0cb" path="res://Scripts/Menu/MainMenu/character_select_menu.gd" id="2_21xkr"]
-[ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/MainMenu/world_select_node.gd" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://dv68qe5d3euf6" path="res://Scenes/MainMenu/world_select_menu.gd" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://c5scwbwr17nu3" path="res://Scenes/MainMenu/PlayerPreview.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/MainMenu/game_container.tscn" id="4_jjvhh"]
 
@@ -61,6 +61,11 @@ const COLOR_OPTIONS : Dictionary[String,Color] ={
 var _character_shirt_color : String = COLOR_OPTIONS.keys()[0]
 var _character_name : String = \"\"
 
+@onready var regex : RegEx = RegEx.new()
+
+func _ready() -> void:
+	regex.compile(\"^%s$\" % SaveLoad.NAMING_REGEX)
+
 func start() -> void:
 	_character_name = \"\"
 	#_character_shirt_color = COLOR_OPTIONS.keys()[0]
@@ -77,8 +82,12 @@ func create_character():
 	return_to_character_select()
 
 func set_character_name(character_name : String):
-	_character_name = character_name.strip_edges()
-	_update_create_button()
+	if !character_name or regex.search(character_name):
+		_character_name = character_name.strip_edges()
+		_update_create_button()
+	else:
+		name_input.text = _character_name
+		name_input.caret_column = len(_character_name)
 
 func set_character_shirt_color(index : int):
 	_character_shirt_color = COLOR_OPTIONS.keys()[index]
@@ -100,6 +109,11 @@ var _world_seed : String = \"\"
 @export var name_input : LineEdit
 @export var seed_input : LineEdit
 
+@onready var regex := RegEx.new()
+
+func _ready() -> void:
+	regex.compile(\"^%s$\" % SaveLoad.NAMING_REGEX)
+
 func start() -> void:
 	_world_name = \"\"
 	_world_seed = \"\"
@@ -114,8 +128,12 @@ func create_world():
 	return_to_world_select()
 
 func set_world_name(world_name : String):
-	_world_name = world_name.strip_edges()
-	_update_create_button()
+	if !world_name or regex.search(world_name):
+		_world_name = world_name.strip_edges()
+		_update_create_button()
+	else:
+		name_input.text = _world_name
+		name_input.caret_column = len(_world_name)
 
 func set_seed(world_seed : String):
 	_world_seed = world_seed.strip_edges()
@@ -426,6 +444,8 @@ horizontal_alignment = 1
 [node name="LineEdit" type="LineEdit" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+keep_editing_on_text_submit = true
+select_all_on_focus = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE"]
 layout_mode = 2
@@ -614,6 +634,8 @@ horizontal_alignment = 1
 [node name="WorldName" type="LineEdit" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+keep_editing_on_text_submit = true
+select_all_on_focus = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE"]
 layout_mode = 2
@@ -627,6 +649,8 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Leave blank for random"
+keep_editing_on_text_submit = true
+select_all_on_focus = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -651,6 +675,7 @@ layout_mode = 1
 [connection signal="pressed" from="MainMenus/Title/VBoxContainer/Buttons/PlayButton" to="MainMenus/Title" method="play"]
 [connection signal="pressed" from="MainMenus/Title/VBoxContainer/Buttons/SettingsButton" to="MainMenus/Title" method="settings"]
 [connection signal="pressed" from="MainMenus/Settings/PanelContainer/MarginContainer/VBoxContainer/ReturnButton" to="MainMenus/Settings" method="return_to_main_menu"]
+[connection signal="character_selected" from="MainMenus/CharacterSelect" to="MainMenus" method="set_current_player_name"]
 [connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/CharacterSelect" method="play"]
 [connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewCharacter" to="MainMenus/CharacterSelect" method="create_character"]
 [connection signal="pressed" from="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Return" to="MainMenus/CharacterSelect" method="return_to_main_menu"]

@@ -8,7 +8,7 @@ enum MENUS {TITLE, SETTINGS, CHARACTER_SELECT, CHARACTER_CREATE, WORLD_SELECT, W
 @export var worldSelectNode : WorldSelectMenu
 @export var gameContainer : GameContainer
 
-var _current_player_index : int = -1
+var _current_player_name : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,9 +22,9 @@ func set_menu(menu : MENUS) -> void:
 		if (key == menu):
 			menus[key].start()
 
-func set_current_player_index(index : int) -> void:
-	_current_player_index = index
+func set_current_player_name(player_name : String) -> void:
+	_current_player_name = player_name
 
-func load_game(world_index : int) -> void:
-	gameContainer.loadGame(world_index, _current_player_index)
+func load_game(world_name : String) -> void:
+	gameContainer.loadGame(world_name, _current_player_name)
 	set_menu(MENUS.GAME)
