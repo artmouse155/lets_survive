@@ -16,3 +16,5 @@ player_save = ExtResource("2_hkm8i")
 
 [node name="GameContainer" parent="." instance=ExtResource("2_r8vti")]
 layout_mode = 1
+
+[connection signal="menu_selected" from="GameContainer" to="." method="_exit"]

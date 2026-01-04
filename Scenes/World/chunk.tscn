@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://e2gerewc8xew"]
+
+[ext_resource type="Script" uid="uid://bufoylri5pbsx" path="res://Scripts/World/chunk.gd" id="1_xv8nu"]
+[ext_resource type="TileSet" uid="uid://5pn671jsdxwh" path="res://Resources/ground.tres" id="2_j3eea"]
+
+[node name="Chunk" type="Node2D" node_paths=PackedStringArray("ground", "above_ground")]
+script = ExtResource("1_xv8nu")
+ground = NodePath("Ground")
+above_ground = NodePath("AboveGround")
+metadata/_custom_type_script = "uid://bufoylri5pbsx"
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_j3eea")
+
+[node name="AboveGround" type="TileMapLayer" parent="."]

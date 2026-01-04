@@ -1,5 +1,7 @@
 class_name EntitySpawner extends Node2D
 
+signal player_position_updated(pos: Vector2)
+
 signal self_selected_index_updated(index: int)
 signal self_inventory_updated(inventory : Array[Item], floating_item : Item)
 signal self_item_collected(item : Item)
@@ -19,6 +21,7 @@ func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 	player.set_inventory(player_save.get_inventory())
 	player.set_color(player_save.get_color())
 	player.world_item_dropped.connect(on_world_item_dropped)
+	SignalPipe.pipe(player.position_updated,player_position_updated)
 	if is_self:
 		player.add_child(Camera2D.new())
 		player.brain = self_brain

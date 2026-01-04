@@ -2,6 +2,7 @@ class_name PlayerEntity extends PersonEntity
 
 @export var body : Sprite2D
 
+signal position_updated(pos : Vector2)
 signal player_inventory_updated(inventory : Array[Item], floating_item : Item)
 
 var _floating_item : Item = null
@@ -23,6 +24,10 @@ func set_movement_enabled(enabled : bool) -> void:
 func _emit_inventory_updated() -> void:
 	super._emit_inventory_updated()
 	player_inventory_updated.emit(_inventory,_floating_item)
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	position_updated.emit(position)
 
 func _set_in_ui(value : bool) -> void:
 	in_ui = value

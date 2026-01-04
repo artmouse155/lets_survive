@@ -4,4 +4,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$GameContainer.testLoad("0", player_save)
+	$GameContainer.testLoad("waterplz", player_save)
+
+func _exit(_menu: MainMenus.MENUS) -> void:
+	get_tree().quit()
