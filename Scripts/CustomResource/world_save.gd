@@ -52,7 +52,7 @@ func _add_player(player_name : String) -> String:
 	var fingerprint := str(randi())
 	while (fingerprint in player_memories.keys()):
 		fingerprint = str(randi())
-	player_memories[fingerprint] = PlayerMemory.new(player_name,_spawnpoint)
+	player_memories[fingerprint] = PlayerMemory.new(player_name,World.tile_to_world(_spawnpoint))
 	return fingerprint.sha256_text()
 
 func _init(world_name : String = "", world_seed : String = "") -> void:
