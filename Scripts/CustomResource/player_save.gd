@@ -17,6 +17,9 @@ func get_color() -> Color:
 func get_inventory() -> Array[Item]:
 	return _inventory
 
+func set_inventory(i : Array[Item]) -> void:
+	_inventory = i
+
 func _init(player_name : String = "", color : Color = Color.WHITE) -> void:
 	_player_name = player_name
 	_color = color

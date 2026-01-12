@@ -113,3 +113,9 @@ func _on_inventory_right_click(index : int) -> void:
 
 func set_color(color : Color):
 	body.self_modulate = color
+
+func export_save(old_save: PlayerSave) -> PlayerSave:
+	var export := PlayerSave.new(old_save.get_player_name(),old_save.get_color())
+	export.set_inventory(_inventory)
+	#TODO: Set player level
+	return export

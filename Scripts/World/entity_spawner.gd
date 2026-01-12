@@ -10,6 +10,12 @@ signal self_health_updated(health : float)
 const PLAYER_PACKED : PackedScene = preload("uid://bfwu7kuh082tc")
 @export var self_brain : SelfBrain
 
+var _spawnpoint := Vector2i.ZERO
+var get_updated_self_save : Callable
+
+func set_spawnpoint(pos : Vector2i) -> void:
+	_spawnpoint = pos
+
 func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -> void:
 	var world_item : WorldItem = WorldItem.from(item)
 	world_item.position = sender.global_position
@@ -18,11 +24,13 @@ func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -
 
 func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 	var player : PlayerEntity = PLAYER_PACKED.instantiate()
+	player.position = World.tile_to_world(_spawnpoint)
 	player.set_inventory(player_save.get_inventory())
 	player.set_color(player_save.get_color())
 	player.world_item_dropped.connect(on_world_item_dropped)
 	SignalPipe.pipe(player.position_updated,player_position_updated)
 	if is_self:
+		get_updated_self_save = player.export_save.bind(player_save)
 		player.add_child(Camera2D.new())
 		player.brain = self_brain
 		SignalPipe.pipe(player.selected_index_updated,self_selected_index_updated)

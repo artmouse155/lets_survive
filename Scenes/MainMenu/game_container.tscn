@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/GameUI/chat.gd" id="6_udj4x"]
 [ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
 
-[node name="GameContainer" type="Control" node_paths=PackedStringArray("world", "game_ui")]
+[node name="GameContainer" type="Control" node_paths=PackedStringArray("world", "game_ui", "save_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ mouse_filter = 1
 script = ExtResource("1_jr5s5")
 world = NodePath("SubViewportContainer/SubViewport/World")
 game_ui = NodePath("GameUI")
+save_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Save")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
 
 [node name="Sky" type="ColorRect" parent="."]
@@ -182,19 +183,23 @@ layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="resume" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="settings" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Save" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="Settings" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="lan" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LAN" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Open to LAN"
 
-[node name="return" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Return" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
 
@@ -207,7 +212,7 @@ text = "Return to Menu"
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
 [connection signal="visibility_changed" from="GameUI/SafeZone/Chat" to="GameUI/SafeZone/Chat" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/resume" to="GameUI" method="resume"]
-[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/return" to="." method="return_to_main_menu"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Resume" to="GameUI" method="resume"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Return" to="." method="return_to_main_menu"]
 
 [editable path="SubViewportContainer/SubViewport/World"]

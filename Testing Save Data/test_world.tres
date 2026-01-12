@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldSave" load_steps=2 format=3 uid="uid://by4ix2cxmgatv"]
+
+[ext_resource type="Script" uid="uid://w7gg55lbr2nk" path="res://Scripts/CustomResource/world_save.gd" id="1_olxol"]
+
+[resource]
+resource_name = "Test World"
+script = ExtResource("1_olxol")
+metadata/_custom_type_script = "uid://w7gg55lbr2nk"

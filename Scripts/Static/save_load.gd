@@ -50,8 +50,13 @@ static func create_world(world_name : String, world_seed : String) -> void:
 	var newSave := WorldSave.new(world_name, world_seed)
 	_save_res(WORLD_SUB_DIR, newSave, "%s%s" % [world_name, SAVE_SUFFIX])
 
-## __________________________________________________________
+static func save_player(player_name : String, player_save : PlayerSave) -> void:
+	_save_res(PLAYER_SUB_DIR, player_save, "%s%s" % [player_name, SAVE_SUFFIX])
 
+static func save_world(world_name : String, world_save : WorldSave) -> void:
+	_save_res(WORLD_SUB_DIR, world_save, "%s%s" % [world_name, SAVE_SUFFIX])
+
+## __________________________________________________________
 
 static func get_file_count(sub_dir : String) -> int:
 	return len(get_filename_list(sub_dir))
