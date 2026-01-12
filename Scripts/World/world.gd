@@ -1,7 +1,7 @@
 class_name World extends Node2D
 
 const CHUNK_SIZE : Vector2i = Vector2i(16,16)
-const TILE_SIZE : Vector2i = Vector2i(16,16)
+const TILE_SIZE : Vector2i = Vector2i(32,32)
 
 @export var entity_spawner : EntitySpawner
 @export var chunk_loader : ChunkLoader
@@ -24,8 +24,8 @@ func get_updated_self_save() -> PlayerSave:
 
 ## Returns the tile directly underneath the given world position.
 static func world_to_tile(pos : Vector2) -> Vector2i:
-	return Vector2i.ZERO
+	return Vector2i(pos.floor())
 
 ## Returns the center pixel position of a tile at the given indicies.
 static func tile_to_world(tile : Vector2i) -> Vector2:
-	return Vector2.ZERO
+	return (Vector2(0.5,0.5) + Vector2(tile)) * Vector2(TILE_SIZE)
