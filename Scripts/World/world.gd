@@ -11,8 +11,14 @@ const TILE_SIZE : Vector2i = Vector2i(32,32)
 
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
 	chunk_loader.start(world_save.get_world_seed())
-	entity_spawner.set_spawnpoint(world_save.get_spawnpoint())
-	entity_spawner.spawn_player(player_save,true)
+	var player_memory : PlayerMemory
+	if (world_save.is_player_known(player_save)):
+		player_memory = world_save.get_player_memory(player_save)
+	else:
+		player_memory = world_save.add_player(player_save)
+		player_save.save()
+		world_save.save()
+	entity_spawner.spawn_player(player_save,player_memory,true)
 
 
 func clear() -> void:

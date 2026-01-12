@@ -10,11 +10,7 @@ signal self_health_updated(health : float)
 const PLAYER_PACKED : PackedScene = preload("uid://bfwu7kuh082tc")
 @export var self_brain : SelfBrain
 
-var _spawnpoint := Vector2i.ZERO
 var get_updated_self_save : Callable
-
-func set_spawnpoint(pos : Vector2i) -> void:
-	_spawnpoint = pos
 
 func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -> void:
 	var world_item : WorldItem = WorldItem.from(item)
@@ -22,9 +18,10 @@ func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -
 	world_item.apply_cooldown(cooldown)
 	add_child(world_item)
 
-func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
+
+func spawn_player(player_save : PlayerSave, player_memory : PlayerMemory, is_self : bool) -> void:
 	var player : PlayerEntity = PLAYER_PACKED.instantiate()
-	player.position = World.tile_to_world(_spawnpoint)
+	player.position = player_memory.get_position()
 	player.set_inventory(player_save.get_inventory())
 	player.set_color(player_save.get_color())
 	player.world_item_dropped.connect(on_world_item_dropped)
@@ -38,6 +35,7 @@ func spawn_player(player_save : PlayerSave, is_self : bool) -> void:
 		SignalPipe.pipe(player.health_updated,self_health_updated)
 		SignalPipe.pipe(player.item_collected,self_item_collected)
 	add_child(player)
+
 
 func clear() -> void:
 	for child in get_children():

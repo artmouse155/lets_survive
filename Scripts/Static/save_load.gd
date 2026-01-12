@@ -52,9 +52,11 @@ static func create_world(world_name : String, world_seed : String) -> void:
 
 static func save_player(player_name : String, player_save : PlayerSave) -> void:
 	_save_res(PLAYER_SUB_DIR, player_save, "%s%s" % [player_name, SAVE_SUFFIX])
+	print("Saved player \"%s\"" % player_name)
 
 static func save_world(world_name : String, world_save : WorldSave) -> void:
 	_save_res(WORLD_SUB_DIR, world_save, "%s%s" % [world_name, SAVE_SUFFIX])
+	print("Saved world \"%s\"" % world_name)
 
 ## __________________________________________________________
 

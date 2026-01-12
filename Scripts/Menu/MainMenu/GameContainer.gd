@@ -26,4 +26,4 @@ func testLoad(world_save : WorldSave, player_save : PlayerSave) -> void:
 
 func save(world_name : String, player_name : String) -> void:
 	SaveLoad.save_player(player_name, world.get_updated_self_save())
-	print("Saved %s and %s!" % [world_name, player_name])
+	
