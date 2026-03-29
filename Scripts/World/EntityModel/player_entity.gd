@@ -27,7 +27,8 @@ func _emit_inventory_updated() -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	brain.physics_process(delta, get_viewport())
+	if brain:
+		brain.physics_process(delta, get_viewport())
 	position_updated.emit(position)
 
 func _set_in_ui(value : bool) -> void:

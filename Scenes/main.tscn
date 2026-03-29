@@ -13,10 +13,10 @@ script/source = "extends Menu
 func start() -> void:
 	pass
 
-func play():
+func play() -> void:
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
 
-func settings():
+func settings() -> void:
 	menu_selected.emit(MainMenus.MENUS.SETTINGS)
 "
 
@@ -38,7 +38,7 @@ script/source = "extends Menu
 func start() -> void:
 	pass
 
-func return_to_main_menu():
+func return_to_main_menu() -> void:
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 "
 
@@ -74,14 +74,14 @@ func start() -> void:
 	set_character_shirt_color(0)
 	#_player_preview.preview(PlayerSave.new(\"_PREVIEW_\",_character_shirt_color))
 
-func return_to_character_select():
+func return_to_character_select() -> void:
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
 	
-func create_character():
+func create_character() -> void:
 	SaveLoad.create_character(_character_name, COLOR_OPTIONS[_character_shirt_color])
 	return_to_character_select()
 
-func set_character_name(character_name : String):
+func set_character_name(character_name : String) -> void:
 	if !character_name or regex.search(character_name):
 		_character_name = character_name.strip_edges()
 		_update_create_button()
@@ -89,12 +89,12 @@ func set_character_name(character_name : String):
 		name_input.text = _character_name
 		name_input.caret_column = len(_character_name)
 
-func set_character_shirt_color(index : int):
+func set_character_shirt_color(index : int) -> void:
 	_character_shirt_color = COLOR_OPTIONS.keys()[index]
 	_player_preview.preview(PlayerSave.new(\"_PREVIEW_\",_character_shirt_color))
 	_update_create_button()
 
-func _update_create_button():
+func _update_create_button() -> void:
 	create_button.disabled = (_character_name.length() == 0)
 "
 
@@ -120,14 +120,14 @@ func start() -> void:
 	name_input.text = \"\"
 	seed_input.text = \"\"
 
-func return_to_world_select():
+func return_to_world_select() -> void:
 	menu_selected.emit(MainMenus.MENUS.WORLD_SELECT)
 	
-func create_world():
+func create_world() -> void:
 	SaveLoad.create_world(_world_name, _world_seed)
 	return_to_world_select()
 
-func set_world_name(world_name : String):
+func set_world_name(world_name : String) -> void:
 	if !world_name or regex.search(world_name):
 		_world_name = world_name.strip_edges()
 		_update_create_button()
@@ -135,11 +135,11 @@ func set_world_name(world_name : String):
 		name_input.text = _world_name
 		name_input.caret_column = len(_world_name)
 
-func set_seed(world_seed : String):
+func set_seed(world_seed : String) -> void:
 	_world_seed = world_seed.strip_edges()
 	_update_create_button()
 
-func _update_create_button():
+func _update_create_button() -> void:
 	create_button.disabled = (_world_name.length() == 0)
 "
 

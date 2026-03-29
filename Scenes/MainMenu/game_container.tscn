@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/GameUI/inventory_ui.tscn" id="5_us7ks"]
 [ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/GameUI/chat.gd" id="6_udj4x"]
 [ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
+[ext_resource type="Script" uid="uid://chiiyfpi7v1su" path="res://Scenes/MainMenu/blank_menu.gd" id="9_4e7g7"]
+[ext_resource type="Script" uid="uid://mavb4w4uiq2d" path="res://Scenes/MainMenu/host_lan.gd" id="9_xbk1c"]
 
 [sub_resource type="Resource" id="Resource_wwudf"]
 script = ExtResource("4_wwudf")
@@ -139,7 +141,8 @@ alignment = 2
 layout_mode = 2
 keep_editing_on_text_submit = true
 
-[node name="PauseMenus" type="Control" parent="." unique_id=1678289000]
+[node name="PauseMenus" type="Control" parent="." unique_id=570948181 node_paths=PackedStringArray("menus", "game_ui")]
+process_mode = 2
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -148,14 +151,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_jvhxo")
+menus = {
+0: NodePath("PauseScreen"),
+1: NodePath("HostLan"),
+2: NodePath("SettingsScreen"),
+3: NodePath("AchievementsScreen")
+}
+game_ui = NodePath("../GameUI")
+metadata/_custom_type_script = "uid://bog3mmqycxk65"
 
-[node name="PauseScreen" type="Control" parent="PauseMenus" unique_id=1050381985]
+[node name="PauseScreen" type="Control" parent="PauseMenus" unique_id=1409875079]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("9_4e7g7")
+metadata/_custom_type_script = "uid://chiiyfpi7v1su"
 
 [node name="PanelContainer" type="PanelContainer" parent="PauseMenus/PauseScreen" unique_id=251065442]
 process_mode = 2
@@ -209,10 +223,175 @@ text = "Open to LAN"
 layout_mode = 2
 text = "Return to Menu"
 
+[node name="HostLan" type="Control" parent="PauseMenus" unique_id=1690016177 node_paths=PackedStringArray("Port")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_xbk1c")
+Port = NodePath("../../GameUI/SafeZone/Chat/VBoxContainer/LineEdit")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/HostLan" unique_id=1057481423]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -56.5
+offset_right = 65.0
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/HostLan/PanelContainer" unique_id=1369402305]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/HostLan/PanelContainer/MarginContainer" unique_id=871287494]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer" unique_id=2032992634]
+layout_mode = 2
+text = "Open to LAN"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer" unique_id=550606627]
+layout_mode = 2
+
+[node name="PortLabel" type="Label" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1899521411]
+layout_mode = 2
+text = "Port:"
+
+[node name="Port" type="SpinBox" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=754625828]
+layout_mode = 2
+min_value = 1024.0
+max_value = 65535.0
+value = 55555.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer" unique_id=42743957]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1336001022]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="Start" type="Button" parent="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2033303447]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="SettingsScreen" type="Control" parent="PauseMenus" unique_id=1904504497]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_4e7g7")
+metadata/_custom_type_script = "uid://chiiyfpi7v1su"
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/SettingsScreen" unique_id=167677581]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/SettingsScreen/PanelContainer" unique_id=967819808]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/SettingsScreen/PanelContainer/MarginContainer" unique_id=939776012]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenus/SettingsScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1235139479]
+layout_mode = 2
+text = "Settings"
+
+[node name="Back" type="Button" parent="PauseMenus/SettingsScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1266437208]
+layout_mode = 2
+text = "Back"
+
+[node name="AchievementsScreen" type="Control" parent="PauseMenus" unique_id=2044385991]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_4e7g7")
+metadata/_custom_type_script = "uid://chiiyfpi7v1su"
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/AchievementsScreen" unique_id=428603827]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/AchievementsScreen/PanelContainer" unique_id=45266599]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer" unique_id=1554099356]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=931903155]
+layout_mode = 2
+text = "Achievements"
+
+[node name="Back" type="Button" parent="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1287909038]
+layout_mode = 2
+text = "Back"
+
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
 [connection signal="visibility_changed" from="GameUI/SafeZone/Chat" to="GameUI/SafeZone/Chat" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Resume" to="GameUI" method="resume"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Settings" to="PauseMenus" method="set_menu_settings"]
+[connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/LAN" to="PauseMenus" method="set_menu_host_lan"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Return" to="." method="return_to_main_menu"]
+[connection signal="value_changed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Port" to="PauseMenus/HostLan" method="validate_port_input"]
+[connection signal="pressed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
+[connection signal="pressed" from="PauseMenus/SettingsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
+[connection signal="pressed" from="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]

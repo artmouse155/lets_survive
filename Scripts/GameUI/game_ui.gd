@@ -1,7 +1,7 @@
 class_name GameUI extends Control
 
 @export var health_label : Label
-@export var pause_menus : Control
+@export var pause_menus : PauseMenus
 @export var hotbar : Hotbar
 @export var inventory_ui : InventoryUI
 @export var chat : Chat
@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
 					if touching_mouse_index != -1:
 						_emit_drop_index(touching_mouse_index)
 		else:
-			if Input.is_action_just_pressed("pause"):
-				set_pause(!get_tree().paused)
+			if Input.is_action_just_pressed("pause") and !get_tree().paused:
+				set_pause(true)
 			elif Input.is_action_just_pressed("open_inventory"):
 				_set_self_movement_enabled(false)
 				inventory_ui.show()
@@ -51,6 +51,8 @@ func _process(_delta: float) -> void:
 #region pause
 func set_pause(pause: bool) -> void:
 	get_tree().paused = pause
+	if pause:
+		pause_menus.set_menu_pause_screen()
 	pause_menus.visible = get_tree().paused
 
 
