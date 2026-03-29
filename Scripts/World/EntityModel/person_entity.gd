@@ -8,7 +8,7 @@ signal selected_index_updated(index : int)
 signal item_collected(item : Item)
 
 ## Inventory. Slot 0 represents currently held item.
-@export var speed = 125
+@export var speed := 125
 @export var _inventory : Array[Item]
 var _selected_index : int = 0
 
@@ -91,16 +91,16 @@ func pickup_item(item : Item) -> Item:
 	for i : int in range(len(_inventory)):
 		var inv_item : Item = _inventory[i]
 		if (!inv_item):
-			var possible_accept_amt = item.get_max()
-			var accept_amt = min(possible_accept_amt,item.item_quantity)
+			var possible_accept_amt := item.get_max()
+			var accept_amt : int = min(possible_accept_amt,item.item_quantity)
 			_inventory[i] = Item.new(item.item_name,accept_amt)
 			item.subtract(accept_amt)
 			if item.is_depleted():
 				item = null
 				break
 		elif (inv_item.item_name == item.item_name) and (!inv_item.is_full()):
-			var possible_accept_amt = inv_item.get_max() - inv_item.item_quantity
-			var accept_amt = min(possible_accept_amt,item.item_quantity)
+			var possible_accept_amt := inv_item.get_max() - inv_item.item_quantity
+			var accept_amt : int = min(possible_accept_amt,item.item_quantity)
 			_inventory[i].add(accept_amt)
 			item.subtract(accept_amt)
 			if item.is_depleted():
@@ -150,7 +150,7 @@ func drop_selected_item() -> void:
 
 
 func drop_index(index : int) -> void:
-	var item = _inventory[index]
+	var item := _inventory[index]
 	if item:
 		drop(Item.new(item.item_name,1))
 		_inventory[index] = null if item.item_quantity <= 1 else Item.new(item.item_name,item.item_quantity - 1)
@@ -163,7 +163,7 @@ func drop_all_selected_item() -> void:
 
 
 func drop_all_index(index : int) -> void:
-	var item = _inventory[index]
+	var item := _inventory[index]
 	if item:
 		drop(item)
 		_inventory[index] = null
@@ -181,10 +181,10 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 	if is_instance_of(area, WorldItem) and !area.has_cooldown():
 		var item : Item = area.get_item()
 		# print("Trying to collect %s" % str(item))
-		var count_before = item.item_quantity if item else 0
+		var count_before := item.item_quantity if item else 0
 		var leftovers : Item = pickup_item(area.get_item())
-		var count_after = leftovers.item_quantity if leftovers else 0
-		var count = count_before - count_after
+		var count_after := leftovers.item_quantity if leftovers else 0
+		var count := count_before - count_after
 		if (item and count > 0):
 			_emit_inventory_updated()
 			item_collected.emit(Item.new(item.item_name,count))

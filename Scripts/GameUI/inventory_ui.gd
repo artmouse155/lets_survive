@@ -35,10 +35,10 @@ func _process(_delta: float) -> void:
 	floating_slot.global_position = get_global_mouse_position()
 
 
-func _on_left_clicked(index : int):
+func _on_left_clicked(index : int) -> void:
 	left_clicked.emit(index)
 
-func _on_right_clicked(index : int):
+func _on_right_clicked(index : int) -> void:
 	right_clicked.emit(index)
 
 func get_touching_mouse_index() -> int:

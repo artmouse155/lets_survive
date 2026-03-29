@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcnynj6tfm2v3"]
+[gd_scene format=3 uid="uid://bcnynj6tfm2v3"]
 
 [ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/GameContainer.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/GameUI/chat.gd" id="6_udj4x"]
 [ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
 
-[node name="GameContainer" type="Control" node_paths=PackedStringArray("world", "game_ui", "save_button")]
+[node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ game_ui = NodePath("GameUI")
 save_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Save")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
 
-[node name="Sky" type="ColorRect" parent="."]
+[node name="Sky" type="ColorRect" parent="." unique_id=1785419536]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5494, 0.73431, 0.82, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=551241396]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,16 +40,16 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1026660224]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="World" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("game_ui") instance=ExtResource("2_juifl")]
+[node name="World" parent="SubViewportContainer/SubViewport" unique_id=748688719 node_paths=PackedStringArray("game_ui") instance=ExtResource("2_juifl")]
 game_ui = NodePath("../../../GameUI")
 
-[node name="GameUI" type="Control" parent="." node_paths=PackedStringArray("health_label", "pause_menus", "hotbar", "inventory_ui", "chat", "self_brain")]
+[node name="GameUI" type="Control" parent="." unique_id=514799370 node_paths=PackedStringArray("health_label", "pause_menus", "hotbar", "inventory_ui", "chat", "self_brain")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -65,7 +65,7 @@ inventory_ui = NodePath("SafeZone/InventoryUI")
 chat = NodePath("SafeZone/Chat")
 self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
 
-[node name="SafeZone" type="MarginContainer" parent="GameUI"]
+[node name="SafeZone" type="MarginContainer" parent="GameUI" unique_id=881062343]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,27 +77,27 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone" unique_id=1386278129]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Health" type="Label" parent="GameUI/SafeZone/VBoxContainer"]
+[node name="Health" type="Label" parent="GameUI/SafeZone/VBoxContainer" unique_id=2136926882]
 layout_mode = 2
 text = "Health:"
 
-[node name="Hotbar" parent="GameUI/SafeZone/VBoxContainer" instance=ExtResource("4_juifl")]
+[node name="Hotbar" parent="GameUI/SafeZone/VBoxContainer" unique_id=957552585 instance=ExtResource("4_juifl")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="InventoryUI" parent="GameUI/SafeZone" instance=ExtResource("5_us7ks")]
+[node name="InventoryUI" parent="GameUI/SafeZone" unique_id=1152418993 instance=ExtResource("5_us7ks")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Chat" type="Control" parent="GameUI/SafeZone" node_paths=PackedStringArray("input", "msg_box", "scroll")]
+[node name="Chat" type="Control" parent="GameUI/SafeZone" unique_id=726412971 node_paths=PackedStringArray("input", "msg_box", "scroll")]
 editor_description = "This is the Chat node."
 visible = false
 layout_mode = 2
@@ -106,7 +106,7 @@ input = NodePath("VBoxContainer/LineEdit")
 msg_box = NodePath("VBoxContainer/ScrollContainer/PanelContainer/MessageContainer")
 scroll = NodePath("VBoxContainer/ScrollContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat" unique_id=946258665]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -116,24 +116,24 @@ offset_top = -135.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/SafeZone/Chat/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/SafeZone/Chat/VBoxContainer" unique_id=589958575]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer" unique_id=1824779386]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MessageContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer"]
+[node name="MessageContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat/VBoxContainer/ScrollContainer/PanelContainer" unique_id=304393199]
 layout_mode = 2
 alignment = 2
 
-[node name="LineEdit" type="LineEdit" parent="GameUI/SafeZone/Chat/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="GameUI/SafeZone/Chat/VBoxContainer" unique_id=178697815]
 layout_mode = 2
 keep_editing_on_text_submit = true
 
-[node name="PauseMenus" type="Control" parent="."]
+[node name="PauseMenus" type="Control" parent="." unique_id=1678289000]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -143,7 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_jvhxo")
 
-[node name="PauseScreen" type="Control" parent="PauseMenus"]
+[node name="PauseScreen" type="Control" parent="PauseMenus" unique_id=1050381985]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,7 +151,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/PauseScreen"]
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenus/PauseScreen" unique_id=251065442]
 process_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -168,38 +168,38 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/PauseScreen/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenus/PauseScreen/PanelContainer" unique_id=976624106]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer" unique_id=367288975]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1531543789]
 layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1559546994]
 layout_mode = 2
 text = "Resume"
 
-[node name="Save" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Save" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=1558746187]
 layout_mode = 2
 text = "Save"
 
-[node name="Settings" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=654929570]
 layout_mode = 2
 text = "Settings"
 
-[node name="LAN" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LAN" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=797921334]
 layout_mode = 2
 text = "Open to LAN"
 
-[node name="Return" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Return" type="Button" parent="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" unique_id=139677680]
 layout_mode = 2
 text = "Return to Menu"
 

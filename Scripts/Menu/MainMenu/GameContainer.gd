@@ -7,7 +7,7 @@ class_name GameContainer extends Menu
 func start() -> void:
 	pass
 
-func return_to_main_menu():
+func return_to_main_menu() -> void:
 	game_ui.set_pause(false)
 	world.clear()
 	menu_selected.emit(MainMenus.MENUS.TITLE)

@@ -17,7 +17,7 @@ func _ready() -> void:
 	set_menu(MENUS.TITLE)
 
 func set_menu(menu : MENUS) -> void:
-	for key in menus.keys():
+	for key: MENUS in menus.keys():
 		menus[key].visible = (key == menu)
 		if (key == menu):
 			menus[key].start()

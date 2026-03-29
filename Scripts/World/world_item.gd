@@ -13,20 +13,20 @@ var fly_tween : Tween
 var _has_cooldown : bool = false
 var cooldown_tween : Tween
 
-func _ready():
+func _ready() -> void:
 	#if !has_cooldown():
 		#apply_cooldown(0.0)
 	fly_tween = create_tween()
 	fly_tween.tween_property(self,"position",position + INIT_DIST * Vector2.from_angle(randf_range(0.0, TAU)),INT_VEL_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 
-func _set_item(item : Item):
+func _set_item(item : Item) -> void:
 	_item = item
 	sprite.texture = item.get_texture()
 
-func get_item():
+func get_item() -> Item:
 	return _item
 
-func apply_cooldown(cooldown : float):
+func apply_cooldown(cooldown : float) -> void:
 	if cooldown_tween:
 		cooldown_tween.kill()
 	_set_has_cooldown(true)
@@ -37,7 +37,7 @@ func apply_cooldown(cooldown : float):
 func has_cooldown() -> bool:
 	return _has_cooldown
 
-func _set_has_cooldown(value : bool):
+func _set_has_cooldown(value : bool) -> void:
 	_has_cooldown = value
 
 static func from(item : Item) -> WorldItem:

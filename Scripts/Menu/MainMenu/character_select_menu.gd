@@ -8,13 +8,13 @@ const SelectButtonPacked : PackedScene = preload("uid://ckcx2xvk8cpir")
 
 signal character_selected(player_name : String)
 
-func return_to_main_menu():
+func return_to_main_menu() -> void:
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 
-func play():
+func play() -> void:
 	menu_selected.emit(MainMenus.MENUS.WORLD_SELECT)
 	
-func create_character():
+func create_character() -> void:
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_CREATE)
 
 func start() -> void:
@@ -30,7 +30,7 @@ func start() -> void:
 	PreviewBox.preview(null)
 	PlayButton.disabled = true
 	
-func select_character(player_name : String):
+func select_character(player_name : String) -> void:
 	character_selected.emit(player_name)
 	PlayButton.disabled = false
 	PreviewBox.preview(SaveLoad.get_player_save(player_name))

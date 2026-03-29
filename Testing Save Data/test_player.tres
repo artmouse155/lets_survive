@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerSave" load_steps=6 format=3 uid="uid://1u8lqvfn1xfb"]
+[gd_resource type="Resource" script_class="PlayerSave" format=3 uid="uid://1u8lqvfn1xfb"]
 
 [ext_resource type="Script" uid="uid://b2814qm5brf7h" path="res://Scripts/CustomResource/player_save.gd" id="1_prisv"]
 [ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://Scripts/CustomResource/item.gd" id="1_x7qvn"]

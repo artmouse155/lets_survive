@@ -32,10 +32,10 @@ func _physics_process(_delta: float) -> void:
 
 
 func _get_look_direction() -> void:	
-	var mouse_angle = (get_viewport().get_mouse_position() - (get_tree().get_root().size / 2.0)).angle()
+	var mouse_angle := (get_viewport().get_mouse_position() - (get_tree().get_root().size / 2.0)).angle()
 	_emit(look_target,mouse_angle)
 
 
 func _get_movement_vector() -> void:
-	var input_direction = Input.get_vector("left", "right", "up", "down")
+	var input_direction := Input.get_vector("left", "right", "up", "down")
 	_emit(movement_vector,input_direction)

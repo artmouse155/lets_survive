@@ -7,5 +7,5 @@ signal pressed
 func set_world_name(world_name : String) -> void:
 	label.text = world_name
 
-func emit_pressed():
+func emit_pressed() -> void:
 	pressed.emit()

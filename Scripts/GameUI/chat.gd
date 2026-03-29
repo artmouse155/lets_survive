@@ -51,10 +51,10 @@ func _print_msg(message : String) -> void:
 		scroll_to_bottom()
 		input.grab_focus.call_deferred()
 
-func scroll_to_bottom():
+func scroll_to_bottom() -> void:
 	scroll.set_deferred("scroll_vertical",SCROLL_MAX)
 
 ## Source: [url=https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html#handling-user-input-safely]Godot Docs[/url]
-static func escape_bbcode(bbcode_text):
+static func escape_bbcode(bbcode_text: String) -> String:
 	# We only need to replace opening brackets to prevent tags from being parsed.
 	return bbcode_text.replace("[", "[lb]")

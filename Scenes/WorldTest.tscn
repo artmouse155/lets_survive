@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxjdkdkaf7fdy"]
+[gd_scene format=3 uid="uid://dxjdkdkaf7fdy"]
 
 [ext_resource type="Script" uid="uid://css2hyvtv3ie4" path="res://Scripts/world_test.gd" id="1_r8vti"]
 [ext_resource type="Resource" uid="uid://1u8lqvfn1xfb" path="res://Testing Save Data/test_player.tres" id="2_hkm8i"]
 [ext_resource type="PackedScene" uid="uid://bcnynj6tfm2v3" path="res://Scenes/MainMenu/game_container.tscn" id="2_r8vti"]
 [ext_resource type="Resource" uid="uid://by4ix2cxmgatv" path="res://Testing Save Data/test_world.tres" id="2_yyb55"]
 
-[node name="WorldTest" type="Control"]
+[node name="WorldTest" type="Control" unique_id=2026714247]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ script = ExtResource("1_r8vti")
 world_save = ExtResource("2_yyb55")
 player_save = ExtResource("2_hkm8i")
 
-[node name="GameContainer" parent="." instance=ExtResource("2_r8vti")]
+[node name="GameContainer" parent="." unique_id=1201041595 instance=ExtResource("2_r8vti")]
 layout_mode = 1
 
 [connection signal="menu_selected" from="GameContainer" to="." method="_exit"]

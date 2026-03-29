@@ -24,7 +24,7 @@ class_name MeleeRadius extends Area2D
 		precision = value
 		_adjust_collision_polygon()
 
-func _adjust_collision_polygon():
+func _adjust_collision_polygon() -> void:
 	if (cPolygon):
 		var new_polygon : PackedVector2Array = []
 		new_polygon.append(Vector2.ZERO)

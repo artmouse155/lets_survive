@@ -60,5 +60,5 @@ func _init(world_name : String = "", world_seed : String = "") -> void:
 	_world_seed = world_seed
 
 ## ALERT: Will save to the user folder. Be careful!
-func save():
+func save() -> void:
 	SaveLoad.save_world(_world_name,self)

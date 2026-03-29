@@ -22,11 +22,11 @@ func _connect_to_brain() -> void
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
-func take_damage(damage : float):
+func take_damage(damage : float) -> void:
 	health -= damage
 	health_updated.emit(health)
 
-func _eval_attack():
+func _eval_attack() -> void:
 	for target in hitBox.get_overlapping_bodies():
 		if is_instance_of(target,Breakable):
 			#TODO: Distribute damage across targets?

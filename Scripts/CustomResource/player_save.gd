@@ -38,5 +38,5 @@ func _init(player_name : String = "", color : Color = Color.WHITE) -> void:
 	_color = color
 
 ## ALERT: Will save to the user folder. Be careful!
-func save():
+func save() -> void:
 	SaveLoad.save_player(_player_name,self)

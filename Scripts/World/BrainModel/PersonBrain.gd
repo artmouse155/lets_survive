@@ -17,9 +17,9 @@ signal drop_index(index: int)
 signal drop_all_index(index: int)
 @warning_ignore_restore("unused_signal")
 
-func emit_drop_index(index: int):
+func emit_drop_index(index: int) -> void:
 	_emit(drop_index,index)
 
 
-func emit_drop_all_index(index: int):
+func emit_drop_all_index(index: int) -> void:
 	_emit(drop_all_index,index)

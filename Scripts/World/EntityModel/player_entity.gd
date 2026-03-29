@@ -59,7 +59,7 @@ func _on_inventory_left_click(index : int) -> void:
 	if _floating_item:
 		if clicked_item:
 			# TODO: Only swap if items are different. Otherwise, try to combine them!
-			var temp = _floating_item.duplicate()
+			var temp := _floating_item.duplicate()
 			_floating_item = clicked_item
 			_inventory[index] = temp
 			_emit_inventory_updated()
@@ -91,19 +91,19 @@ func _on_inventory_right_click(index : int) -> void:
 			#clicked_slot.update(floating_item)
 		else:
 			# Leave one behind
-			var grabbed_item = null if _floating_item.item_quantity <= 1 else Item.new(_floating_item.item_name,_floating_item.item_quantity - 1)
-			var left_behind_item = Item.new(_floating_item.item_name,1) 
+			var grabbed_item : Item = null if _floating_item.item_quantity <= 1 else Item.new(_floating_item.item_name,_floating_item.item_quantity - 1)
+			var left_behind_item := Item.new(_floating_item.item_name,1) 
 			_floating_item = grabbed_item
 			_inventory[index] = left_behind_item
 			_emit_inventory_updated()
 	else:
 		if clicked_item:
 			# Grab half
-			var half = clicked_item.item_quantity / 2.0
-			var upper = int(ceil(half))
-			var lower = int(floor(half))
-			var grabbed_item = Item.new(clicked_item.item_name,upper)
-			var left_behind_item = Item.new(clicked_item.item_name,lower) if lower > 0 else null
+			var half := clicked_item.item_quantity / 2.0
+			var upper := int(ceil(half))
+			var lower := int(floor(half))
+			var grabbed_item := Item.new(clicked_item.item_name,upper)
+			var left_behind_item := Item.new(clicked_item.item_name,lower) if lower > 0 else null
 			_floating_item = grabbed_item
 			_inventory[index] = left_behind_item
 			_emit_inventory_updated()
@@ -111,7 +111,7 @@ func _on_inventory_right_click(index : int) -> void:
 			# Do nothing
 			pass
 
-func set_color(color : Color):
+func set_color(color : Color) -> void:
 	body.self_modulate = color
 
 func export_save(old_save: PlayerSave) -> PlayerSave:

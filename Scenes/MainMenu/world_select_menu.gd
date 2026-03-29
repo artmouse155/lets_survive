@@ -9,13 +9,13 @@ var _world_name : String
 
 signal world_selected(world_index : int)
 
-func return_to_player_select():
+func return_to_player_select() -> void:
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
 
-func play():
+func play() -> void:
 	world_selected.emit(_world_name)
 
-func create_world():
+func create_world() -> void:
 	menu_selected.emit(MainMenus.MENUS.WORLD_CREATE)
 
 func start() -> void:
@@ -29,6 +29,6 @@ func start() -> void:
 		WorldButtonContainer.add_child(button)
 	PlayButton.disabled = true
 	
-func select_world(world_name : String):
+func select_world(world_name : String) -> void:
 	_world_name = world_name
 	PlayButton.disabled = false
