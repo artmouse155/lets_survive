@@ -1,8 +1,8 @@
 class_name SelfBrain extends PlayerBrain
 
-func _physics_process(_delta: float) -> void:
+func physics_process(_delta: float, viewport: Viewport) -> void:
 	
-	_get_look_direction()
+	_get_look_direction(viewport)
 	if is_movement_disabled:
 		return
 	_get_movement_vector()
@@ -31,8 +31,8 @@ func _physics_process(_delta: float) -> void:
 		_emit(drop_selected_item)
 
 
-func _get_look_direction() -> void:	
-	var mouse_angle := (get_viewport().get_mouse_position() - (get_tree().get_root().size / 2.0)).angle()
+func _get_look_direction(viewport: Viewport) -> void:	
+	var mouse_angle := (viewport.get_mouse_position() - (viewport.get_visible_rect().size / 2.0)).angle()
 	_emit(look_target,mouse_angle)
 
 

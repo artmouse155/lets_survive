@@ -5,9 +5,28 @@ const TILE_SIZE : Vector2i = Vector2i(32,32)
 
 @export var entity_spawner : EntitySpawner
 @export var chunk_loader : ChunkLoader
-
+@export var self_brain : SelfBrain
 @export var game_ui : GameUI
 
+
+func _ready() -> void:
+	if self_brain:
+		if entity_spawner:
+			entity_spawner.self_brain = self_brain
+		else:
+			push_warning("No EntitySpawner connected to World node.")
+	else:
+		push_warning("No SelfBrain connected to World node.")
+	if game_ui:
+		if entity_spawner:
+			entity_spawner.self_health_updated.connect(game_ui._on_health_updated)
+			entity_spawner.self_inventory_updated.connect(game_ui._on_player_inventory_updated)
+			entity_spawner.self_item_collected.connect(game_ui._on_item_collected)
+			entity_spawner.self_selected_index_updated.connect(game_ui._on_selected_index_updated)
+		else:
+			push_warning("No EntitySpawner connected to World node.")
+	else:
+		push_warning("No Game UI connected to World node.")
 
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
 	chunk_loader.start(world_save.get_world_seed())

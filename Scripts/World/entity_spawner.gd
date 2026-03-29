@@ -8,7 +8,7 @@ signal self_item_collected(item : Item)
 signal self_health_updated(health : float)
 
 const PLAYER_PACKED : PackedScene = preload("uid://bfwu7kuh082tc")
-@export var self_brain : SelfBrain
+var self_brain : SelfBrain
 
 var get_updated_self_save : Callable
 

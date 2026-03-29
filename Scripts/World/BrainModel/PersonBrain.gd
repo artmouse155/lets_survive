@@ -1,3 +1,4 @@
+@abstract
 class_name PersonBrain extends Brain
 
 @warning_ignore_start("unused_signal")

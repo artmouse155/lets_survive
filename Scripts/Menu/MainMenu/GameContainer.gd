@@ -24,6 +24,6 @@ func loadGame(world_name : String, player_name : String) -> void:
 func testLoad(world_save : WorldSave, player_save : PlayerSave) -> void:
 	world.start(world_save, player_save)
 
-func save(world_name : String, player_name : String) -> void:
+func save(_world_name : String, player_name : String) -> void:
 	SaveLoad.save_player(player_name, world.get_updated_self_save())
 	

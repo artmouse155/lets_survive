@@ -4,9 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scripts/GameUI/game_ui.gd" id="3_us7ks"]
 [ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/GameUI/hotbar.tscn" id="4_juifl"]
+[ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scripts/World/BrainModel/SelfBrain.gd" id="4_wwudf"]
 [ext_resource type="PackedScene" uid="uid://blkwdjk1xb8wr" path="res://Scenes/GameUI/inventory_ui.tscn" id="5_us7ks"]
 [ext_resource type="Script" uid="uid://cvl38fv5heg82" path="res://Scripts/GameUI/chat.gd" id="6_udj4x"]
 [ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
+
+[sub_resource type="Resource" id="Resource_wwudf"]
+script = ExtResource("4_wwudf")
+metadata/_custom_type_script = "uid://yyjkgbfe6jg5"
 
 [node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button")]
 layout_mode = 3
@@ -47,9 +52,10 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="World" parent="SubViewportContainer/SubViewport" unique_id=748688719 node_paths=PackedStringArray("game_ui") instance=ExtResource("2_juifl")]
+self_brain = SubResource("Resource_wwudf")
 game_ui = NodePath("../../../GameUI")
 
-[node name="GameUI" type="Control" parent="." unique_id=514799370 node_paths=PackedStringArray("health_label", "pause_menus", "hotbar", "inventory_ui", "chat", "self_brain")]
+[node name="GameUI" type="Control" parent="." unique_id=514799370 node_paths=PackedStringArray("health_label", "pause_menus", "hotbar", "inventory_ui", "chat")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -63,7 +69,7 @@ pause_menus = NodePath("../PauseMenus")
 hotbar = NodePath("SafeZone/VBoxContainer/Hotbar")
 inventory_ui = NodePath("SafeZone/InventoryUI")
 chat = NodePath("SafeZone/Chat")
-self_brain = NodePath("../SubViewportContainer/SubViewport/World/SelfBrain")
+self_brain = SubResource("Resource_wwudf")
 
 [node name="SafeZone" type="MarginContainer" parent="GameUI" unique_id=881062343]
 layout_mode = 1
@@ -203,10 +209,6 @@ text = "Open to LAN"
 layout_mode = 2
 text = "Return to Menu"
 
-[connection signal="self_health_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_health_updated"]
-[connection signal="self_inventory_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_player_inventory_updated"]
-[connection signal="self_item_collected" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_item_collected"]
-[connection signal="self_selected_index_updated" from="SubViewportContainer/SubViewport/World/EntitySpawner" to="GameUI" method="_on_selected_index_updated"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
@@ -214,5 +216,3 @@ text = "Return to Menu"
 [connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Resume" to="GameUI" method="resume"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Return" to="." method="return_to_main_menu"]
-
-[editable path="SubViewportContainer/SubViewport/World"]
