@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WorldSave" format=3]
+
+[ext_resource type="Script" path="res://Scripts/CustomResource/world_save.gd" id="1_y65ri"]
+
+[resource]
+script = ExtResource("1_y65ri")
+_world_name = "Hello there"
+_world_seed = "3202381855"

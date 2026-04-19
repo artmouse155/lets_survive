@@ -4,7 +4,7 @@ class_name WorldSave extends Resource
 @export var _world_seed : String = ""
 @export var _spawnpoint : Vector2i = Vector2i.ZERO
 
-var chunks : Dictionary[Vector2i,Chunk]
+#var chunks : Dictionary[Vector2i,Chunk]
 
 # Dictionary[Player Fingerprint, Memory]
 var player_memories : Dictionary[String,PlayerMemory] = {}
