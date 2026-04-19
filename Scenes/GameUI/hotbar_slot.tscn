@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm4nhneowv5r"]
+[gd_scene format=3 uid="uid://cm4nhneowv5r"]
 
 [ext_resource type="Script" uid="uid://b65ymnneektyg" path="res://Scripts/GameUI/hotbar_slot.gd" id="1_vsge4"]
 
@@ -19,7 +19,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="HotbarSlot" type="PanelContainer" node_paths=PackedStringArray("selected", "texture_node", "count_label")]
+[node name="HotbarSlot" type="PanelContainer" unique_id=2014274566 node_paths=PackedStringArray("selected", "texture_node", "count_label")]
 offset_right = 32.0
 offset_bottom = 32.0
 script = ExtResource("1_vsge4")
@@ -28,12 +28,12 @@ texture_node = NodePath("TextureRect")
 count_label = NodePath("Label")
 metadata/_custom_type_script = "uid://b65ymnneektyg"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=936896680]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 expand_mode = 1
 
-[node name="selected" type="MarginContainer" parent="."]
+[node name="selected" type="MarginContainer" parent="." unique_id=164542215]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = -10
@@ -41,11 +41,11 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = -10
 theme_override_constants/margin_bottom = -10
 
-[node name="Panel" type="Panel" parent="selected"]
+[node name="Panel" type="Panel" parent="selected" unique_id=1311209747]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1jnhk")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1665074470]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

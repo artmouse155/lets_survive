@@ -28,6 +28,12 @@ func is_full() -> bool:
 func is_depleted() -> bool:
 	return item_quantity <= 0
 
+func equals(other: Item) -> bool:
+	return (
+		item_name == other.item_name
+		and
+		item_quantity == other.item_quantity
+	)
 
 func is_tool() -> bool:
 	var tool_type : TOOL_TYPE = static_tool_type(item_name)

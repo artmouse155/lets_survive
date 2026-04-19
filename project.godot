@@ -139,6 +139,11 @@ ctrl={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="landfaring"
+2d_physics/layer_2="seafaring"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
