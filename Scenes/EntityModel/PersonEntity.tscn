@@ -1,10 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://b2501naobgh8n"]
+[gd_scene format=3 uid="uid://b2501naobgh8n"]
 
 [ext_resource type="Script" uid="uid://bqvhs7u5b5bxs" path="res://Scripts/World/EntityModel/person_entity.gd" id="1_vm3h2"]
-[ext_resource type="Texture2D" uid="uid://bjsy02kxx1nu5" path="res://Resources/Textures/People/hat_white.png" id="2_ckagm"]
-[ext_resource type="Texture2D" uid="uid://b5ri0e6agp7r4" path="res://Resources/Textures/People/skin.png" id="3_uq0ln"]
+[ext_resource type="Texture2D" uid="uid://cqeqmfswe7aj5" path="res://Resources/Textures/People/hat_white.svg" id="2_ckagm"]
+[ext_resource type="Texture2D" uid="uid://c67bped72bdae" path="res://Resources/Textures/People/skin.svg" id="3_ckagm"]
 [ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_br0ts"]
 [ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/World/melee_radius.tscn" id="5_nmbym"]
+
+[sub_resource type="Gradient" id="Gradient_io1oy"]
+offsets = PackedFloat32Array(0, 0.45544556, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ckagm"]
+gradient = SubResource("Gradient_io1oy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sar6w"]
 animation = &"RESET"
@@ -258,7 +268,7 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ckagm"]
 
-[node name="PersonEntity" type="CharacterBody2D" node_paths=PackedStringArray("melee_radius", "_tool_sprite", "hitBox")]
+[node name="PersonEntity" type="CharacterBody2D" unique_id=205893169 node_paths=PackedStringArray("melee_radius", "_tool_sprite", "hitBox")]
 input_pickable = true
 script = ExtResource("1_vm3h2")
 melee_radius = NodePath("MeleeRadius")
@@ -266,61 +276,75 @@ _tool_sprite = NodePath("Body/ArmR/HandR/Tool")
 hitBox = NodePath("MeleeRadius")
 metadata/_custom_type_script = "uid://bqvhs7u5b5bxs"
 
-[node name="Body" type="Sprite2D" parent="."]
+[node name="Shadow" type="TextureRect" parent="." unique_id=852898797]
+self_modulate = Color(1, 1, 1, 0.14509805)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ckagm")
+expand_mode = 2
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1713524607]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ckagm")
 
-[node name="ArmR" type="Node2D" parent="Body"]
+[node name="ArmR" type="Node2D" parent="Body" unique_id=1824009924]
 show_behind_parent = true
 rotation = 0.7853982
 scale = Vector2(1.0000001, 1.0000001)
 
-[node name="HandR" type="Sprite2D" parent="Body/ArmR"]
+[node name="HandR" type="Sprite2D" parent="Body/ArmR" unique_id=1653172137]
 show_behind_parent = true
 position = Vector2(72, 0)
-texture = ExtResource("3_uq0ln")
+texture = ExtResource("3_ckagm")
 
-[node name="Tool" type="Sprite2D" parent="Body/ArmR/HandR"]
+[node name="Tool" type="Sprite2D" parent="Body/ArmR/HandR" unique_id=549814266]
 visible = false
 show_behind_parent = true
 rotation = 1.5707964
 texture = ExtResource("4_br0ts")
 offset = Vector2(0, -36)
 
-[node name="ArmL" type="Node2D" parent="Body"]
+[node name="ArmL" type="Node2D" parent="Body" unique_id=850310105]
 show_behind_parent = true
 rotation = -0.7853982
 
-[node name="HandL" type="Sprite2D" parent="Body/ArmL"]
+[node name="HandL" type="Sprite2D" parent="Body/ArmL" unique_id=833840098]
 show_behind_parent = true
 position = Vector2(72, 0)
 scale = Vector2(0.9999998, 0.9999998)
-texture = ExtResource("3_uq0ln")
+texture = ExtResource("3_ckagm")
 
-[node name="Nose" type="Sprite2D" parent="Body"]
+[node name="Nose" type="Sprite2D" parent="Body" unique_id=962596302]
 show_behind_parent = true
 position = Vector2(60, 0)
-texture = ExtResource("3_uq0ln")
+texture = ExtResource("3_ckagm")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1575275100]
 tree_root = SubResource("AnimationNodeStateMachine_7f30m")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_oyunc")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1386167009]
+libraries/ = SubResource("AnimationLibrary_oyunc")
 
-[node name="MeleeRadius" parent="." instance=ExtResource("5_nmbym")]
+[node name="MeleeRadius" parent="." unique_id=13633436 instance=ExtResource("5_nmbym")]
 radius = 20.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1336087226]
 shape = SubResource("CircleShape2D_pucux")
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="." unique_id=2003474747]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=2136464908]
 shape = SubResource("CircleShape2D_ckagm")
 
 [connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]

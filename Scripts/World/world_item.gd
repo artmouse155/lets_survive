@@ -6,7 +6,7 @@ const INIT_DIST : float = 10
 const INT_VEL_DURATION : float = 0.25
 
 @export var _item : Item = null
-@export var sprite : Sprite2D
+@export var sprite : TextureRect
 
 var fly_tween : Tween
 

@@ -1,9 +1,17 @@
 [gd_resource type="TileSet" format=3 uid="uid://5pn671jsdxwh"]
 
 [ext_resource type="Texture2D" uid="uid://cdp8mhyo7jxwm" path="res://Resources/Textures/Terrain/terrain.png" id="1_aiaad"]
+[ext_resource type="Texture2D" uid="uid://c2k0g1lpdt5n1" path="res://Resources/Textures/Terrain/svg/svg_map.png" id="2_ujj56"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8j60k"]
 texture = ExtResource("1_aiaad")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m0mrx"]
+texture = ExtResource("2_ujj56")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -13,3 +21,4 @@ texture_region_size = Vector2i(32, 32)
 resource_name = "Ground"
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_8j60k")
+sources/1 = SubResource("TileSetAtlasSource_m0mrx")

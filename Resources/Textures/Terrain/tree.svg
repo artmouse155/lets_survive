@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="tree.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:antialias-rendering="false"
+     inkscape:zoom="5.5090348"
+     inkscape:cx="0.63532"
+     inkscape:cy="6.807"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#50a025;stroke:#187c17;stroke-width:0.264583;stroke-linecap:round;fill-opacity:1;stroke-opacity:1"
+       id="path4"
+       inkscape:flatsided="false"
+       sodipodi:sides="9"
+       sodipodi:cx="6.2826619"
+       sodipodi:cy="6.486424"
+       sodipodi:r1="5.9794307"
+       sodipodi:r2="4.7835445"
+       sodipodi:arg1="2.3602105"
+       sodipodi:arg2="2.7092764"
+       inkscape:rounded="0"
+       inkscape:randomized="0.025"
+       d="M 1.9084413,10.663316 2.013438,8.5797394 0.37749064,7.1019745 1.5291613,5.2346411 1.2613553,3.0022131 3.4829052,2.4351736 4.8541589,0.81597919 6.8085886,1.7182716 8.8267478,1.1500713 9.6144349,3.2272266 11.780912,3.9052103 11.144119,6.0450287 12.031302,8.1389177 10.120442,9.3455503 9.754035,11.470579 7.6506138,11.182173 5.7516353,12.411818 4.3014736,10.701524 Z"
+       inkscape:transform-center-x="0.21818161"
+       inkscape:transform-center-y="-0.0074335541"
+       transform="translate(0.14799402,-0.26987636)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#6fb04d;stroke:#187c17;stroke-width:0.264583;stroke-linecap:round;fill-opacity:1;stroke-opacity:1"
+       id="path5"
+       inkscape:flatsided="false"
+       sodipodi:sides="7"
+       sodipodi:cx="6.3166223"
+       sodipodi:cy="6.486424"
+       sodipodi:r1="3.6735289"
+       sodipodi:r2="2.938823"
+       sodipodi:arg1="-1.3280598"
+       sodipodi:arg2="-0.87926085"
+       inkscape:rounded="0"
+       inkscape:randomized="0.05"
+       d="M 7.1808271,2.9374729 8.1595906,4.0851952 9.7963374,4.9544912 9.1415253,6.4947158 9.7588952,8.1598809 8.0551071,8.9097781 7.1223437,10.106614 5.7759677,9.5038451 4.0463935,9.3671037 3.7198445,7.7467477 2.5122962,6.2918416 3.8756234,5.3405807 4.2594902,3.6342019 5.6017479,3.5313599 Z"
+       inkscape:transform-center-x="-0.034485433"
+       inkscape:transform-center-y="-0.058443464"
+       transform="translate(0.14799402,-0.26987636)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#6fbf44;stroke:#187c17;stroke-width:0.264583;stroke-linecap:round;fill-opacity:1;stroke-opacity:1"
+       id="path6"
+       inkscape:flatsided="false"
+       sodipodi:sides="5"
+       sodipodi:cx="6.3505826"
+       sodipodi:cy="7.675036"
+       sodipodi:r1="1.3660331"
+       sodipodi:r2="1.0928265"
+       sodipodi:arg1="-2.5329033"
+       sodipodi:arg2="-1.9045848"
+       inkscape:rounded="0"
+       inkscape:randomized="0.05"
+       d="M 5.2068335,6.9544258 6.0162178,6.6516213 6.751339,6.3479717 7.2629509,7.0376532 7.6683896,7.6655812 7.2140547,8.2727124 6.7437289,9.0260776 6.0540312,8.7079104 5.2909551,8.4669482 5.265187,7.6624524 Z"
+       inkscape:transform-center-x="-0.0029346958"
+       inkscape:transform-center-y="-0.0003809673"
+       transform="translate(0.21591469,-1.2886865)" />
+  </g>
+</svg>

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsifbn1s8va8o"
-path="res://.godot/imported/wood.png-4ee0ab91bd21d6267fe28c1b1a7af875.ctex"
+uid="uid://c67bped72bdae"
+path="res://.godot/imported/skin.svg-898536114372ac8821b7ba46e46d5d80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Terrain/wood.png"
-dest_files=["res://.godot/imported/wood.png-4ee0ab91bd21d6267fe28c1b1a7af875.ctex"]
+source_file="res://Resources/Textures/People/skin.svg"
+dest_files=["res://.godot/imported/skin.svg-898536114372ac8821b7ba46e46d5d80.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

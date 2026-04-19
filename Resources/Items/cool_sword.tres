@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://hbvcijgt3nv6"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://hbvcijgt3nv6"]
 
 [ext_resource type="Script" uid="uid://w82p7ap6838j" path="res://Scripts/CustomResource/item_data.gd" id="1_8tqlv"]
-[ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="1_b4jhe"]
+[ext_resource type="Texture2D" uid="uid://cau7dhy5od7y6" path="res://Resources/Textures/Terrain/Items/sword.svg" id="1_s0kha"]
 
 [resource]
 resource_name = "cool_sword"
 script = ExtResource("1_8tqlv")
-_icon = ExtResource("1_b4jhe")
+_icon = ExtResource("1_s0kha")
 _max_amount = 1
 _tool_enabled = true
 _tool_type = 2

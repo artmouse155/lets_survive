@@ -1,24 +1,64 @@
-[gd_scene load_steps=6 format=3 uid="uid://q7wfdi5cus2m"]
+[gd_scene format=3 uid="uid://q7wfdi5cus2m"]
 
 [ext_resource type="Script" uid="uid://cqbywq1gnb2n7" path="res://Scripts/World/world_item.gd" id="1_aeu3x"]
 [ext_resource type="Script" uid="uid://c4r1h1lajnqwo" path="res://Scripts/CustomResource/item.gd" id="2_70t5p"]
-[ext_resource type="Texture2D" uid="uid://bsifbn1s8va8o" path="res://Resources/Textures/Terrain/wood.png" id="2_etyx1"]
+[ext_resource type="Texture2D" uid="uid://hmv1fdhfru7b" path="res://Resources/Textures/Terrain/Items/Resources/wood.svg" id="3_io1oy"]
 
 [sub_resource type="Resource" id="Resource_wrcol"]
 script = ExtResource("2_70t5p")
 metadata/_custom_type_script = "uid://c4r1h1lajnqwo"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_etyx1"]
-radius = 8.0
+radius = 16.0
 
-[node name="WorldItem" type="Area2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="Gradient" id="Gradient_io1oy"]
+offsets = PackedFloat32Array(0, 0.45544556, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mbiax"]
+gradient = SubResource("Gradient_io1oy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="WorldItem" type="Area2D" unique_id=1772775298 node_paths=PackedStringArray("sprite")]
+z_index = -1
 script = ExtResource("1_aeu3x")
 _item = SubResource("Resource_wrcol")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("TextureRect")
 metadata/_custom_type_script = "uid://cqbywq1gnb2n7"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_etyx1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529931061]
 shape = SubResource("CircleShape2D_etyx1")
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=1808448161]
+self_modulate = Color(1, 1, 1, 0.14509805)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mbiax")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=846995217]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_io1oy")
+expand_mode = 1
+stretch_mode = 4

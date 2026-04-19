@@ -28,7 +28,7 @@ func spawn_player(player_save : PlayerSave, player_memory : PlayerMemory, is_sel
 	SignalPipe.pipe(player.position_updated,player_position_updated)
 	if is_self:
 		get_updated_self_save = player.export_save.bind(player_save)
-		player.add_child(Camera2D.new())
+		player.add_child(ZoomableCamera.new())
 		player.brain = self_brain
 		SignalPipe.pipe(player.selected_index_updated,self_selected_index_updated)
 		SignalPipe.pipe(player.player_inventory_updated,self_inventory_updated)

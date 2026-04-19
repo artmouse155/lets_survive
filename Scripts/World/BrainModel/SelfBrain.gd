@@ -21,9 +21,9 @@ func physics_process(_delta: float, viewport: Viewport) -> void:
 		_emit(select,3)
 	elif Input.is_action_just_pressed("select_4"):
 		_emit(select,4)
-	elif Input.is_action_just_pressed("select_next"):
+	elif Input.is_action_just_pressed("select_next") and not Input.is_action_pressed("ctrl"):
 		_emit(select_next)
-	elif Input.is_action_just_pressed("select_prev"):
+	elif Input.is_action_just_pressed("select_prev") and not Input.is_action_pressed("ctrl"):
 		_emit(select_prev)
 	if Input.is_action_just_pressed("drop_all"):
 		_emit(drop_all_selected_item)

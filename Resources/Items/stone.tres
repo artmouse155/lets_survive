@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://csa57185p0hmc"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://csa57185p0hmc"]
 
 [ext_resource type="Script" uid="uid://w82p7ap6838j" path="res://Scripts/CustomResource/item_data.gd" id="1_0ruft"]
-[ext_resource type="Texture2D" uid="uid://bfnhf5fvnfvc6" path="res://Resources/Textures/Terrain/stone.png" id="1_j62wq"]
+[ext_resource type="Texture2D" uid="uid://bwq6s8dkkl6rg" path="res://Resources/Textures/Terrain/Items/Resources/stone.svg" id="1_ws5bn"]
 
 [resource]
 resource_name = "stone"
 script = ExtResource("1_0ruft")
-_icon = ExtResource("1_j62wq")
+_icon = ExtResource("1_ws5bn")
 metadata/_custom_type_script = "uid://w82p7ap6838j"
