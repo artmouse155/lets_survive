@@ -2,13 +2,8 @@
 
 [ext_resource type="Script" uid="uid://wkf0s66nyt07" path="res://Scripts/World/tree.gd" id="1_7kcem"]
 [ext_resource type="Texture2D" uid="uid://c46rub4y648k7" path="res://Resources/Textures/Terrain/tree.svg" id="2_e10wn"]
-[ext_resource type="Shader" uid="uid://ckju1ko7s36w7" path="res://Resources/Shaders/shadow.gdshader" id="2_r1lji"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8phe"]
-shader = ExtResource("2_r1lji")
-shader_parameter/r = 0.0
-shader_parameter/offset = 0.2800000133
-shader_parameter/shadow_intensity = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tccs"]
 radius = 16.0

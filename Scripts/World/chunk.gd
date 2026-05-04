@@ -14,6 +14,7 @@ enum STAGE {EMPTY, FINISHED}
 	get:
 		return _coordinates
 	set(value):
+		_coordinates = value
 		position = _coordinates * World.TILE_SIZE * World.CHUNK_SIZE
 
 @export_group("🔒 Node References")
@@ -21,14 +22,18 @@ enum STAGE {EMPTY, FINISHED}
 @export var above_ground : TileMapLayer
 @export var tree_group : CanvasGroup
 
+func get_coordinate() -> Vector2i:
+	return _coordinates
+
 func generate(coordinates : Vector2i, random : RandomNumberGenerator, terrain_gen : FastNoiseLite, world_item_dropped : Signal) -> void:
 	_coordinates = coordinates
+	var offset := _coordinates * World.CHUNK_SIZE
 	for x in range(World.CHUNK_SIZE.x):
 		for y in range(World.CHUNK_SIZE.y):
-			var noise_val : float = terrain_gen.get_noise_2d(x,y)
+			var noise_val : float = terrain_gen.get_noise_2d(x + offset.x,y + offset.y)
 			var tile_atlas := _noise_to_atlas(noise_val)
 			ground.set_cell(Vector2i(x,y), SOURCE_ID, tile_atlas)
-			if (noise_val < .1) && (random.randf() < .1):
+			if (random.randf() < .1) && (noise_val < .1):
 				_spawn_tree(ground.map_to_local(Vector2i(x,y)), world_item_dropped)
 
 static func _noise_to_atlas(noise_val : float) -> Vector2i:

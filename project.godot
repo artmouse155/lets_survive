@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="lets_survive"
+config/name="Let's Survive"
 run/main_scene="uid://dxjdkdkaf7fdy"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cau7dhy5od7y6"
 
 [debug]
 

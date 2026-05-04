@@ -10,6 +10,25 @@ entity_spawner = NodePath("EntitySpawner")
 chunk_loader = NodePath("ChunkLoader")
 metadata/_custom_type_script = "uid://d4nnyh3h5l7bl"
 
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=36801273]
+z_index = -999
+repeat_size = Vector2(1000, 1000)
+repeat_times = 10
+
+[node name="Sky" type="ColorRect" parent="Parallax2D" unique_id=1404782626]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5494, 0.73431, 0.82, 1)
+
 [node name="ChunkLoader" type="Node2D" parent="." unique_id=578091348]
 script = ExtResource("3_vadfg")
 metadata/_custom_type_script = "uid://bbt2pnjpjtcwn"
@@ -19,3 +38,4 @@ script = ExtResource("3_fo5ed")
 metadata/_custom_type_script = "uid://53rs4mt5chvi"
 
 [connection signal="world_item_dropped" from="ChunkLoader" to="EntitySpawner" method="on_world_item_dropped"]
+[connection signal="player_position_updated" from="EntitySpawner" to="ChunkLoader" method="on_player_position_updated"]

@@ -14,13 +14,15 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 c = textureLod(screen_texture, SCREEN_UV, 0.0);
+	vec2 screen_uv = SCREEN_UV + 50. * fwidth(SCREEN_UV);
+	vec4 c = textureLod(screen_texture, screen_uv, 0.0);
 
 	if (c.a > 0.0001) {
 		c.rgb /= c.a;
 	}
-	//vec4 color = shadow(vec2(1.0), SCREEN_UV, offset, screen_texture, shadow_intensity);
+	//vec4 color = shadow(SCREEN_PIXEL_SIZE, SCREEN_UV, offset, screen_texture, shadow_intensity);
 	//color *= c;
 	//COLOR = vec4(UV.x, UV.y, 0., 1.0);
 	COLOR *= c;
+	//COLOR = color;
 }
