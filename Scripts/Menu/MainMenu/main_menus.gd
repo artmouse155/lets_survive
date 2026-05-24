@@ -28,3 +28,6 @@ func set_current_player_name(player_name : String) -> void:
 func load_game(world_name : String) -> void:
 	gameContainer.loadGame(world_name, _current_player_name)
 	set_menu(MENUS.GAME)
+
+func join_game(host: String, port: String) -> void:
+	pass

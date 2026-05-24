@@ -1,34 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckcx2xvk8cpir"]
+[gd_scene format=3 uid="uid://ckcx2xvk8cpir"]
 
 [ext_resource type="Script" uid="uid://btlilw2x0f3i8" path="res://Scripts/Menu/MainMenu/character_select_button.gd" id="1_4pux1"]
+[ext_resource type="PackedScene" uid="uid://doxoj6h0x4jef" path="res://Scenes/MainMenu/select_button.tscn" id="1_tes0t"]
 
-[node name="CharacterSelectButton" type="PanelContainer" node_paths=PackedStringArray("NameLabel", "LevelLabel")]
-offset_right = 137.0
-offset_bottom = 60.0
+[node name="SelectButton" unique_id=996605854 node_paths=PackedStringArray("NameLabel", "LevelLabel") instance=ExtResource("1_tes0t")]
 script = ExtResource("1_4pux1")
 NameLabel = NodePath("MarginContainer/VBoxContainer/NameLabel")
 LevelLabel = NodePath("MarginContainer/VBoxContainer/LevelLabel")
-metadata/_custom_type_script = "uid://btlilw2x0f3i8"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." index="1" unique_id=163695294]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0" unique_id=1289713350]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer" index="0" unique_id=72920638]
 layout_mode = 2
 text = "Character Name"
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer" index="1" unique_id=1873473856]
 layout_mode = 2
 text = "Lv. 0"
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." index="2" unique_id=1541602157]
 layout_mode = 2
 flat = true
 

@@ -31,7 +31,9 @@ func start() -> void:
 	PlayButton.disabled = true
 	
 func select_character(player_name : String) -> void:
+	for child in CharacterButtonContainer.get_children():
+		if child is CharacterSelectButton:
+			child.set_selected(player_name == child.internal_character_name)
 	character_selected.emit(player_name)
 	PlayButton.disabled = false
 	PreviewBox.preview(SaveLoad.get_player_save(player_name))
-	# TODO: Make preview show up

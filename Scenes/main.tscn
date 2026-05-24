@@ -291,7 +291,6 @@ layout_mode = 2
 text = "Return to Main Menu"
 
 [node name="CharacterSelect" type="Control" parent="MainMenus" unique_id=580623616 node_paths=PackedStringArray("CharacterButtonContainer", "PlayButton", "PreviewBox")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,7 +299,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("2_21xkr")
-CharacterButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/CharacterSelectButtons")
+CharacterButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer/CharacterSelectButtons")
 PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton")
 PreviewBox = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayerPreview")
 metadata/_custom_type_script = "uid://bdjj0fr0ve0cb"
@@ -353,7 +352,20 @@ custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CharacterSelectButtons" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE" unique_id=308092639]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE" unique_id=276192536]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer" unique_id=1208500761]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CharacterSelectButtons" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer" unique_id=308092639]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/CharacterSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1901318614]
@@ -380,6 +392,7 @@ size_flags_vertical = 4
 text = "Back"
 
 [node name="CharacterCreate" type="Control" parent="MainMenus" unique_id=216999223 node_paths=PackedStringArray("create_button", "name_input", "shirts_dropdown", "_player_preview")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -493,7 +506,7 @@ size_flags_vertical = 4
 disabled = true
 text = "Create"
 
-[node name="WorldSelect" type="Control" parent="MainMenus" unique_id=1122729794 node_paths=PackedStringArray("WorldButtonContainer", "PlayButton")]
+[node name="WorldSelect" type="Control" parent="MainMenus" unique_id=1122729794 node_paths=PackedStringArray("WorldButtonContainer", "LanWorldButtonContainer", "PlayButton")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -503,72 +516,198 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("3_jjvhh")
-WorldButtonContainer = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/WorldSelectButtons")
-PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton")
+WorldButtonContainer = NodePath("CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer/WorldSelectButtons")
+LanWorldButtonContainer = NodePath("CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer/LanWorldSelectButtons")
+PlayButton = NodePath("CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2/PlayButton")
 metadata/_custom_type_script = "uid://dv68qe5d3euf6"
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenus/WorldSelect" unique_id=1703674222]
+[node name="CenterContainer" type="CenterContainer" parent="MainMenus/WorldSelect" unique_id=1365864888]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = -176.5
-offset_right = 189.5
-offset_bottom = 176.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/PanelContainer" unique_id=2023889083]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldSelect/CenterContainer" unique_id=1578972874]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer" unique_id=1703674222]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer" unique_id=2023889083]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=1284143108]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=409825352]
+layout_mode = 2
+text = "Select Local World"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=826775961]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=127850870]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MIN_SIZE" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=662703955]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE" unique_id=1961459627]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer" unique_id=1045991660]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="WorldSelectButtons" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer" unique_id=1270721361]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2036120312]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NewWorld" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1934976427]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Create New World"
+
+[node name="DeleteWorld" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=968525275]
+layout_mode = 2
+disabled = true
+text = "Delete"
+
+[node name="PanelContainer2" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer" unique_id=2137770478]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2" unique_id=761315455]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer" unique_id=1861289655]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1287090216]
+layout_mode = 2
+text = "Join LAN World"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1435037258]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1717254446]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MIN_SIZE" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2023161434]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE" unique_id=1489280252]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer" unique_id=2004745818]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LanWorldSelectButtons" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE/ScrollContainer/MarginContainer" unique_id=1055804865]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=232343376]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AddServer" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1818824996]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Add Server"
+
+[node name="EditServer" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1290439218]
+layout_mode = 2
+disabled = true
+text = "Edit Server"
+
+[node name="RemoveServer" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1147752142]
+layout_mode = 2
+disabled = true
+text = "Remove Server"
+
+[node name="Return" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=877394994]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[node name="PanelContainer3" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer" unique_id=12174623]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3" unique_id=1182564003]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer" unique_id=1284143108]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer" unique_id=141594331]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer" unique_id=409825352]
+[node name="Label" type="Label" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=1659151379]
 layout_mode = 2
-text = "Select a World"
+text = "Options"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer" unique_id=826775961]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer" unique_id=441632941]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=127850870]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="MIN_SIZE" type="PanelContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=662703955]
-custom_minimum_size = Vector2(200, 300)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="WorldSelectButtons" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MIN_SIZE" unique_id=1270721361]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2036120312]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="PlayButton" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1254756038]
+[node name="PlayButton" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1254756038]
 layout_mode = 2
 size_flags_vertical = 4
 disabled = true
 text = "Play"
 
-[node name="NewWorld" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1934976427]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Create New World"
-
-[node name="Return" type="Button" parent="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1652026789]
+[node name="Return" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1652026789]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Back"
@@ -684,9 +823,9 @@ layout_mode = 1
 [connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/CharacterCreate" method="return_to_character_select"]
 [connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create" to="MainMenus/CharacterCreate" method="create_character"]
 [connection signal="world_selected" from="MainMenus/WorldSelect" to="MainMenus" method="load_game"]
-[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/WorldSelect" method="play"]
-[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewWorld" to="MainMenus/WorldSelect" method="create_world"]
-[connection signal="pressed" from="MainMenus/WorldSelect/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Return" to="MainMenus/WorldSelect" method="return_to_player_select"]
+[connection signal="pressed" from="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewWorld" to="MainMenus/WorldSelect" method="create_world"]
+[connection signal="pressed" from="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/WorldSelect" method="play"]
+[connection signal="pressed" from="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2/Return" to="MainMenus/WorldSelect" method="return_to_player_select"]
 [connection signal="text_changed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer/WorldName" to="MainMenus/WorldCreate" method="set_world_name"]
 [connection signal="text_changed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2/Seed" to="MainMenus/WorldCreate" method="set_seed"]
 [connection signal="pressed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/WorldCreate" method="return_to_world_select"]

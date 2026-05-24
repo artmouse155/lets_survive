@@ -1,25 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb032osgj4mk6"]
+[gd_scene format=3 uid="uid://cb032osgj4mk6"]
 
 [ext_resource type="Script" uid="uid://dt4c87rq0gnte" path="res://Scripts/Menu/MainMenu/world_select_button.gd" id="1_njgei"]
+[ext_resource type="PackedScene" uid="uid://doxoj6h0x4jef" path="res://Scenes/MainMenu/select_button.tscn" id="1_u4b6p"]
 
-[node name="WorldSelectButton" type="PanelContainer" node_paths=PackedStringArray("label")]
-offset_right = 107.0
-offset_bottom = 33.0
+[node name="SelectButton" unique_id=996605854 node_paths=PackedStringArray("label") instance=ExtResource("1_u4b6p")]
 script = ExtResource("1_njgei")
 label = NodePath("MarginContainer/WorldLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." index="1" unique_id=1577629577]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="WorldLabel" type="Label" parent="MarginContainer"]
+[node name="WorldLabel" type="Label" parent="MarginContainer" index="0" unique_id=974828052]
 layout_mode = 2
 text = "World Name"
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." index="2" unique_id=1648574831]
 layout_mode = 2
 flat = true
 

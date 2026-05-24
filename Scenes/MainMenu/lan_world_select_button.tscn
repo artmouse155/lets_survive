@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://uehrlr0ufpx6"]
+
+[ext_resource type="Script" uid="uid://b4idjhissb6bk" path="res://Scripts/Menu/MainMenu/lan_world_select_button.gd" id="1_0eo3u"]
+[ext_resource type="PackedScene" uid="uid://doxoj6h0x4jef" path="res://Scenes/MainMenu/select_button.tscn" id="1_kt8jm"]
+
+[node name="SelectButton" unique_id=996605854 node_paths=PackedStringArray("WorldLabel", "button") instance=ExtResource("1_kt8jm")]
+script = ExtResource("1_0eo3u")
+WorldLabel = NodePath("MarginContainer/VBoxContainer/WorldName")
+button = NodePath("Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="." index="1" unique_id=2054095608]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0" unique_id=194710634]
+layout_mode = 2
+
+[node name="WorldName" type="Label" parent="MarginContainer/VBoxContainer" index="0" unique_id=1270689708]
+layout_mode = 2
+text = "WorldName"
+
+[node name="ConnectionStatus" type="Label" parent="MarginContainer/VBoxContainer" index="1" unique_id=1458325245]
+layout_mode = 2
+text = "OFFLINE"
+
+[node name="Button" type="Button" parent="." index="2" unique_id=750674291]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="emit_pressed"]

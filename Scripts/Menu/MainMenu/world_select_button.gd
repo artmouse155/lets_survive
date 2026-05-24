@@ -1,11 +1,9 @@
-class_name WorldSelectButton extends PanelContainer
+class_name WorldSelectButton extends SelectButton
 
 @export var label : Label
 
-signal pressed
+var internal_world_name := ""
 
 func set_world_name(world_name : String) -> void:
+	internal_world_name = world_name
 	label.text = world_name
-
-func emit_pressed() -> void:
-	pressed.emit()

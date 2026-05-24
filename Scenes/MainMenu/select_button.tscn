@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://doxoj6h0x4jef"]
+
+[ext_resource type="Script" uid="uid://dwd087xx4mdki" path="res://Scripts/Menu/MainMenu/select_button.gd" id="1_8pesl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pesl"]
+bg_color = Color(0.43142366, 0.6776986, 0.30641228, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="SelectButton" type="PanelContainer" unique_id=996605854 node_paths=PackedStringArray("SelectedPanel")]
+script = ExtResource("1_8pesl")
+SelectedPanel = NodePath("Panel")
+metadata/_custom_type_script = "uid://dwd087xx4mdki"
+
+[node name="Panel" type="Panel" parent="." unique_id=206693345]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pesl")
