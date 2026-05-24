@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/GameContainer.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
+[ext_resource type="Script" uid="uid://dfen5dd7alj85" path="res://Scripts/Multiplayer/multiplayer_bus.gd" id="2_limo0"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scripts/GameUI/game_ui.gd" id="3_us7ks"]
 [ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/GameUI/hotbar.tscn" id="4_juifl"]
 [ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scripts/World/BrainModel/SelfBrain.gd" id="4_wwudf"]
@@ -28,6 +29,9 @@ world = NodePath("SubViewportContainer/SubViewport/World")
 game_ui = NodePath("GameUI")
 save_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Save")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
+
+[node name="MultiplayerBus" type="Node" parent="." unique_id=614583109]
+script = ExtResource("2_limo0")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=551241396]
 layout_mode = 1
