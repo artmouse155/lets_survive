@@ -29,5 +29,13 @@ func load_game(world_name : String) -> void:
 	gameContainer.loadGame(world_name, _current_player_name)
 	set_menu(MENUS.GAME)
 
-func join_game(host: String, port: String) -> void:
-	pass
+func load_lan_game(host: String, port: String) -> void:
+	gameContainer.load_lan_game(host, port, _current_player_name)
+	set_menu(MENUS.GAME)
+
+
+func _on_game_container_back_from_lan(host: String, port: String) -> void:
+	set_menu(MENUS.WORLD_SELECT)
+	var menu := menus[MENUS.WORLD_SELECT]
+	if menu is WorldSelectMenu:
+		menu.select_lan_world(host, port)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/GameContainer.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
-[ext_resource type="Script" uid="uid://dfen5dd7alj85" path="res://Scripts/Multiplayer/multiplayer_bus.gd" id="2_limo0"]
+[ext_resource type="Script" uid="uid://dfen5dd7alj85" path="res://Scripts/Multiplayer/connection_bus.gd" id="2_limo0"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scripts/GameUI/game_ui.gd" id="3_us7ks"]
 [ext_resource type="PackedScene" uid="uid://bbe71tvxwfhof" path="res://Scenes/GameUI/hotbar.tscn" id="4_juifl"]
 [ext_resource type="Script" uid="uid://yyjkgbfe6jg5" path="res://Scripts/World/BrainModel/SelfBrain.gd" id="4_wwudf"]
@@ -11,12 +11,16 @@
 [ext_resource type="Script" uid="uid://bog3mmqycxk65" path="res://Scripts/Menu/PauseMenu/pause_menus.gd" id="7_jvhxo"]
 [ext_resource type="Script" uid="uid://chiiyfpi7v1su" path="res://Scenes/MainMenu/blank_menu.gd" id="9_4e7g7"]
 [ext_resource type="Script" uid="uid://mavb4w4uiq2d" path="res://Scenes/MainMenu/host_lan.gd" id="9_xbk1c"]
+[ext_resource type="Shader" uid="uid://bc4l08fljwy0n" path="res://Resources/Shaders/loading_screen.gdshader" id="12_kbcjv"]
 
 [sub_resource type="Resource" id="Resource_wwudf"]
 script = ExtResource("4_wwudf")
 metadata/_custom_type_script = "uid://yyjkgbfe6jg5"
 
-[node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhh4l"]
+shader = ExtResource("12_kbcjv")
+
+[node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button", "connection_bus", "load_screen", "load_screen_text", "load_screen_button", "open_to_lan_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,10 +32,21 @@ script = ExtResource("1_jr5s5")
 world = NodePath("SubViewportContainer/SubViewport/World")
 game_ui = NodePath("GameUI")
 save_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Save")
+connection_bus = NodePath("ConnectionBus")
+load_screen = NodePath("LoadScreen")
+load_screen_text = NodePath("LoadScreen/CenterContainer/VBoxContainer/RichTextLabel")
+load_screen_button = NodePath("LoadScreen/CenterContainer/VBoxContainer/BackButton")
+open_to_lan_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/LAN")
 metadata/_custom_type_script = "uid://pbgoqkx5pxk1"
 
-[node name="MultiplayerBus" type="Node" parent="." unique_id=614583109]
+[node name="ConnectionBus" type="Node" parent="." unique_id=614583109 node_paths=PackedStringArray("game_ui", "chat", "host_lan_button", "load_screen", "load_screen_text", "load_screen_button")]
 script = ExtResource("2_limo0")
+game_ui = NodePath("../GameUI")
+chat = NodePath("../GameUI/SafeZone/Chat")
+host_lan_button = NodePath("../PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/LAN")
+load_screen = NodePath("../LoadScreen")
+load_screen_text = NodePath("../LoadScreen/CenterContainer/VBoxContainer/RichTextLabel")
+load_screen_button = NodePath("../LoadScreen/CenterContainer/VBoxContainer/BackButton")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=551241396]
 layout_mode = 1
@@ -99,7 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Chat" type="Control" parent="GameUI/SafeZone" unique_id=726412971 node_paths=PackedStringArray("input", "msg_box", "scroll")]
+[node name="Chat" type="Control" parent="GameUI/SafeZone" unique_id=726412971 node_paths=PackedStringArray("input", "msg_box", "scroll", "disappearing_messages_container")]
 editor_description = "This is the Chat node."
 visible = false
 layout_mode = 2
@@ -107,6 +122,7 @@ script = ExtResource("6_udj4x")
 input = NodePath("VBoxContainer/LineEdit")
 msg_box = NodePath("VBoxContainer/ScrollContainer/PanelContainer/MessageContainer")
 scroll = NodePath("VBoxContainer/ScrollContainer")
+disappearing_messages_container = NodePath("../Control/DMContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SafeZone/Chat" unique_id=946258665]
 layout_mode = 1
@@ -134,6 +150,23 @@ alignment = 2
 [node name="LineEdit" type="LineEdit" parent="GameUI/SafeZone/Chat/VBoxContainer" unique_id=178697815]
 layout_mode = 2
 keep_editing_on_text_submit = true
+
+[node name="Control" type="Control" parent="GameUI/SafeZone" unique_id=1448959025]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DMContainer" type="VBoxContainer" parent="GameUI/SafeZone/Control" unique_id=1966737744]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+alignment = 2
 
 [node name="PauseMenus" type="Control" parent="." unique_id=570948181 node_paths=PackedStringArray("menus", "game_ui")]
 process_mode = 2
@@ -217,7 +250,7 @@ text = "Open to LAN"
 layout_mode = 2
 text = "Return to Menu"
 
-[node name="HostLan" type="Control" parent="PauseMenus" unique_id=1690016177 node_paths=PackedStringArray("Port")]
+[node name="HostLan" type="Control" parent="PauseMenus" unique_id=1690016177 node_paths=PackedStringArray("port_node")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -226,7 +259,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_xbk1c")
-Port = NodePath("../../GameUI/SafeZone/Chat/VBoxContainer/LineEdit")
+port_node = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Port")
 
 [node name="PanelContainer" type="PanelContainer" parent="PauseMenus/HostLan" unique_id=1057481423]
 process_mode = 2
@@ -376,15 +409,63 @@ text = "Achievements"
 layout_mode = 2
 text = "Back"
 
+[node name="LoadScreen" type="Control" parent="." unique_id=2058953407]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LoadScreen" unique_id=2131684865]
+material = SubResource("ShaderMaterial_bhh4l")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2592937, 0.2592937, 0.2592937, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="LoadScreen" unique_id=146299898]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadScreen/CenterContainer" unique_id=2060854247]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LoadScreen/CenterContainer/VBoxContainer" unique_id=1865312657]
+layout_mode = 2
+bbcode_enabled = true
+text = "Error: Could not connect to server[br]java.lang.socket.connection.execption"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="LoadScreen/CenterContainer/VBoxContainer" unique_id=516104203]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="join_lan" from="." to="ConnectionBus" method="_on_networking_ui_join"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
 [connection signal="right_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_right_clicked"]
+[connection signal="send_peers_msg" from="GameUI/SafeZone/Chat" to="ConnectionBus" method="_on_chat_send_peers_msg"]
 [connection signal="visibility_changed" from="GameUI/SafeZone/Chat" to="GameUI/SafeZone/Chat" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="GameUI/SafeZone/Chat/VBoxContainer/LineEdit" to="GameUI/SafeZone/Chat" method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Resume" to="GameUI" method="resume"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Settings" to="PauseMenus" method="set_menu_settings"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/LAN" to="PauseMenus" method="set_menu_host_lan"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Return" to="." method="return_to_main_menu"]
+[connection signal="host" from="PauseMenus/HostLan" to="ConnectionBus" method="_on_networking_ui_host"]
+[connection signal="unpause" from="PauseMenus/HostLan" to="PauseMenus" method="unpause"]
 [connection signal="pressed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
+[connection signal="pressed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Start" to="PauseMenus/HostLan" method="_on_start_pressed"]
 [connection signal="pressed" from="PauseMenus/SettingsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
 [connection signal="pressed" from="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]

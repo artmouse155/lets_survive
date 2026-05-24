@@ -11,9 +11,6 @@ func _ready() -> void:
 	if !self_brain:
 		push_warning("No SelfBrain specified in GameUI. UI will not be able to communicate with player node.")
 
-func start(player_name: String) -> void:
-	chat.self_player_name = player_name
-
 func _process(_delta: float) -> void:
 	
 	if !is_visible_in_tree():
@@ -26,6 +23,7 @@ func _process(_delta: float) -> void:
 	else:
 		if !get_tree().paused and Input.is_action_just_pressed("chat"):
 			chat.show()
+			
 			_set_self_movement_enabled(false)
 		elif inventory_ui.visible:
 			if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("open_inventory"):

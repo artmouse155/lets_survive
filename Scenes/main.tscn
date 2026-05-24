@@ -291,6 +291,7 @@ layout_mode = 2
 text = "Return to Main Menu"
 
 [node name="CharacterSelect" type="Control" parent="MainMenus" unique_id=580623616 node_paths=PackedStringArray("CharacterButtonContainer", "PlayButton", "PreviewBox")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -672,11 +673,6 @@ layout_mode = 2
 disabled = true
 text = "Remove Server"
 
-[node name="Return" type="Button" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=877394994]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Back"
-
 [node name="PanelContainer3" type="PanelContainer" parent="MainMenus/WorldSelect/CenterContainer/HBoxContainer" unique_id=12174623]
 layout_mode = 2
 
@@ -822,6 +818,7 @@ layout_mode = 1
 [connection signal="item_selected" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MIN_SIZE/HBoxContainer2/OptionButton" to="MainMenus/CharacterCreate" method="set_character_shirt_color"]
 [connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/CharacterCreate" method="return_to_character_select"]
 [connection signal="pressed" from="MainMenus/CharacterCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create" to="MainMenus/CharacterCreate" method="create_character"]
+[connection signal="lan_world_selected" from="MainMenus/WorldSelect" to="MainMenus" method="load_lan_game"]
 [connection signal="world_selected" from="MainMenus/WorldSelect" to="MainMenus" method="load_game"]
 [connection signal="pressed" from="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/NewWorld" to="MainMenus/WorldSelect" method="create_world"]
 [connection signal="pressed" from="MainMenus/WorldSelect/CenterContainer/HBoxContainer/PanelContainer3/MarginContainer/VBoxContainer/VBoxContainer2/PlayButton" to="MainMenus/WorldSelect" method="play"]
@@ -830,3 +827,4 @@ layout_mode = 1
 [connection signal="text_changed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/MIN_SIZE/HBoxContainer2/Seed" to="MainMenus/WorldCreate" method="set_seed"]
 [connection signal="pressed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="MainMenus/WorldCreate" method="return_to_world_select"]
 [connection signal="pressed" from="MainMenus/WorldCreate/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Create" to="MainMenus/WorldCreate" method="create_world"]
+[connection signal="back_from_lan" from="MainMenus/GameContainer" to="MainMenus" method="_on_game_container_back_from_lan"]

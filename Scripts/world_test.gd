@@ -9,3 +9,7 @@ func _ready() -> void:
 
 func _exit(_menu: MainMenus.MENUS) -> void:
 	get_tree().quit()
+
+
+func _on_game_container_back_from_lan(_host: String, _port: String) -> void:
+	get_tree().quit()

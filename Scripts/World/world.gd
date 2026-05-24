@@ -1,5 +1,7 @@
 class_name World extends Node2D
 
+const GAME_MUSIC : AudioStream = preload("uid://be781y8ixix8a")
+
 const CHUNK_SIZE : Vector2i = Vector2i(16,16)
 const TILE_SIZE : Vector2i = Vector2i(32,32)
 
@@ -29,7 +31,7 @@ func _ready() -> void:
 		push_warning("No Game UI connected to World node.")
 
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
-	game_ui.start(player_save.get_player_name())
+	AudioBus.play_song(GAME_MUSIC)
 	chunk_loader.start(world_save.get_world_seed())
 	var player_memory : PlayerMemory
 	if (world_save.is_player_known(player_save)):

@@ -19,4 +19,5 @@ player_save = ExtResource("2_hkm8i")
 [node name="GameContainer" parent="." unique_id=1201041595 instance=ExtResource("2_r8vti")]
 layout_mode = 1
 
+[connection signal="back_from_lan" from="GameContainer" to="." method="_on_game_container_back_from_lan"]
 [connection signal="menu_selected" from="GameContainer" to="." method="_exit"]
