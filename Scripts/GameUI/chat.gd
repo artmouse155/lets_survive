@@ -7,6 +7,8 @@ const CHAT_MESSAGE_PACKED : PackedScene = preload("uid://c860wmol3yjcq")
 @export var msg_box : BoxContainer
 @export var scroll : ScrollContainer
 
+var self_player_name := "UNSET PLAYER NAME"
+
 func _on_visibility_changed() -> void:
 	input.clear()
 	if visible:
@@ -17,15 +19,15 @@ func _on_visibility_changed() -> void:
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	if new_text != "":
 		input.clear()
-		send_player_msg(new_text)
+		send_player_msg(self_player_name, new_text)
 
 
 func send_system_msg(msg : String) -> void:
 	_print_msg(msg)
 
 
-func send_player_msg(msg : String) -> void:
-	_print_msg("<%s> %s" % ["Chase", escape_bbcode(msg)])
+func send_player_msg(player_name : String, msg : String) -> void:
+	_print_msg("<%s> %s" % [player_name, escape_bbcode(msg)])
 
 
 func send_join_game_msg(player_name : String) -> void:

@@ -15,6 +15,10 @@ run/main_scene="uid://dxjdkdkaf7fdy"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://cau7dhy5od7y6"
 
+[autoload]
+
+AudioBus="*uid://dpqxxkq4oweqy"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2

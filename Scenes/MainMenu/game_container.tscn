@@ -381,7 +381,6 @@ text = "Back"
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Settings" to="PauseMenus" method="set_menu_settings"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/LAN" to="PauseMenus" method="set_menu_host_lan"]
 [connection signal="pressed" from="PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Return" to="." method="return_to_main_menu"]
-[connection signal="value_changed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Port" to="PauseMenus/HostLan" method="validate_port_input"]
 [connection signal="pressed" from="PauseMenus/HostLan/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
 [connection signal="pressed" from="PauseMenus/SettingsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]
 [connection signal="pressed" from="PauseMenus/AchievementsScreen/PanelContainer/MarginContainer/VBoxContainer/Back" to="PauseMenus" method="set_menu_pause_screen"]

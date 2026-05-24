@@ -29,6 +29,7 @@ func _ready() -> void:
 		push_warning("No Game UI connected to World node.")
 
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
+	game_ui.start(player_save.get_player_name())
 	chunk_loader.start(world_save.get_world_seed())
 	var player_memory : PlayerMemory
 	if (world_save.is_player_known(player_save)):

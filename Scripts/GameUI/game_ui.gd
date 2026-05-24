@@ -11,6 +11,8 @@ func _ready() -> void:
 	if !self_brain:
 		push_warning("No SelfBrain specified in GameUI. UI will not be able to communicate with player node.")
 
+func start(player_name: String) -> void:
+	chat.self_player_name = player_name
 
 func _process(_delta: float) -> void:
 	
