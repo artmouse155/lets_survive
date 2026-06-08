@@ -34,22 +34,22 @@ func send_system_msg(msg : String) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func send_error(msg : String) -> void:
-	await _print_msg("[color=#ff5f5f]Error: %s[/color]" % escape_bbcode(msg))
+	await _print_msg("[color=#ff5f5f]Error: %s[/color]" % _escape_bbcode(msg))
 
 
 @rpc("authority", "call_local", "reliable")
 func send_player_msg(player_name : String, msg : String) -> void:
-	await _print_msg("<%s> %s" % [player_name, escape_bbcode(msg)])
+	await _print_msg("<%s> %s" % [player_name, _escape_bbcode(msg)])
 
 
 @rpc("authority", "call_local", "reliable")
 func send_join_game_msg(player_name : String) -> void:
-	await _print_msg("[color=yellow]%s joined the game[/color]" % escape_bbcode(player_name))
+	await _print_msg("[color=yellow]%s joined the game[/color]" % _escape_bbcode(player_name))
 
 
 @rpc("authority", "call_local", "reliable")
 func send_leave_game_msg(player_name : String) -> void:
-	await _print_msg("[color=yellow]%s left the game[/color]" % escape_bbcode(player_name))
+	await _print_msg("[color=yellow]%s left the game[/color]" % _escape_bbcode(player_name))
 
 
 func _print_msg(message : String) -> void:
@@ -64,7 +64,7 @@ func _print_msg(message : String) -> void:
 	if on_bottom:
 		await get_tree().process_frame
 		#scroll.ensure_control_visible(message_node)
-		scroll_to_bottom()
+		_scroll_to_bottom()
 		input.grab_focus.call_deferred()
 	var disappearing_message_node : RichTextLabel = CHAT_MESSAGE_PACKED.instantiate()
 	disappearing_message_node.text = message
@@ -75,10 +75,16 @@ func _print_msg(message : String) -> void:
 	tween.tween_callback(disappearing_message_node.queue_free)
 	#disappearing_messages_scroll_container.set_deferred("scroll_vertical",SCROLL_MAX)
 
-func scroll_to_bottom() -> void:
+func clear_chat() -> void:
+	for child in msg_box.get_children():
+		child.queue_free()
+	for child in disappearing_messages_container.get_children():
+		child.queue_free()
+
+func _scroll_to_bottom() -> void:
 	scroll.set_deferred("scroll_vertical",SCROLL_MAX)
 
 ## Source: [url=https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html#handling-user-input-safely]Godot Docs[/url]
-static func escape_bbcode(bbcode_text: String) -> String:
+static func _escape_bbcode(bbcode_text: String) -> String:
 	# We only need to replace opening brackets to prevent tags from being parsed.
 	return bbcode_text.replace("[", "[lb]")

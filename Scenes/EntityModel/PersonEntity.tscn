@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c67bped72bdae" path="res://Resources/Textures/People/skin.svg" id="3_ckagm"]
 [ext_resource type="Texture2D" uid="uid://vdpl0cs1odtg" path="res://Resources/Textures/Terrain/cool_sword.png" id="4_br0ts"]
 [ext_resource type="PackedScene" uid="uid://djrh6t2ximylw" path="res://Scenes/World/melee_radius.tscn" id="5_nmbym"]
+[ext_resource type="AudioStream" uid="uid://b8lbhr4kgui2f" path="res://Resources/Audio/Effects/Item/pop.mp3" id="6_uq0ln"]
 
 [sub_resource type="Gradient" id="Gradient_io1oy"]
 offsets = PackedFloat32Array(0, 0.45544556, 1)
@@ -346,5 +347,10 @@ shape = SubResource("CircleShape2D_pucux")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=2136464908]
 shape = SubResource("CircleShape2D_ckagm")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=269075284]
+unique_name_in_owner = true
+stream = ExtResource("6_uq0ln")
+bus = &"SFX"
 
 [connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]

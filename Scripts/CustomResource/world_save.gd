@@ -7,7 +7,7 @@ class_name WorldSave extends Resource
 #var chunks : Dictionary[Vector2i,Chunk]
 
 # Dictionary[Player Fingerprint, Memory]
-var player_memories : Dictionary[String,PlayerMemory] = {}
+@export var player_memories : Dictionary[String,PlayerMemory] = {}
 
 func get_world_name() -> String:
 	return _world_name

@@ -32,7 +32,8 @@ func _ready() -> void:
 
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
 	AudioBus.play_song(GAME_MUSIC)
-	chunk_loader.start(world_save.get_world_seed())
+	game_ui.clear_chat()
+	chunk_loader.start(world_save.get_world_name(), world_save.get_world_seed())
 	var player_memory : PlayerMemory
 	if (world_save.is_player_known(player_save)):
 		player_memory = world_save.get_player_memory(player_save)
@@ -49,6 +50,14 @@ func clear() -> void:
 
 func get_updated_self_save() -> PlayerSave:
 	return entity_spawner.get_updated_self_save.call()
+
+
+func get_chunk_saves() -> Array[ChunkSave]:
+	var chunk_saves : Array[ChunkSave] = []
+	for child in chunk_loader.get_children():
+		if child is Chunk:
+			chunk_saves.push_back(child.save(entity_spawner))
+	return chunk_saves
 
 ## Returns the tile directly underneath the given world position.
 static func world_to_tile(pos : Vector2) -> Vector2i:

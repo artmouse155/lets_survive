@@ -13,7 +13,7 @@ signal world_item_dropped(sender : Node2D, item : Item)
 
 var shake_tween : Tween
 
-func _ready() -> void:
+func _init() -> void:
 	health = base_health
 
 func take_damage(damage : float, attack_origin : Vector2) -> void:
@@ -24,7 +24,7 @@ func take_damage(damage : float, attack_origin : Vector2) -> void:
 		if (shake_tween):
 			shake_tween.kill()
 		shake_tween = create_tween()
-		shake_tween.tween_property(sprite,"position",(position - attack_origin).normalized() * SHAKE_AMT,SHAKE_DURATION)
+		shake_tween.tween_property(sprite,"position",(global_position - attack_origin).normalized() * SHAKE_AMT,SHAKE_DURATION)
 		shake_tween.tween_property(sprite,"position",Vector2.ZERO,SHAKE_DURATION)
 
 

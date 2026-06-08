@@ -2,20 +2,25 @@
 
 [ext_resource type="Script" uid="uid://wkf0s66nyt07" path="res://Scripts/World/tree.gd" id="1_7kcem"]
 [ext_resource type="Texture2D" uid="uid://c46rub4y648k7" path="res://Resources/Textures/Terrain/tree.svg" id="2_e10wn"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8phe"]
+[ext_resource type="AudioStream" uid="uid://cqwx0gm7mxh1s" path="res://Resources/Audio/Effects/Tree/wood.mp3" id="3_r1lji"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tccs"]
 radius = 16.0
 
 [node name="Tree" type="StaticBody2D" unique_id=2024680543 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_7kcem")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("Sprite")
 metadata/_custom_type_script = "uid://dhej6pd0sfvi2"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1116876374]
-material = SubResource("ShaderMaterial_a8phe")
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1116876374]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_e10wn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307815729]
 shape = SubResource("CircleShape2D_6tccs")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=1108413632]
+unique_name_in_owner = true
+stream = ExtResource("3_r1lji")
+bus = &"SFX"

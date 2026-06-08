@@ -125,5 +125,6 @@ func _on_inventory_right_clicked(index: int) -> void:
 #endregion
 
 #region chat
-
+func clear_chat() -> void:
+	chat.clear_chat()
 #endregion

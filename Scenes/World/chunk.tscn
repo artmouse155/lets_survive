@@ -2,12 +2,22 @@
 
 [ext_resource type="Script" uid="uid://bufoylri5pbsx" path="res://Scripts/World/chunk.gd" id="1_xv8nu"]
 [ext_resource type="TileSet" uid="uid://5pn671jsdxwh" path="res://Resources/ground.tres" id="2_j3eea"]
+[ext_resource type="Texture2D" uid="uid://cx471iilinfo3" path="res://Resources/Textures/Terrain/svg/stone_brick.svg" id="3_xn4pv"]
 
-[node name="Chunk" type="Node2D" unique_id=1324978909 node_paths=PackedStringArray("ground", "above_ground", "tree_group")]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y68wu"]
+texture = ExtResource("3_xn4pv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_q4o7x"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_y68wu")
+
+[node name="Chunk" type="Node2D" unique_id=1324978909 node_paths=PackedStringArray("ground", "above_ground", "breakable_group")]
 script = ExtResource("1_xv8nu")
 ground = NodePath("Ground")
 above_ground = NodePath("AboveGround")
-tree_group = NodePath("TreeGroup")
+breakable_group = NodePath("BreakableGroup")
 metadata/_custom_type_script = "uid://bufoylri5pbsx"
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1062033803]
@@ -15,5 +25,6 @@ z_index = -10
 tile_set = ExtResource("2_j3eea")
 
 [node name="AboveGround" type="TileMapLayer" parent="." unique_id=1017670299]
+tile_set = SubResource("TileSet_q4o7x")
 
-[node name="TreeGroup" type="CanvasGroup" parent="." unique_id=830103558]
+[node name="BreakableGroup" type="CanvasGroup" parent="." unique_id=830103558]

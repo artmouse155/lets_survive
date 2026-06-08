@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c46rub4y648k7"
-path="res://.godot/imported/tree.svg-d2511de5a00fd4f476ea1aa5e664d9e6.ctex"
+uid="uid://cx471iilinfo3"
+path="res://.godot/imported/stone_brick.svg-48d6567a1bc07602a018fc9bc16a4c33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Terrain/tree.svg"
-dest_files=["res://.godot/imported/tree.svg-d2511de5a00fd4f476ea1aa5e664d9e6.ctex"]
+source_file="res://Resources/Textures/Terrain/svg/stone_brick.svg"
+dest_files=["res://.godot/imported/stone_brick.svg-48d6567a1bc07602a018fc9bc16a4c33.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=2.0
+svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

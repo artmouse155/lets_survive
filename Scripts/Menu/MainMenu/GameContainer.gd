@@ -49,8 +49,9 @@ func load_lan_game(host: String, port: String, player_name : String) -> void:
 func testLoad(world_save : WorldSave, player_save : PlayerSave) -> void:
 	world.start(world_save, player_save)
 
-func save(_world_name : String, player_name : String) -> void:
+func save(world_name : String, player_name : String) -> void:
 	SaveLoad.save_player(player_name, world.get_updated_self_save())
+	SaveLoad.save_chunks(world_name, world.get_chunk_saves())
 
 func _on_back_from_lan_button_pressed(host: String, port: String) -> void:
 	game_ui.set_pause(false)

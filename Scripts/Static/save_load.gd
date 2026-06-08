@@ -12,8 +12,11 @@ const PLAYER_SAVE_CLASS = "PlayerSave"
 
 const WORLD_SUB_DIR = "world_saves"
 const WORLD_SAVE_CLASS = "WorldSave"
+
+
 const CHUNKS_FOLDER_NAME = "chunks"
 const CHUNKS_SAVE_SUFFIX = ".tscn"
+const CHUNK_SAVE_CLASS = "ChunkSave"
 
 const MAX_NUM_SAVES = 5
 #save filenames start with save_0, and go on numerically. if save_0 and save_2 exist, the next save created will be save_1.tres.
@@ -65,6 +68,12 @@ static func save_world(world_name : String, world_save : WorldSave) -> void:
 	var sub_dir := "%s/%s" % [WORLD_SUB_DIR, world_name]
 	_save_res(sub_dir, world_save, "%s%s" % [world_name, SAVE_SUFFIX])
 	print("Saved world \"%s\"" % world_name)
+
+static func save_chunks(world_name : String, chunks: Array[ChunkSave]) -> void:
+	var sub_dir := "%s/%s/%s" % [WORLD_SUB_DIR, world_name, CHUNKS_FOLDER_NAME]
+	for chunk in chunks: 
+		_save_res(sub_dir, chunk, "%s_%s%s" % [chunk.get_coordinates().x, chunk.get_coordinates().y, CHUNKS_SAVE_SUFFIX], false)
+		print("[%s] Saved chunk %s" % [world_name, str(chunk.get_coordinates())])
 
 ## __________________________________________________________
 
@@ -124,18 +133,25 @@ static func ensure_global() -> bool:
 	return true
 
 
-static func _save_res(sub_dir : String, data: Resource, filename : String = "") -> void:
+static func _save_res(sub_dir : String, data: Resource, filename : String = "", throttle_num_saves : bool = true) -> void:
 	ensure_sub_dir(sub_dir)
 	var dir := DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
-	if (!dir.file_exists(filename)) and (len(get_filename_list(sub_dir)) >= MAX_NUM_SAVES):
+	if (throttle_num_saves and (!dir.file_exists(filename)) and (len(get_filename_list(sub_dir)) >= MAX_NUM_SAVES)):
 		push_error("NO MORE ROOM FOR SAVES")
 		return
-	ResourceSaver.save(data, "%s%s/%s" % [USER_DIR, sub_dir, filename])
+	var error := ResourceSaver.save(data, "%s%s/%s" % [USER_DIR, sub_dir, filename])
+	if error != OK:
+		printerr("Failed to save resource: %s" % error_string(error))
+
+
 
 
 static func _load_res(sub_dir : String, filename : String = "", type_hint : String = "Resource") -> Resource:
 	ensure_sub_dir(sub_dir)
 	var dir := DirAccess.open("%s%s/" % [USER_DIR, sub_dir])
+	if !dir:
+		printerr(error_string(DirAccess.get_open_error()))
+		return null
 	if dir.file_exists(filename):
 		var resource := ResourceLoader.load("%s%s/%s" % [USER_DIR, sub_dir, filename], type_hint) as Resource
 		if !resource:
@@ -144,24 +160,17 @@ static func _load_res(sub_dir : String, filename : String = "", type_hint : Stri
 		#HACK: This is because GDScript be funky...
 		if (
 			(type_hint == PLAYER_SAVE_CLASS) and !(resource is PlayerSave) or
-			(type_hint == WORLD_SAVE_CLASS) and !(resource is WorldSave)
+			(type_hint == WORLD_SAVE_CLASS) and !(resource is WorldSave) or
+			(type_hint == CHUNK_SAVE_CLASS) and !(resource is ChunkSave)
 		):
 			push_error("Couldn't parse %s as type \"%s\"" % [filename, type_hint])
 			return null
 		return resource
 	else:
-		push_error("Couldn't find " + filename)
+		push_warning("Couldn't find " + filename)
 		return null
 
-static func load_chunk(world_name: String, coords: Vector2i) -> Chunk:
-	var dir := "%s%s/%s/%s" % [USER_DIR, WORLD_SUB_DIR, world_name, CHUNKS_FOLDER_NAME]
-	var dir_access := DirAccess.open(dir)
+static func load_chunk(world_name: String, coords: Vector2i) -> ChunkSave:
+	var dir := "%s/%s/%s" % [WORLD_SUB_DIR, world_name, CHUNKS_FOLDER_NAME]
 	var filename := "%d_%d%s" % [coords.x, coords.y, CHUNKS_SAVE_SUFFIX]
-	if dir_access.file_exists(filename):
-		var chunk_packed := ResourceLoader.load("%s/%s" % [dir, filename], "PackedScene") as PackedScene
-		if !chunk_packed or !(chunk_packed is PackedScene):
-			push_error("Couldn't parse %s" % filename)
-			return null
-		var chunk : Chunk = chunk_packed.instantiate() as Chunk
-		return chunk
-	return null
+	return _load_res(dir, filename, CHUNK_SAVE_CLASS) as ChunkSave

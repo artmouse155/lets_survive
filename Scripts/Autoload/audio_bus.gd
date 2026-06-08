@@ -1,14 +1,15 @@
 extends Node
 
-const BASE_MUSIC_VOLUME = 0.15
+#const BASE_MUSIC_VOLUME = 0.15
 
 @onready var music: AudioStreamPlayer = AudioStreamPlayer.new()
 
 func _ready() -> void:
 	add_child(music)
+	music.bus = &"Music"
 
 func play_song(song: AudioStream) -> void:
 	assert(is_node_ready())
-	music.volume_linear = BASE_MUSIC_VOLUME
+	#music.volume_linear = BASE_MUSIC_VOLUME
 	music.stream = song
 	music.play()

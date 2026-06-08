@@ -186,6 +186,7 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		var count_after := leftovers.item_quantity if leftovers else 0
 		var count := count_before - count_after
 		if (item and count > 0):
+			%Audio.play()
 			_emit_inventory_updated()
 			item_collected.emit(Item.new(item.item_name,count))
 		if !leftovers:

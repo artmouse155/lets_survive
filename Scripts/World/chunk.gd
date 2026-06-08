@@ -20,7 +20,7 @@ enum STAGE {EMPTY, FINISHED}
 @export_group("🔒 Node References")
 @export var ground : TileMapLayer
 @export var above_ground : TileMapLayer
-@export var tree_group : CanvasGroup
+@export var breakable_group : CanvasGroup
 
 func get_coordinate() -> Vector2i:
 	return _coordinates
@@ -47,4 +47,17 @@ func _spawn_tree(coords : Vector2, world_item_dropped : Signal) -> void:
 	var tree : Breakable = PACKED_TREE.instantiate()
 	tree.position = coords
 	SignalPipe.pipe(tree.world_item_dropped,world_item_dropped)
-	tree_group.add_child(tree)
+	breakable_group.add_child(tree)
+
+func save(entity_spawner : EntitySpawner) -> ChunkSave:
+	var breakables : Array[Breakable] = []
+	for child in breakable_group.get_children():
+		if child is Breakable:
+			breakables.push_back(child)
+	return ChunkSave.new(
+		_coordinates,
+		ground.tile_map_data,
+		above_ground.tile_map_data,
+		breakables,
+		[] #TODO: Save entities
+	)
