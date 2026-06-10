@@ -78,7 +78,10 @@ func return_to_character_select() -> void:
 	menu_selected.emit(MainMenus.MENUS.CHARACTER_SELECT)
 	
 func create_character() -> void:
-	SaveLoad.create_character(_character_name, COLOR_OPTIONS[_character_shirt_color])
+	var new_player := PlayerSave.new()
+	new_player.player_name = _character_name
+	new_player.color = COLOR_OPTIONS[_character_shirt_color]
+	SaveLoad.player_serializer.ser_player(new_player)
 	return_to_character_select()
 
 func set_character_name(character_name : String) -> void:
@@ -91,7 +94,9 @@ func set_character_name(character_name : String) -> void:
 
 func set_character_shirt_color(index : int) -> void:
 	_character_shirt_color = COLOR_OPTIONS.keys()[index]
-	_player_preview.preview(PlayerSave.new(\"_PREVIEW_\",_character_shirt_color))
+	var preview_player := PlayerSave.new()
+	preview_player.color = COLOR_OPTIONS[_character_shirt_color]
+	_player_preview.preview(preview_player)
 	_update_create_button()
 
 func _update_create_button() -> void:

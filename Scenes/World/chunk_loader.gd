@@ -13,11 +13,13 @@ var seed_int : int
 var _chunk_load_queue : Array[Vector2i] = []
 var _chunk_remove_queue : Array[Vector2i] = []
 
-# Called when the node enters the scene tree for the first time.
+var chunk_serializer : ChunkSerializer
+
 func start(world_name: String, world_seed : String) -> void:
 	seed_int = world_seed.hash()
 	_world_name = world_name
 	terrain_gen.seed = seed_int
+	chunk_serializer = SaveLoad.get_chunk_serializer(world_name)
 	load_chunk(Vector2i.ZERO)
 	load_chunk(Vector2i.UP)
 
@@ -57,7 +59,7 @@ func is_chunk_in_world(chunk_coordiate: Vector2i) -> bool:
 
 ## TODO: Flesh out
 func saved_chunk_data(chunk_coordiate: Vector2i) -> ChunkSave:
-	return SaveLoad.load_chunk(_world_name, chunk_coordiate)
+	return chunk_serializer.des_chunk(chunk_coordiate)
 
 func on_player_position_updated(pos: Vector2) -> void:
 	

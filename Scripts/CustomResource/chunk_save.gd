@@ -21,6 +21,10 @@ func _init(
 	_entities = entities
 
 
+static func c_to_s(coords : Vector2i) -> String:
+	return "%s %s" % [str(coords.x), str(coords.y)]
+
+
 func get_coordinates() -> Vector2i:
 	return _coordinates
 

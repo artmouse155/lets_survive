@@ -117,7 +117,9 @@ func set_color(color : Color) -> void:
 	body.self_modulate = color
 
 func export_save(old_save: PlayerSave) -> PlayerSave:
-	var export := PlayerSave.new(old_save.get_player_name(),old_save.get_color())
-	export.set_inventory(_inventory)
+	var export := PlayerSave.new()
+	export.player_name = old_save.player_name
+	export.color = old_save.color
+	export.inventory = _inventory
 	#TODO: Set player level
 	return export

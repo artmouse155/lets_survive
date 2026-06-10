@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="WorldSave" format=3 uid="uid://by4ix2cxmgatv"]
 
+[ext_resource type="Script" uid="uid://jarxaj24oeo2" path="res://Scripts/CustomResource/player_memory.gd" id="1_bo2mg"]
 [ext_resource type="Script" uid="uid://w7gg55lbr2nk" path="res://Scripts/CustomResource/world_save.gd" id="1_olxol"]
 
 [resource]
 resource_name = "Test World"
 script = ExtResource("1_olxol")
-_world_name = "Test World"
+world_name = "John Test's World"
+world_seed = "Test"
 metadata/_custom_type_script = "uid://w7gg55lbr2nk"

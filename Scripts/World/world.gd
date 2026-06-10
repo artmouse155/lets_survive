@@ -33,7 +33,7 @@ func _ready() -> void:
 func start(world_save : WorldSave, player_save : PlayerSave) -> void:
 	AudioBus.play_song(GAME_MUSIC)
 	game_ui.clear_chat()
-	chunk_loader.start(world_save.get_world_name(), world_save.get_world_seed())
+	chunk_loader.start(world_save.world_name, world_save.world_seed)
 	var player_memory : PlayerMemory
 	if (world_save.is_player_known(player_save)):
 		player_memory = world_save.get_player_memory(player_save)

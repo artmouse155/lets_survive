@@ -22,8 +22,8 @@ func on_world_item_dropped(sender : Node2D, item : Item, cooldown : float = 0) -
 func spawn_player(player_save : PlayerSave, player_memory : PlayerMemory, is_self : bool) -> void:
 	var player : PlayerEntity = PLAYER_PACKED.instantiate()
 	player.position = player_memory.get_position()
-	player.set_inventory(player_save.get_inventory())
-	player.set_color(player_save.get_color())
+	player.set_inventory(player_save.inventory)
+	player.set_color(player_save.color)
 	player.world_item_dropped.connect(on_world_item_dropped)
 	SignalPipe.pipe(player.position_updated,player_position_updated)
 	if is_self:

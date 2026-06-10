@@ -4,8 +4,8 @@ class_name PlayerPreview extends SubViewportContainer
 
 func preview(player_save : PlayerSave) -> void:
 	if player_save:
-		player.set_inventory(player_save.get_inventory())
-		player.set_color(player_save.get_color())
+		player.set_inventory(player_save.inventory)
+		player.set_color(player_save.color)
 		player.show()
 	else:
 		player.hide()

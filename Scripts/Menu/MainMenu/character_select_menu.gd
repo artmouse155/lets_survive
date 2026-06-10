@@ -20,12 +20,12 @@ func create_character() -> void:
 func start() -> void:
 	for child in CharacterButtonContainer.get_children():
 		child.queue_free()
-	var saves := SaveLoad.get_player_saves()
+	var saves := SaveLoad.player_serializer.list()
 	for save : PlayerSave in saves:
 		var button : CharacterSelectButton = SelectButtonPacked.instantiate()
-		button.set_character_name(save.get_player_name())
-		button.set_character_level(save.get_level())
-		button.pressed.connect(select_character.bind(save.get_player_name()))
+		button.set_character_name(save.player_name)
+		button.set_character_level(save.level)
+		button.pressed.connect(select_character.bind(save.player_name))
 		CharacterButtonContainer.add_child(button)
 	PreviewBox.preview(null)
 	PlayButton.disabled = true
@@ -36,4 +36,4 @@ func select_character(player_name : String) -> void:
 			child.set_selected(player_name == child.internal_character_name)
 	character_selected.emit(player_name)
 	PlayButton.disabled = false
-	PreviewBox.preview(SaveLoad.get_player_save(player_name))
+	PreviewBox.preview(SaveLoad.player_serializer.des_player(player_name))

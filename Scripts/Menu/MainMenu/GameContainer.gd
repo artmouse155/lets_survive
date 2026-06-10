@@ -25,17 +25,17 @@ func return_to_main_menu() -> void:
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 
 func loadGame(world_name : String, player_name : String) -> void:
-	var player_save := SaveLoad.get_player_save(player_name)
+	var player_save := SaveLoad.player_serializer.des_player(player_name)
 	print("Player Save Path: %s" % player_save.resource_path)
-	var world_data := SaveLoad.get_world_save(world_name)
+	var world_data := SaveLoad.world_serializer.des_world(world_name)
 	if (save_button.pressed.is_connected(save)):
 		save_button.pressed.disconnect(save)
-	save_button.pressed.connect(save.bind(world_name,player_name))
+	save_button.pressed.connect(save.bind(world_name))
 	load_screen.hide()
 	world.start(world_data, player_save)
 
 func load_lan_game(host: String, port: String, player_name : String) -> void:
-	var player_save := SaveLoad.get_player_save(player_name)
+	var player_save := SaveLoad.player_serializer.des_player(player_name)
 	print("Player Save Path: %s" % player_save.resource_path)
 	if (save_button.pressed.is_connected(save)):
 		save_button.pressed.disconnect(save)
@@ -49,9 +49,10 @@ func load_lan_game(host: String, port: String, player_name : String) -> void:
 func testLoad(world_save : WorldSave, player_save : PlayerSave) -> void:
 	world.start(world_save, player_save)
 
-func save(world_name : String, player_name : String) -> void:
-	SaveLoad.save_player(player_name, world.get_updated_self_save())
+func save(world_name : String) -> void:
+	SaveLoad.player_serializer.ser_player(world.get_updated_self_save())
 	SaveLoad.save_chunks(world_name, world.get_chunk_saves())
+	game_ui.chat.send_system_msg("Game Saved!")
 
 func _on_back_from_lan_button_pressed(host: String, port: String) -> void:
 	game_ui.set_pause(false)

@@ -32,7 +32,7 @@ func create_world() -> void:
 func start() -> void:
 	for child : Node in WorldButtonContainer.get_children():
 		child.queue_free()
-	var saves := SaveLoad.get_world_saves()
+	var saves := SaveLoad.world_serializer.list()
 	for save : WorldSave in saves:
 		var button : WorldSelectButton = SelectButtonPacked.instantiate()
 		button.set_world_name(save.get_world_name())

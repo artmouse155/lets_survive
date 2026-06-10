@@ -18,6 +18,7 @@ config/icon="uid://cau7dhy5od7y6"
 [autoload]
 
 AudioBus="*uid://dpqxxkq4oweqy"
+SaveLoad="*uid://btu8d81snmnev"
 
 [debug]
 
@@ -26,6 +27,10 @@ gdscript/warnings/untyped_declaration=2
 [dotnet]
 
 project/assembly_name="lets_survive"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/A2J/plugin.cfg")
 
 [file_customization]
 
