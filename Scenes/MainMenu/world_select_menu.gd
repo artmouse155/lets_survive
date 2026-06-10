@@ -35,8 +35,8 @@ func start() -> void:
 	var saves := SaveLoad.world_serializer.list()
 	for save : WorldSave in saves:
 		var button : WorldSelectButton = SelectButtonPacked.instantiate()
-		button.set_world_name(save.get_world_name())
-		button.pressed.connect(select_world.bind(save.get_world_name()))
+		button.set_world_name(save.world_name)
+		button.pressed.connect(select_world.bind(save.world_name))
 		WorldButtonContainer.add_child(button)
 	
 	for child : Node in LanWorldButtonContainer.get_children():

@@ -54,10 +54,17 @@ func save(entity_spawner : EntitySpawner) -> ChunkSave:
 	for child in breakable_group.get_children():
 		if child is Breakable:
 			breakables.push_back(child)
-	return ChunkSave.new(
-		_coordinates,
-		ground.tile_map_data,
-		above_ground.tile_map_data,
-		breakables,
-		[] #TODO: Save entities
-	)
+	var chunk_save := ChunkSave.new()
+	chunk_save.coordinates = _coordinates
+	chunk_save.ground_tile_map_data = ground.tile_map_data
+	chunk_save.above_ground_tile_map_data = above_ground.tile_map_data
+	chunk_save.breakables = [] # TODO: add breakables
+	chunk_save.entities = []
+	return chunk_save
+	#return ChunkSave.new(
+		#_coordinates,
+		#ground.tile_map_data,
+		#above_ground.tile_map_data,
+		#breakables,
+		#[] #TODO: Save entities
+	#)

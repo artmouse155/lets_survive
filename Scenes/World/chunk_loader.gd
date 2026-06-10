@@ -27,9 +27,10 @@ func load_chunk(coords : Vector2i) -> void:
 	var saved_chunk := saved_chunk_data(coords)
 	if saved_chunk:
 		var chunk : Chunk = _NEW_CHUNK_PACKED.instantiate()
-		chunk.ground.tile_map_data = saved_chunk.get_ground_tile_map_data()
-		chunk.above_ground.tile_map_data = saved_chunk.get_above_ground_tile_map_data()
-		for breakable in saved_chunk.get_breakables():
+		chunk._coordinates = saved_chunk.coordinates
+		chunk.ground.set_tile_map_data_from_array(saved_chunk.ground_tile_map_data)
+		chunk.above_ground.set_tile_map_data_from_array(saved_chunk.above_ground_tile_map_data)
+		for breakable in saved_chunk.breakables:
 			chunk.breakable_group.add_child(breakable)
 		# TODO: Add entities where they ought to go
 	else:

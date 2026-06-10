@@ -129,7 +129,10 @@ func return_to_world_select() -> void:
 	menu_selected.emit(MainMenus.MENUS.WORLD_SELECT)
 	
 func create_world() -> void:
-	SaveLoad.create_world(_world_name, _world_seed)
+	var new_world := WorldSave.new()
+	new_world.world_name = _world_name
+	new_world.world_seed = _world_seed
+	SaveLoad.world_serializer.ser_world(new_world)
 	return_to_world_select()
 
 func set_world_name(world_name : String) -> void:

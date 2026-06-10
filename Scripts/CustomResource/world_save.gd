@@ -1,6 +1,6 @@
 class_name WorldSave extends Resource
 
-@export var world_name : String = ""
+@export var world_name : String = "default_world_name"
 @export var world_seed : String = ""
 @export var spawnpoint : Vector2i = Vector2i.ZERO
 @export var player_memories : Dictionary[String,PlayerMemory] = {}
@@ -40,10 +40,6 @@ func _add_player(player_name : String) -> String:
 		fingerprint = str(randi())
 	player_memories[fingerprint] = PlayerMemory.new(player_name,World.tile_to_world(spawnpoint))
 	return fingerprint.sha256_text()
-
-func _init(p_world_name : String = "", p_world_seed : String = "") -> void:
-	world_name = p_world_name
-	world_seed = p_world_seed
 
 ## ALERT: Will save to the user folder. Be careful!
 func save() -> void:
