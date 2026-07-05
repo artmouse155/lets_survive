@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Let's Survive"
+config/tags=PackedStringArray("current")
 run/main_scene="uid://dxjdkdkaf7fdy"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://cau7dhy5od7y6"
 
 [autoload]
@@ -152,8 +153,3 @@ ctrl={
 
 2d_physics/layer_1="landfaring"
 2d_physics/layer_2="seafaring"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

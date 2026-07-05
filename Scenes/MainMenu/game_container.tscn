@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bcnynj6tfm2v3"]
 
-[ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/GameContainer.gd" id="1_jr5s5"]
+[ext_resource type="Script" uid="uid://pbgoqkx5pxk1" path="res://Scripts/Menu/MainMenu/game_container.gd" id="1_jr5s5"]
 [ext_resource type="PackedScene" uid="uid://dr6w6t2qv7atg" path="res://Scenes/World/world.tscn" id="2_juifl"]
 [ext_resource type="Script" uid="uid://dfen5dd7alj85" path="res://Scripts/Multiplayer/connection_bus.gd" id="2_limo0"]
 [ext_resource type="Script" uid="uid://bno5jm45y4cod" path="res://Scripts/GameUI/game_ui.gd" id="3_us7ks"]
