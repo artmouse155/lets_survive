@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BlockData" format=3 uid="uid://dfras14tehstb"]
+
+[ext_resource type="Script" uid="uid://digh45n3fe8qj" path="res://Scripts/CustomResource/block_data.gd" id="1_d5mai"]
+
+[resource]
+script = ExtResource("1_d5mai")
+source_id = 1
+metadata/_custom_type_script = "uid://digh45n3fe8qj"

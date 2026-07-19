@@ -56,7 +56,7 @@ func get_chunk_saves() -> Array[ChunkSave]:
 	var chunk_saves : Array[ChunkSave] = []
 	for child in chunk_loader.get_children():
 		if child is Chunk:
-			chunk_saves.push_back(child.save(entity_spawner))
+			chunk_saves.push_back(child.get_chunk_save(entity_spawner))
 	return chunk_saves
 
 ## Returns the tile directly underneath the given world position.

@@ -2,10 +2,9 @@ class_name ChunkLoader extends Node2D
 
 signal world_item_dropped(sender : Node2D, item : Item, cooldown : float)
 
-const RENDER_DISTANCE : int = 3
+const RENDER_DISTANCE : int = 2
 
 var terrain_gen : FastNoiseLite = preload("uid://dyd1hw7adwaqb")
-const _NEW_CHUNK_PACKED : PackedScene = preload("uid://e2gerewc8xew")
 
 var _world_name: String
 var seed_int : int
@@ -26,21 +25,14 @@ func start(world_name: String, world_seed : String) -> void:
 func load_chunk(coords : Vector2i) -> void:
 	var saved_chunk := saved_chunk_data(coords)
 	if saved_chunk:
-		var chunk : Chunk = _NEW_CHUNK_PACKED.instantiate()
-		chunk._coordinates = saved_chunk.coordinates
-		chunk.ground.set_tile_map_data_from_array(saved_chunk.ground_tile_map_data)
-		chunk.above_ground.set_tile_map_data_from_array(saved_chunk.above_ground_tile_map_data)
-		for breakable in saved_chunk.breakables:
-			chunk.breakable_group.add_child(breakable)
-		# TODO: Add entities where they ought to go
+		add_child(Chunk.from_chunk_save(saved_chunk))
 	else:
 		_generate_chunk(coords)
 
 func _generate_chunk(coords : Vector2i) -> void:
-	var chunk : Chunk = _NEW_CHUNK_PACKED.instantiate()
 	var random := RandomNumberGenerator.new()
 	random.seed = seed_int
-	chunk.generate(coords, random, terrain_gen, world_item_dropped)
+	var chunk := Chunk.generate(coords, random, terrain_gen, world_item_dropped)
 	add_child(chunk)
 
 func clear() -> void:

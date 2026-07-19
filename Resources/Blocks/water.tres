@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BlockData" format=3 uid="uid://bo0ljasodv0hu"]
+
+[ext_resource type="Script" uid="uid://digh45n3fe8qj" path="res://Scripts/CustomResource/block_data.gd" id="1_7rhgr"]
+
+[resource]
+script = ExtResource("1_7rhgr")
+atlas = Vector2i(2, 0)
+source_id = 1
+metadata/_custom_type_script = "uid://digh45n3fe8qj"
