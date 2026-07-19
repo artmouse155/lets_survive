@@ -17,6 +17,7 @@ const CONNECTION_TIMEOUT := 10.0
 @export var load_screen_text : RichTextLabel
 @export var load_screen_button : Button
 
+#region Connection
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
@@ -49,8 +50,9 @@ func _on_networking_ui_join(host: String, port: String) -> void:
 	timeout_tween.tween_callback(_on_connection_timeout)
 	
 func _on_connection_timeout() -> void:
+	_end_connection()
 	load_screen_text.text = "Error\nConnection timed out"
-	remove_multiplayer_peer()
+	load_screen_button.show()
 
 func _on_networking_ui_host(port: String) -> void:
 	if (int(port) < 1 or int(port) > 65535):
@@ -65,7 +67,7 @@ func _on_networking_ui_host(port: String) -> void:
 		chat.send_error("failed to create server.")
 		return
 	chat.send_system_msg("Server created successfully!")
-	var ip := get_lan_ip()
+	var ip := _get_lan_ip()
 	if (ip != ""):
 		chat.send_system_msg("Hosted on %s:%d" % [ip, int(port)])
 	else:
@@ -73,8 +75,8 @@ func _on_networking_ui_host(port: String) -> void:
 		chat.send_system_msg("Hosting on port %d" % int(port))
 	multiplayer.multiplayer_peer = peer
 	_on_player_connected(SERVER_PEER_ID)
-	register.rpc_id(SERVER_PEER_ID, "Host")
-	start_game()
+	_register.rpc_id(SERVER_PEER_ID, "Host")
+	_start_game()
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
@@ -95,44 +97,28 @@ func _on_connected_ok() -> void:
 		timeout_tween.kill()
 	load_screen_button.hide()
 	load_screen_text.text = "Registering..."
-	register.rpc_id(SERVER_PEER_ID, "Bob the client")
-	start_game()
+	_register.rpc_id(SERVER_PEER_ID, "Bob the client")
+	_start_game()
 	# TODO: Show register screen
 
-@rpc("any_peer", "call_local", "reliable")
-func register(player_name: String) -> void:
-	if multiplayer.is_server():
-		players[multiplayer.get_remote_sender_id()].player_name = player_name
-		players[multiplayer.get_remote_sender_id()].state = PlayerConnection.States.REGISTERED
-		chat.send_join_game_msg.rpc(player_name)
-
 func _on_connected_fail() -> void:
-	remove_multiplayer_peer()
+	_end_connection()
 	load_screen_text.text = "Unable to connect to server."
 	load_screen_button.show()
 
 
 func _on_server_disconnected() -> void:
-	remove_multiplayer_peer()
+	_end_connection()
 	players.clear()
 	load_screen_text.text = "Server closed"
 	load_screen_button.show()
 
-func remove_multiplayer_peer() -> void:
+func _remove_multiplayer_peer() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
-	end_game()
 
-@rpc("any_peer", "call_local", "reliable")
-func _send_peers_msg(msg: String) -> void:
-	if multiplayer.is_server():
-		if len(players) > 0:
-			chat.send_player_msg.rpc(players[multiplayer.get_remote_sender_id()].player_name, msg)
-		else:
-			chat.send_player_msg("MESELF", msg)
-		
 # Source: https://github.com/godotengine/godot-docs-user-notes/discussions/57#discussioncomment-13819893
-func get_lan_ip() -> String:
+func _get_lan_ip() -> String:
 	for ip in IP.get_local_addresses():
 		if ip.is_valid_ip_address() \
 		and ip.find('.') != -1 \
@@ -142,14 +128,38 @@ func get_lan_ip() -> String:
 	push_error("No usable LAN IP found.")
 	return ""
 
-func start_game() -> void:
+func _start_game() -> void:
 	host_lan_button.disabled = true
 	load_screen.hide()
 
-func end_game() -> void:
+func _end_connection() -> void:
+	_remove_multiplayer_peer()
 	load_screen.show()
 	load_screen_button.show()
 	game_ui.set_pause(false)
+#endregion
 
+#region Signal Handlers
 func _on_chat_send_peers_msg(msg: String) -> void:
 	_send_peers_msg.rpc_id(SERVER_PEER_ID, msg)
+
+func _on_game_container_end_connection() -> void:
+	_end_connection()
+	#endregion
+
+#region RPC
+@rpc("any_peer", "call_local", "reliable")
+func _register(player_name: String) -> void:
+	if multiplayer.is_server():
+		players[multiplayer.get_remote_sender_id()].player_name = player_name
+		players[multiplayer.get_remote_sender_id()].state = PlayerConnection.States.REGISTERED
+		chat.send_join_game_msg.rpc(player_name)
+
+@rpc("any_peer", "call_local", "reliable")
+func _send_peers_msg(msg: String) -> void:
+	if multiplayer.is_server():
+		if len(players) > 0:
+			chat.send_player_msg.rpc(players[multiplayer.get_remote_sender_id()].player_name, msg)
+		else:
+			chat.send_player_msg("MESELF", msg)
+#endregion

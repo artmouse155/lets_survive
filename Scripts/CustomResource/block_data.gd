@@ -17,7 +17,6 @@ static var _block_data : Dictionary[StringName,BlockData] = {
 static func block_data(block : StringName) -> BlockData:
 	if block in _block_data.keys():
 		return _block_data[block]
-	if block == AIR:
-		return null
-	push_warning("Block \"%s\" not found" % block)
-	return _block_data[block]
+	if block != AIR:
+		push_warning("Block \"%s\" not found" % block)
+	return null

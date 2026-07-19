@@ -19,7 +19,7 @@ func _init(
 	if error != OK:
 		push_error(error_string(error))
 
-## Deserialize the given [String].
+## Deserialize the given filepath.
 func _des(s : String) -> Variant:
 	var file := FileAccess.open("%s/%s%s" % [directory,s,FILE_TYPE], FileAccess.READ)
 	if file:
@@ -30,15 +30,15 @@ func _des(s : String) -> Variant:
 			push_error("Parsing save JSON %s failed " % s)
 			return null
 		var obj : Variant = A2J.from_json(json.data)
-		print("Deserialized %s as %s" % [s, type_string(typeof(obj))])
 		if obj:
+			print("📖 Deserialized \"%s\" as %s" % [s, type_string(typeof(obj))])
 			return obj
 		push_error("Deserializing %s failed" % s)
 		return null
 	push_warning("Error loading %s: %s" % [s, error_string(FileAccess.get_open_error())])
 	return null
 
-## Serialize the given [Variant].
+## Serialize the given [Variant] o as filepath s.
 func _ser(s: String, o : Variant) -> void:
 	var obj_json : Variant = A2J.to_json(o)
 	if obj_json:
@@ -46,6 +46,7 @@ func _ser(s: String, o : Variant) -> void:
 		if file:
 			var json := JSON.stringify(obj_json)
 			if file.store_string(str(json)):
+				print("📘 Serialized \"%s\" as %s" % [s, type_string(typeof(o))])
 				return
 			push_error("Could not store JSON for %s" % s)
 			return

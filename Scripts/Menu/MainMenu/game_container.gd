@@ -3,7 +3,6 @@ class_name GameContainer extends Menu
 @export var world : World
 @export var game_ui : GameUI
 @export var save_button : Button
-@export var connection_bus : ConnectionBus
 
 @export var load_screen : Control
 @export var load_screen_text : RichTextLabel
@@ -11,7 +10,11 @@ class_name GameContainer extends Menu
 
 @export var open_to_lan_button : Button
 
+# Signals handled by the connection bus
 signal join_lan(host: String, port: String)
+signal end_connection()
+
+
 signal back_from_lan(host: String, port: String)
 
 func start() -> void:
@@ -21,7 +24,7 @@ func start() -> void:
 func return_to_main_menu() -> void:
 	game_ui.set_pause(false)
 	world.clear()
-	connection_bus.remove_multiplayer_peer()
+	end_connection.emit()
 	menu_selected.emit(MainMenus.MENUS.TITLE)
 
 func loadGame(world_name : String, player_name : String) -> void:
@@ -56,5 +59,5 @@ func save(world_name : String) -> void:
 
 func _on_back_from_lan_button_pressed(host: String, port: String) -> void:
 	game_ui.set_pause(false)
-	connection_bus.remove_multiplayer_peer()
+	end_connection.emit()
 	back_from_lan.emit(host,port)

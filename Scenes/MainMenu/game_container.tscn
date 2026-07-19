@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://yyjkgbfe6jg5"
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bhh4l"]
 shader = ExtResource("12_kbcjv")
 
-[node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button", "connection_bus", "load_screen", "load_screen_text", "load_screen_button", "open_to_lan_button")]
+[node name="GameContainer" type="Control" unique_id=1042941945 node_paths=PackedStringArray("world", "game_ui", "save_button", "load_screen", "load_screen_text", "load_screen_button", "open_to_lan_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,6 @@ script = ExtResource("1_jr5s5")
 world = NodePath("SubViewportContainer/SubViewport/World")
 game_ui = NodePath("GameUI")
 save_button = NodePath("PauseMenus/PauseScreen/PanelContainer/MarginContainer/VBoxContainer/Save")
-connection_bus = NodePath("ConnectionBus")
 load_screen = NodePath("LoadScreen")
 load_screen_text = NodePath("LoadScreen/CenterContainer/VBoxContainer/RichTextLabel")
 load_screen_button = NodePath("LoadScreen/CenterContainer/VBoxContainer/BackButton")
@@ -453,6 +452,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
+[connection signal="end_connection" from="." to="ConnectionBus" method="_on_game_container_end_connection"]
 [connection signal="join_lan" from="." to="ConnectionBus" method="_on_networking_ui_join"]
 [connection signal="gui_input" from="GameUI" to="GameUI" method="_on_gui_input"]
 [connection signal="left_clicked" from="GameUI/SafeZone/InventoryUI" to="GameUI" method="_on_inventory_left_clicked"]
